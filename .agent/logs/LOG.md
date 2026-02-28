@@ -10,7 +10,22 @@
 
 ## Session Log
 
-## 2026-02-28 — TASK-18: Implement Services section variants (services-grid, services-list)
+## 2026-02-28 — TASK-19: Implement About section variants (about-left, about-right)
+
+- Created `src/components/shared/about/AboutLeft.tsx` — two-column grid, image left / text right, responsive (stacks on mobile)
+- Created `src/components/shared/about/AboutRight.tsx` — same layout but image right (uses CSS `order` classes to reverse)
+- Both accept `{ content: AboutContent, business: BusinessInfo }` props
+- Both render headline, body text, optional image (with placeholder when absent), and stat badge chips
+- Stat chips use `--color-primary` background with `--color-text-inverted` text
+- Exported from `src/components/shared/about/index.ts`
+- Added `app/test-about/page.tsx` for visual verification
+- Playwright smoke test: all 3 browsers pass
+- Screenshots: `.agent/screenshots/TASK-19-1.png` — both variants + placeholder visible
+- TypeScript: no errors; 23 unit tests pass
+
+---
+
+
 
 - Created `src/components/shared/services/ServicesGrid.tsx` — responsive 3-column card grid with icon, title, description
 - Created `src/components/shared/services/ServicesList.tsx` — vertical list with icon/number badge, title, description, dividers
