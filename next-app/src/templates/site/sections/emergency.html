@@ -1,0 +1,17 @@
+<section id="emergency" class="emergency section">
+  <div class="container">
+    <h2>{{headline}}</h2>
+    <div class="emergency__phone"><a href="tel:{{phone}}" style="color:#fff;">{{phone}}</a></div>
+    <p class="emergency__availability">{{availability}}</p>
+    {{#if services}}
+    <div class="emergency__services">
+      {{#each services}}
+      <span class="emergency__service-tag">{{this}}</span>
+      {{/each}}
+    </div>
+    {{/if}}
+    <div style="margin-top:2rem;">
+      <a href="tel:{{phone}}" class="btn" style="background:#fff;color:var(--color-accent);">Call Now</a>
+    </div>
+  </div>
+</section>

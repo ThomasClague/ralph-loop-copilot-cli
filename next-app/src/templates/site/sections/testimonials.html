@@ -1,0 +1,15 @@
+<section id="testimonials" class="testimonials section">
+  <div class="container">
+    <div class="section-header"><h2>What Our Customers Say</h2></div>
+    <div class="grid grid-3">
+      {{#each items}}
+      <div class="card testimonial">
+        {{#if rating}}<div class="testimonial__stars">{{stars}}</div>{{/if}}
+        <p class="testimonial__quote">&ldquo;{{quote}}&rdquo;</p>
+        <div class="testimonial__author">{{author}}</div>
+        {{#if role}}<div class="testimonial__role">{{role}}</div>{{/if}}
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</section>

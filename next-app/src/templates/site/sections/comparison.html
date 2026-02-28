@@ -1,0 +1,27 @@
+<section id="comparison" class="comparison section">
+  <div class="container">
+    <div class="section-header"><h2>{{headline}}</h2></div>
+    <div style="overflow-x:auto;">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            {{#each columns}}
+            <th>{{label}}</th>
+            {{/each}}
+          </tr>
+        </thead>
+        <tbody>
+          {{#each featureRows}}
+          <tr>
+            <td>{{feature}}</td>
+            {{#each values}}
+            <td>{{#if this}}<span class="check">✓</span>{{else}}<span class="cross">—</span>{{/if}}</td>
+            {{/each}}
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

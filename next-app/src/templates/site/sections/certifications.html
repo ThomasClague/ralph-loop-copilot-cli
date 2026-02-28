@@ -1,0 +1,14 @@
+<section id="certifications" class="certifications section">
+  <div class="container">
+    <div class="section-header"><h2>{{headline}}</h2></div>
+    <div class="grid grid-4">
+      {{#each items}}
+      <div class="card cert-item">
+        {{#if imageUrl}}<img class="cert-logo" src="{{imageUrl}}" alt="{{name}}" loading="lazy" />{{/if}}
+        <div class="cert-name">{{name}}</div>
+        {{#if year}}<div class="cert-year">Since {{year}}</div>{{/if}}
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</section>

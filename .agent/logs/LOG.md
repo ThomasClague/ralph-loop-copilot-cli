@@ -1,5 +1,15 @@
 
-## 2026-02-28  TASK-84: Implement export button with status dropdown
+## 2026-02-28 — TASK-85: Create site-template scaffold
+
+- Created `next-app/src/templates/site/` directory with:
+  - `index.html` — base shell with `{{businessName}}`, `{{phone}}`, `{{email}}`, `{{location}}`, `{{sections}}`, `{{year}}` tokens
+  - `styles.css` — full CSS reset + layout helpers + CSS custom properties for theming (`--color-primary`, `--color-secondary`, `--color-accent`, `--bg`, `--bg-alt`, `--text`, `--text-muted`, `--border`, `--radius`, etc.)
+  - `scripts.js` — vanilla JS: mobile nav toggle, FAQ accordion, smooth scrolling, lazy image loading
+- Created 21 section HTML snippets in `sections/` with Handlebars-style `{{variable}}` placeholders matching all `SectionType` variants
+- No React/Next.js imports — pure vanilla HTML/CSS/JS
+- All 135 unit tests pass; TypeScript compiles clean
+
+
 
 - Replaced stub `ExportButton` with full implementation using shadcn `DropdownMenu`
 - Props: `slug: string, exportUrl: string | null` (replaces `prospectId`)

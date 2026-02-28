@@ -1,0 +1,14 @@
+<section id="services" class="services section">
+  <div class="container">
+    {{#if headline}}<div class="section-header"><h2>{{headline}}</h2></div>{{/if}}
+    <div class="grid grid-3 services-grid">
+      {{#each items}}
+      <div class="card">
+        {{#if icon}}<div class="service-icon">{{icon}}</div>{{/if}}
+        <h3>{{title}}</h3>
+        <p>{{description}}</p>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</section>

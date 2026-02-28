@@ -1,0 +1,15 @@
+<section id="team" class="team section section--alt">
+  <div class="container">
+    <div class="section-header"><h2>{{headline}}</h2></div>
+    <div class="grid grid-3">
+      {{#each members}}
+      <div class="card team-member">
+        {{#if imageUrl}}<img class="team-avatar" src="{{imageUrl}}" alt="{{name}}" loading="lazy" />{{/if}}
+        <div class="team-name">{{name}}</div>
+        <div class="team-role">{{role}}</div>
+        {{#if bio}}<p class="team-bio">{{bio}}</p>{{/if}}
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</section>

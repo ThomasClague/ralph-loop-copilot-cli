@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{businessName}}</title>
+  <meta name="description" content="{{metaDescription}}" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- NAV -->
+  <header class="site-nav" role="banner">
+    <div class="nav-inner container">
+      <a href="#" class="nav-logo">{{businessName}}</a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="hamburger"></span>
+      </button>
+      <nav class="nav-links" role="navigation">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="tel:{{phone}}" class="btn btn-primary nav-cta">{{phone}}</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- SECTIONS injected by export engine -->
+  <main id="main">
+    {{sections}}
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <strong>{{businessName}}</strong>
+        <p>{{location}}</p>
+      </div>
+      <div class="footer-contact">
+        <a href="tel:{{phone}}">{{phone}}</a>
+        <a href="mailto:{{email}}">{{email}}</a>
+      </div>
+      <p class="footer-copy">&copy; {{year}} {{businessName}}. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="scripts.js"></script>
+</body>
+</html>

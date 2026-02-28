@@ -1,0 +1,16 @@
+<section id="blog_preview" class="blog-preview section">
+  <div class="container">
+    <div class="section-header"><h2>{{headline}}</h2></div>
+    <div class="grid grid-3">
+      {{#each posts}}
+      <div class="card">
+        {{#if imageUrl}}<img class="blog-post-image" src="{{imageUrl}}" alt="{{title}}" loading="lazy" />{{/if}}
+        <div class="blog-post-date">{{date}}</div>
+        <div class="blog-post-title">{{title}}</div>
+        <p class="blog-post-excerpt">{{excerpt}}</p>
+        <a href="#" class="blog-post-link">Read More &rarr;</a>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,15 @@
+<section id="service_area" class="service-area section">
+  <div class="container">
+    <div class="section-header"><h2>{{headline}}</h2></div>
+    <div class="service-area__areas">
+      {{#each areas}}
+      <span class="area-tag">{{this}}</span>
+      {{/each}}
+    </div>
+    {{#if mapEmbedUrl}}
+    <div class="service-area__map">
+      <iframe src="{{mapEmbedUrl}}" title="Service area map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    {{/if}}
+  </div>
+</section>

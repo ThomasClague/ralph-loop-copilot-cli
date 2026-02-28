@@ -1,0 +1,23 @@
+<section id="about" class="about section section--alt">
+  <div class="container about--split">
+    {{#if imageUrl}}
+    <div class="about__image-col">
+      <img class="about__image" src="{{imageUrl}}" alt="About {{businessName}}" />
+    </div>
+    {{/if}}
+    <div class="about__content">
+      <h2>{{headline}}</h2>
+      <p>{{body}}</p>
+      {{#if stats}}
+      <div class="about__stats">
+        {{#each stats}}
+        <div class="about__stat">
+          <div class="stat-value">{{value}}</div>
+          <div class="stat-label">{{label}}</div>
+        </div>
+        {{/each}}
+      </div>
+      {{/if}}
+    </div>
+  </div>
+</section>

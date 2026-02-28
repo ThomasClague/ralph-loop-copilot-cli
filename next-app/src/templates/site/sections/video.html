@@ -1,0 +1,15 @@
+<section id="video" class="video-section section section--alt">
+  <div class="container">
+    <div class="section-header"><h2>{{headline}}</h2></div>
+    <div class="video__wrapper">
+      {{#if isEmbed}}
+      <iframe src="{{videoUrl}}" title="{{headline}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      {{else}}
+      <video controls preload="metadata"{{#if poster}} poster="{{poster}}"{{/if}}>
+        <source src="{{videoUrl}}" />
+        Your browser does not support the video tag.
+      </video>
+      {{/if}}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,16 @@
+<section id="faq" class="faq section">
+  <div class="container">
+    <div class="section-header"><h2>{{headline}}</h2></div>
+    <div class="faq-list" style="max-width:760px;margin:0 auto;">
+      {{#each items}}
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>{{question}}</span>
+          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="5 8 10 13 15 8"/></svg>
+        </button>
+        <div class="faq-answer">{{answer}}</div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,13 @@
+<section id="trust_indicators" class="trust-indicators section section--alt">
+  <div class="container">
+    <div class="grid grid-4">
+      {{#each items}}
+      <div class="trust-item">
+        {{#if icon}}<div class="trust-icon">{{icon}}</div>{{/if}}
+        <div class="trust-value">{{value}}</div>
+        <div class="trust-label">{{label}}</div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</section>

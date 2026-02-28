@@ -1,0 +1,12 @@
+<section id="hero" class="hero section">
+  <div class="container hero--centered">
+    {{#if badgeText}}<div class="hero__badge"><span class="badge">{{badgeText}}</span></div>{{/if}}
+    <h1 class="hero__headline">{{headline}}</h1>
+    <p class="hero__sub">{{subheadline}}</p>
+    <div class="hero__cta">
+      <a href="{{ctaHref}}" class="btn btn-primary">{{ctaText}}</a>
+      <a href="tel:{{phone}}" class="btn btn-outline">Call Now</a>
+    </div>
+    {{#if imageUrl}}<img class="hero__image" src="{{imageUrl}}" alt="{{headline}}" />{{/if}}
+  </div>
+</section>

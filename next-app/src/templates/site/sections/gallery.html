@@ -1,0 +1,13 @@
+<section id="gallery" class="gallery section section--alt">
+  <div class="container">
+    <div class="section-header"><h2>{{headline}}</h2></div>
+    <div class="gallery-grid">
+      {{#each images}}
+      <div class="gallery-item">
+        <img data-src="{{url}}" src="{{url}}" alt="{{alt}}" loading="lazy" />
+        {{#if caption}}<p class="gallery-caption">{{caption}}</p>{{/if}}
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</section>
