@@ -3,10 +3,21 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 26
-**Current Task:** TASK-37 Complete
+**Tasks Completed:** 27
+**Current Task:** TASK-38 Complete
 
 ---
+
+## 2026-02-28 — TASK-38: Implement section renderer component
+
+- Created `src/lib/component-map.ts` — COMPONENT_MAP registry mapping all 21 section types to their React components; keys are short variant names (e.g., "centered", "grid", "accordion")
+- Created `src/components/shared/SectionRenderer.tsx` — `SectionRenderer` looks up component from registry by section.type + section.variant, returns null for unknowns; `SiteRenderer` iterates all visible sections (visible: false sections are skipped) and renders each via SectionRenderer
+- Verified: integration test page at /test-section-renderer renders HeroCentered + ServicesGrid; hidden contact section correctly omitted
+- Screenshot saved to `.agent/screenshots/TASK-38-1.png`
+- TypeScript: no errors; all 15 tests pass
+
+---
+
 
 ## 2026-02-28 — TASK-37: Implement Guarantee section variant (guarantee-badge)
 

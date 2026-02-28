@@ -1,0 +1,4 @@
+
+> next-app@0.1.0 dev
+> concurrently "next dev" "tsx src/scraper/server.ts"
+
