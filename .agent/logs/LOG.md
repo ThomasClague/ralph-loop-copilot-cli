@@ -10,6 +10,14 @@
 
 ## Session Log
 
+## 2026-02-28 — TASK-7: Update package.json scripts with concurrently
+
+- Updated `dev` script: `concurrently "next dev" "tsx src/scraper/server.ts"`
+- Updated `start` script: `concurrently "next start" "tsx src/scraper/server.ts"`
+- Verified both processes start: scraper logs "Scraping API running on port 3001", Next.js starts on port 3000
+
+---
+
 ## 2026-02-28 — TASK-6: Set up Express sidecar server entry point
 
 - Created `src/scraper/` directory with stub files: `crawlee-service.ts`, `extract.ts`, `branding.ts`

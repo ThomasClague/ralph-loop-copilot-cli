@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "concurrently \"next dev\" \"tsx src/scraper/server.ts\"",
     "build": "next build",
-    "start": "next start",
+    "start": "concurrently \"next start\" \"tsx src/scraper/server.ts\"",
     "lint": "eslint",
     "test": "npm run test:unit && npm run test:e2e",
     "test:unit": "vitest run",
