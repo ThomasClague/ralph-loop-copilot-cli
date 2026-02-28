@@ -10,7 +10,20 @@
 
 ## Session Log
 
-## 2026-02-28 — TASK-16: Define shared TypeScript types for all section content and site types
+## 2026-02-28 — TASK-17: Implement Hero section variants (hero-centered, hero-split)
+
+- Created `src/components/shared/hero/HeroCentered.tsx` — full-viewport centered hero with background image overlay
+- Created `src/components/shared/hero/HeroSplit.tsx` — two-column layout, content left / image right, responsive
+- Both accept `{ content: HeroContent, business: BusinessInfo }` props
+- All colors use CSS custom properties (`--color-primary`, `--color-heading`, etc.)
+- CTA button links to `#contact`; phone renders as `tel:` link
+- Exported from `src/components/shared/hero/index.ts`
+- Screenshots: `.agent/screenshots/TASK-17-1.png` (centered), `.agent/screenshots/TASK-17-2.png` (split)
+- TypeScript: no errors; 23 unit tests pass
+
+---
+
+
 
 - Created `next-app/src/types/site.ts` with all shared TypeScript interfaces
 - Exports: `BusinessInfo`, `SiteConfig`, `SectionType`, `SiteSection`, `SectionContent`
