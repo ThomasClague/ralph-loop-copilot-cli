@@ -3,12 +3,20 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 49
-**Current Task:** TASK-63 Complete
+**Tasks Completed:** 50
+**Current Task:** TASK-64 Complete
 
 ---
 
-## 2026-02-28 — TASK-63: Implement settings page (/settings)
+## 2026-02-28 — TASK-64: POST /api/batches — create batch
+
+- `app/api/batches/route.ts` already implemented from prior task: POST handler validates `name` and `industry`, calls `createBatch()` from repository, returns 201 with batch object
+- Returns 400 with `{ error }` on missing fields, 500 for unexpected errors
+- Verified: `curl -X POST http://localhost:3000/api/batches -d '{"name":"Test Batch","industry":"roofing"}'` → 201 `{"id":...,"name":"Test Batch","industry":"roofing","createdAt":...}`
+- Verified: missing `industry` → 400 `{"error":"industry is required"}`
+
+---
+
 
 - Created `app/(admin)/settings/page.tsx` — client component with GET /api/settings on mount and PUT on save
 - API Keys section: password inputs for ANTHROPIC_API_KEY, PEXELS_API_KEY, RESEND_API_KEY with show/hide toggle per field

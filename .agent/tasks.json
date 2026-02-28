@@ -62,7 +62,7 @@
   { "id": "TASK-61", "title": "Implement batch detail page with prospect table and status badges", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-61.json", "passes": true },
   { "id": "TASK-62", "title": "Implement generation trigger UI (bulk + per-row) with real-time status updates", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-62.json", "passes": true },
   { "id": "TASK-63", "title": "Implement settings page (/settings)", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-63.json", "passes": true },
-  { "id": "TASK-64", "title": "POST /api/batches — create batch", "category": "api-endpoint", "specFilePath": ".agent/tasks/TASK-64.json", "passes": false },
+  { "id": "TASK-64", "title": "POST /api/batches — create batch", "category": "api-endpoint", "specFilePath": ".agent/tasks/TASK-64.json", "passes": true },
   { "id": "TASK-65", "title": "GET /api/batches — list all batches", "category": "api-endpoint", "specFilePath": ".agent/tasks/TASK-65.json", "passes": false },
   { "id": "TASK-66", "title": "POST /api/prospects — create one or more prospects in a batch", "category": "api-endpoint", "specFilePath": ".agent/tasks/TASK-66.json", "passes": false },
   { "id": "TASK-67", "title": "GET /api/prospects — list prospects filtered by batch_id", "category": "api-endpoint", "specFilePath": ".agent/tasks/TASK-67.json", "passes": false },
