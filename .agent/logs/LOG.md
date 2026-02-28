@@ -3,6 +3,16 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
+
+## 2026-02-28 — TASK-75: GET /api/email/preview endpoint
+
+- Created `app/api/email/preview/route.ts` — GET endpoint accepting `prospectSlug` and `templateId` query params
+- Returns 400 if either param is missing, 404 if prospect not found, 400 if template not found
+- Renders template with prospect data (businessName, previewUrl, agentName) and returns `{ subject, html, text }`
+- Verified with live dev server: correct subject, HTML, and text rendered for real prospect
+- All 135 unit tests pass; TypeScript compiles clean; no new lint errors
+
+---
 **Tasks Completed:** 73
 **Current Task:** TASK-74 Complete
 
