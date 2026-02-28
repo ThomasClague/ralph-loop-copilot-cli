@@ -10,7 +10,20 @@
 
 ## Session Log
 
-## 2026-02-28 — TASK-23: Implement Service Area section variants (service-area-list, service-area-map)
+## 2026-02-28 — TASK-24: Implement Gallery section variants (gallery-grid, gallery-masonry)
+
+- Created `src/components/shared/gallery/GalleryGrid.tsx` — uniform `grid-cols-2 md:grid-cols-3 lg:grid-cols-4` grid; each image is `aspect-square object-cover`; hover overlay shows caption if present; max 12 images
+- Created `src/components/shared/gallery/GalleryMasonry.tsx` — CSS columns (`columns-2 md:columns-3`) masonry layout; `break-inside-avoid mb-4 w-full` per image; hover overlay shows caption
+- Both accept `{ content: GalleryContent, business: BusinessInfo }` props; fall back to placeholder images when `content.images` is empty
+- All colors use CSS custom properties (`--color-bg`, `--color-heading`, `--color-border`)
+- Exported from `src/components/shared/gallery/index.ts`
+- Added `app/test-gallery/page.tsx` for visual verification
+- Playwright smoke test: all 3 browsers pass; screenshot saved to `.agent/screenshots/TASK-24-1.png`
+- TypeScript: no errors; all 23 unit tests pass
+
+---
+
+
 
 - Created `src/components/shared/service_area/ServiceAreaList.tsx` — headline + description + flex-wrap pill badges; shows first 8 areas with "+ X more" badge when there are more than 8
 - Created `src/components/shared/service_area/ServiceAreaMap.tsx` — two-column layout: Google Maps iframe (4:3 aspect ratio, sandbox attr) on one side, area pill list on the other; falls back to ServiceAreaList if no mapEmbedUrl provided
