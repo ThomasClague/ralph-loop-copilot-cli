@@ -3,8 +3,24 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 31
-**Current Task:** TASK-42 Complete
+**Tasks Completed:** 32
+**Current Task:** TASK-43 Complete
+
+---
+
+## 2026-02-28 — TASK-43: Implement programmatic data extraction from scraped pages (Stage 1b Part A)
+
+- Created `next-app/src/lib/ai/industry-keywords.ts` — `INDUSTRY_KEYWORDS` map with 10 industries (roofing, plumbing, electrical, landscaping, cleaning, painting, construction, hvac, pest_control, locksmith), each with 12–15 service keywords
+- Created `next-app/src/lib/ai/extract.ts` — exports `extractBusinessData(crawlResult, inputData): ExtractedData` with pure TS logic:
+  - Business name: most common h1 across pages, fallback to input name
+  - Phones/emails: deduplicated merge across all pages
+  - Address: first UK postcode found via regex (`/\b[A-Z]{1,2}\d[\dA-Z]?\s*\d[A-Z]{2}\b/gi`)
+  - Services: keyword match against industry dictionary
+  - Testimonials: detect quoted text, review-like phrases, attribution patterns (up to 5)
+  - Headings: h1 + h2 from homepage only
+  - Image URLs: deduplicated across all pages
+  - `totalTokenEstimate`: sum of body text chars / 4
+- 13 unit tests all pass; full suite (36 tests) passes
 
 ---
 
