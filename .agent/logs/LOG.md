@@ -1115,3 +1115,12 @@
 - Created __unit-tests/email/resend.test.ts with 3 tests (success, error, custom from)
 - All 138 unit tests pass; TypeScript compiles clean
 
+
+## 2026-02-28  TASK-101: Write Playwright E2E test for email sending
+
+- Added 'Send Email' button + Dialog to GenerateTrigger.tsx for ready prospects
+- Dialog has template selector (coldOutreach, followUp) and Send button
+- On success, shows notification 'Email sent to [businessName]'
+- Created tests/e2e/email.spec.ts: creates batch + prospect with email, patches status to 'ready', navigates to batch detail, clicks Send Email, selects template, confirms send, asserts success notification, verifies GET /api/email/sent record
+- All 3 E2E tests pass (3 browsers), all 180 unit tests pass, tsc clean
+- Screenshot: .agent/screenshots/TASK-101-1.png

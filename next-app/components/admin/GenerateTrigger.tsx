@@ -18,7 +18,22 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Zap } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Zap, Mail } from "lucide-react";
 import Link from "next/link";
 import type { Prospect } from "@/src/db/repository";
 
@@ -49,6 +64,35 @@ export function GenerateTrigger({
   const [isGenerating, setIsGenerating] = useState(false);
   const [notification, setNotification] = useState<string | null>(null);
   const [errorMap, setErrorMap] = useState<Record<string, string>>({});
+  const [emailProspect, setEmailProspect] = useState<Prospect | null>(null);
+  const [emailTemplate, setEmailTemplate] = useState("coldOutreach");
+  const [isSendingEmail, setIsSendingEmail] = useState(false);
+
+  async function handleSendEmail() {
+    if (!emailProspect) return;
+    setIsSendingEmail(true);
+    try {
+      const res = await fetch("/api/email/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          prospectSlug: emailProspect.slug,
+          templateId: emailTemplate,
+        }),
+      });
+      if (res.ok) {
+        setNotification(`Email sent to ${emailProspect.businessName}.`);
+        setEmailProspect(null);
+      } else {
+        const body = await res.json().catch(() => ({}));
+        setNotification(`Email error: ${body.error ?? "Unknown error"}`);
+      }
+    } catch {
+      setNotification("Network error — could not send email.");
+    } finally {
+      setIsSendingEmail(false);
+    }
+  }
 
   const hasPendingOrFailed = prospects.some(
     (p) => p.status === "pending" || p.status === "failed",
@@ -223,6 +267,14 @@ export function GenerateTrigger({
                             <Button variant="outline" size="sm" asChild>
                               <Link href={`/edit/${prospect.slug}`}>Edit</Link>
                             </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => setEmailProspect(prospect)}
+                            >
+                              <Mail className="mr-1 h-3 w-3" />
+                              Send Email
+                            </Button>
                           </>
                         )}
                         <Button
@@ -251,6 +303,38 @@ export function GenerateTrigger({
           </div>
         )}
       </div>
+
+      {/* Send Email Dialog */}
+      <Dialog
+        open={!!emailProspect}
+        onOpenChange={(open) => !open && setEmailProspect(null)}
+      >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Send Email</DialogTitle>
+            <DialogDescription>
+              Send an outreach email to {emailProspect?.businessName}.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-3 py-2">
+            <label className="text-sm font-medium">Template</label>
+            <Select value={emailTemplate} onValueChange={setEmailTemplate}>
+              <SelectTrigger className="w-full">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="coldOutreach">Cold Outreach</SelectItem>
+                <SelectItem value="followUp">Follow Up</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <DialogFooter showCloseButton>
+            <Button onClick={handleSendEmail} disabled={isSendingEmail}>
+              {isSendingEmail ? "Sending…" : "Send Email"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </TooltipProvider>
   );
 }
