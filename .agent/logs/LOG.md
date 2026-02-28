@@ -3,10 +3,20 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 35
-**Current Task:** TASK-46 Complete
+**Tasks Completed:** 36
+**Current Task:** TASK-47 Complete
 
 ---
+
+## 2026-02-28 — TASK-47: Implement variant assignment via deterministic hash (Stage 5)
+
+- Created `next-app/src/lib/ai/assign-variants.ts` — exports `assignVariants(sections, businessName, industry): SiteSection[]`
+- Hash function uses djb2-style algorithm; parity = XOR of all charCode parities → deterministic and side-effect free
+- `SECTION_VARIANTS` maps every `SectionType` to its valid variants, mirroring `COMPONENT_MAP` without a React import
+- 7 unit tests all pass; full suite (67 tests) passes; TypeScript compiles clean
+
+---
+
 
 ## 2026-02-28 — TASK-46: Implement content generation via generateObject (Stage 3)
 
