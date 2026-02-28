@@ -88,7 +88,7 @@
   { "id": "TASK-87", "title": "Define EmailService interface", "category": "functional", "specFilePath": ".agent/tasks/TASK-87.json", "passes": true },
   { "id": "TASK-88", "title": "Implement MockEmailService", "category": "functional", "specFilePath": ".agent/tasks/TASK-88.json", "passes": true },
   { "id": "TASK-89", "title": "Implement ResendEmailService", "category": "integration", "specFilePath": ".agent/tasks/TASK-89.json", "passes": true },
-  { "id": "TASK-90", "title": "Implement EmailService factory (controlled by EMAIL_MODE env var)", "category": "functional", "specFilePath": ".agent/tasks/TASK-90.json", "passes": false },
+  { "id": "TASK-90", "title": "Implement EmailService factory (controlled by EMAIL_MODE env var)", "category": "functional", "specFilePath": ".agent/tasks/TASK-90.json", "passes": true },
   { "id": "TASK-91", "title": "Create 3 outreach email templates with variable placeholders", "category": "functional", "specFilePath": ".agent/tasks/TASK-91.json", "passes": false },
   { "id": "TASK-92", "title": "Implement email template variable interpolation", "category": "functional", "specFilePath": ".agent/tasks/TASK-92.json", "passes": false },
   { "id": "TASK-93", "title": "Write Vitest unit tests for utility functions", "category": "functional", "specFilePath": ".agent/tasks/TASK-93.json", "passes": false },

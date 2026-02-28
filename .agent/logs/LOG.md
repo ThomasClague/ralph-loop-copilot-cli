@@ -1,4 +1,13 @@
 
+## 2026-02-28 — TASK-90: Implement EmailService factory
+
+- `next-app/src/lib/email/factory.ts` already existed with correct implementation
+- `getEmailService()` reads `email_mode` from settings table (defaults to `mock`)
+- Returns `MockEmailService` when mode=mock, `ResendEmailService` when mode=live
+- Throws `Error('RESEND_API_KEY not configured in settings')` if live mode missing key
+- Factory already integrated in `app/api/email/send/route.ts`
+- All 138 unit tests pass; TypeScript compiles clean; dev server confirmed running
+
 ## 2026-02-28 — TASK-88: Implement MockEmailService
 
 - `next-app/src/lib/email/mock.ts` implements `MockEmailService implements EmailService`
