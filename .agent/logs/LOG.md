@@ -3,8 +3,17 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 69
-**Current Task:** TASK-69 Complete
+**Tasks Completed:** 70
+**Current Task:** TASK-71 Complete
+
+---
+
+## 2026-02-28 — TASK-71: POST /api/generate/batch/[id] concurrency limiting
+
+- Updated `app/api/generate/batch/[id]/route.ts` to run pipelines with concurrency=3 (chunked `Promise.all` instead of sequential loop)
+- Added unit tests in `__unit-tests/api/generate-batch.test.ts` (5 tests: no eligible, 202 with count, concurrency, failure handling, DB error)
+- Integration verified: `POST /api/generate/batch/test-batch-54` returns 202 with `{"message":"Generation started","count":1}`
+- 122 unit tests pass; TypeScript compiles clean
 
 ---
 

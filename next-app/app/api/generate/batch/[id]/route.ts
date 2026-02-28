@@ -31,15 +31,21 @@ export async function POST(_req: NextRequest, { params }: Params) {
       eligible.map((p) => updateProspectStatus(p.id, "processing")),
     );
 
-    // Fire and forget — run pipelines in the background
+    // Fire and forget — run pipelines in the background with concurrency=3
     (async () => {
-      for (const prospect of eligible) {
-        try {
-          await runPipeline(prospect.id);
-        } catch (err) {
-          console.error(`[generate] prospect ${prospect.id} failed:`, err);
-          await updateProspectStatus(prospect.id, "failed");
-        }
+      const CONCURRENCY = 3;
+      for (let i = 0; i < eligible.length; i += CONCURRENCY) {
+        const chunk = eligible.slice(i, i + CONCURRENCY);
+        await Promise.all(
+          chunk.map(async (prospect) => {
+            try {
+              await runPipeline(prospect.id);
+            } catch (err) {
+              console.error(`[generate] prospect ${prospect.id} failed:`, err);
+              await updateProspectStatus(prospect.id, "failed");
+            }
+          }),
+        );
       }
     })().catch(console.error);
 
