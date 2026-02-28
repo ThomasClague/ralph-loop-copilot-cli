@@ -4,6 +4,24 @@
 =================
 **Last Updated:** 2026-02-28
 
+## 2026-02-28 — TASK-82: Implement content editor drawer
+
+- Created `components/edit/sectionFields.ts` — `SECTION_FIELDS` map defining editable field descriptors for all 21 section types (scalar: text/textarea/image/url; array with sub-fields)
+- Replaced stub `components/edit/ContentEditorDrawer.tsx` with full implementation:
+  - "Edit Content" panel showing clickable section buttons (pencil icon + section label)
+  - Clicking a section opens a shadcn/ui Sheet from the right (slide-over drawer)
+  - Sheet renders dynamic fields from `SECTION_FIELDS`: Input for text/url, Textarea for long text, ImageField for image (thumbnail + URL input + Upload button)
+  - Image upload: POST to `/api/batches/[id]/media` with auto-renamed filename matching `{slot}-general-{ts}.{ext}` convention; falls back to object URL if no batchId
+  - Array fields (items, steps, members, etc.) render expandable list with per-item sub-fields
+  - All changes propagate immediately to parent → preview re-renders in real-time
+  - Drawer closes without forcing save (auto-save handled by parent debounce)
+- Updated `app/edit/[slug]/page.tsx` to pass `batchId` prop to ContentEditorDrawer
+- Playwright E2E: `__playwright-tests/task82.spec.ts` — 9/9 tests pass (all 3 browsers)
+- Screenshot: `.agent/screenshots/TASK-82-1.png`, `TASK-82-2.png`, `TASK-82-3.png`
+- All 135 unit tests pass; TypeScript compiles clean; 9 Playwright tests pass
+
+---
+
 ## 2026-02-28 — TASK-81: Implement palette picker component
 
 - Replaced stub `components/edit/PalettePicker.tsx` with full implementation:

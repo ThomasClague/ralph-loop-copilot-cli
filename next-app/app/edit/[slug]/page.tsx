@@ -197,6 +197,7 @@ export default function EditPage() {
           <ContentEditorDrawer
             sections={siteConfig.sections}
             onChange={handleSectionsChange}
+            batchId={batchId ?? undefined}
           />
 
           {prospectId && <ExportButton prospectId={prospectId} />}
