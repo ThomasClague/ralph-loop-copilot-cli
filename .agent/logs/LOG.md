@@ -4,6 +4,16 @@
 =================
 **Last Updated:** 2026-02-28
 
+## 2026-02-28 — TASK-77: GET and PUT /api/settings
+
+- Updated `app/api/settings/route.ts` to add sensitive key masking (anthropic_api_key, pexels_api_key, resend_api_key → `****{last4}`)
+- GET /api/settings returns flat object with masked sensitive values
+- PUT /api/settings updates all provided keys and returns masked updated settings
+- Integration verified: PUT + GET round-trip works; API keys masked correctly
+- All 135 unit tests pass; TypeScript compiles clean
+
+---
+
 ## 2026-02-28 — TASK-76: DELETE /api/prospects/[slug] and DELETE /api/batches/[id]
 
 - Added `deleteProspect(id)` and `deleteBatch(id)` to `src/db/repository.ts`
