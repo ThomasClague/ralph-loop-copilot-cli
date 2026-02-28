@@ -4,6 +4,19 @@
 =================
 **Last Updated:** 2026-02-28
 
+## 2026-02-28 — TASK-81: Implement palette picker component
+
+- Replaced stub `components/edit/PalettePicker.tsx` with full implementation:
+  - 3-column grid of 80×42px color swatches showing 5 colors (primary, secondary, accent, background, text-primary)
+  - Palette name displayed below each swatch
+  - Active swatch highlighted with a 2px outline ring using the palette's primary color
+  - Clicking a swatch calls `onSelect(palette.id)` — parent updates `siteConfig.paletteId` and preview re-renders instantly
+- Playwright E2E: `__playwright-tests/task81.spec.ts` — 3/3 tests pass (renders swatches, active ring visible, click changes palette)
+- Screenshot: `.agent/screenshots/TASK-81-1.png`, `.agent/screenshots/TASK-81-2.png`
+- All 135 unit tests pass; TypeScript compiles clean; 3 Playwright tests pass
+
+---
+
 ## 2026-02-28 — TASK-80: Implement section list panel
 
 - Installed `@dnd-kit/core` and `@dnd-kit/sortable` packages
