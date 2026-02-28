@@ -3,12 +3,21 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 39
-**Current Task:** TASK-50 Complete
+**Tasks Completed:** 40
+**Current Task:** TASK-51 Complete
 
 ---
 
-## 2026-02-28 — TASK-50: Implement single section regeneration (regenerate-section.ts)
+## 2026-02-28 — TASK-51: Implement Pexels API client
+
+- Created `next-app/src/lib/images/pexels.ts` — exports `searchPhotos(query, perPage, orientation): Promise<PexelsPhoto[]>`
+- Typed `PexelsPhoto` interface with `url`, `alt`, `photographer` fields
+- Uses `PEXELS_API_KEY` env var for Authorization header; returns `[]` on any error
+- Supports `landscape` (default) and `square` orientations for hero vs gallery use
+- 8 unit tests all pass; full suite (108 tests) passes; TypeScript compiles clean
+
+---
+
 
 - Created `next-app/src/lib/ai/regenerate-section.ts` — exports `regenerateSection(prospectId, sectionId): Promise<SiteSection>`
 - Loads prospect from DB, finds target section in site_config.sections, builds section-specific prompt
