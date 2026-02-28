@@ -191,6 +191,7 @@ export default function EditPage() {
           <SectionListPanel
             sections={siteConfig.sections}
             onChange={handleSectionsChange}
+            slug={slug}
           />
 
           <ContentEditorDrawer

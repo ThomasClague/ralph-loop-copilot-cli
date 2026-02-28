@@ -4,6 +4,21 @@
 =================
 **Last Updated:** 2026-02-28
 
+## 2026-02-28 — TASK-80: Implement section list panel
+
+- Installed `@dnd-kit/core` and `@dnd-kit/sortable` packages
+- Replaced stub `components/edit/SectionListPanel.tsx` with full implementation:
+  - Drag-and-drop reordering via `@dnd-kit/sortable` (PointerSensor with 4px activation threshold)
+  - Toggle visibility (eye / eye-off icon) updates `section.visible`
+  - Regenerate (refresh icon) calls `POST /api/generate/prospect/[slug]/section` with spinner while in-flight
+  - Remove (trash icon) shows `window.confirm` before removing from sections array
+- Updated `/app/edit/[slug]/page.tsx` to pass `slug` prop to SectionListPanel
+- Playwright E2E: `__playwright-tests/task80.spec.ts` — 6/6 tests pass (renders rows with buttons, toggle hide/show)
+- Screenshot: `.agent/screenshots/TASK-80-1.png`
+- All 135 unit tests pass; TypeScript compiles clean; 6 Playwright tests pass
+
+---
+
 ## 2026-02-28 — TASK-79: Implement edit page layout (/edit/[slug])
 
 - Created `app/edit/[slug]/page.tsx` — client component, split-pane layout (340px left + flex-1 right)
