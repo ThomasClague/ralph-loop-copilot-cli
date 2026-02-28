@@ -3,8 +3,16 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 33
-**Current Task:** TASK-44 Complete
+**Tasks Completed:** 34
+**Current Task:** TASK-45 Complete
+
+---
+
+## 2026-02-28 — TASK-45: Implement structure decision via generateObject (Stage 2)
+
+- Created `next-app/src/lib/ai/prompts.ts` — exports `buildStructurePrompt(profile, prospect)` with full section descriptions and enforcement rules in prompt text
+- Created `next-app/src/lib/ai/generate-structure.ts` — exports `generateStructure(profile, prospect): Promise<StructureDecision>`; calls `generateObject` with `structureSchema`, then enforces hero-first and contact/cta_banner-last rules post-response
+- 9 unit tests all pass; full suite (50 tests) passes; TypeScript compiles clean
 
 ---
 

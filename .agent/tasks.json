@@ -43,7 +43,7 @@
   { "id": "TASK-42", "title": "Define Zod schemas for all AI pipeline outputs", "category": "functional", "specFilePath": ".agent/tasks/TASK-42.json", "passes": true },
   { "id": "TASK-43", "title": "Implement programmatic data extraction from scraped pages (Stage 1b Part A)", "category": "functional", "specFilePath": ".agent/tasks/TASK-43.json", "passes": true },
   { "id": "TASK-44", "title": "Implement AI condensation via generateObject (Stage 1b Part B)", "category": "functional", "specFilePath": ".agent/tasks/TASK-44.json", "passes": true },
-  { "id": "TASK-45", "title": "Implement structure decision via generateObject (Stage 2)", "category": "functional", "specFilePath": ".agent/tasks/TASK-45.json", "passes": false },
+  { "id": "TASK-45", "title": "Implement structure decision via generateObject (Stage 2)", "category": "functional", "specFilePath": ".agent/tasks/TASK-45.json", "passes": true },
   { "id": "TASK-46", "title": "Implement content generation via generateObject (Stage 3)", "category": "functional", "specFilePath": ".agent/tasks/TASK-46.json", "passes": false },
   { "id": "TASK-47", "title": "Implement variant assignment via deterministic hash (Stage 5)", "category": "functional", "specFilePath": ".agent/tasks/TASK-47.json", "passes": false },
   { "id": "TASK-48", "title": "Implement color theming logic (Stage 6 — brand-derived or palette-mapped)", "category": "functional", "specFilePath": ".agent/tasks/TASK-48.json", "passes": false },
