@@ -3,8 +3,19 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 37
-**Current Task:** TASK-48 Complete
+**Tasks Completed:** 38
+**Current Task:** TASK-49 Complete
+
+---
+
+## 2026-02-28 — TASK-49: Implement main pipeline orchestrator (pipeline.ts)
+
+- Created `next-app/src/lib/pipeline.ts` — exports `runPipeline(prospectId): Promise<SiteConfig>`
+- Orchestrates all 6 pipeline stages: scraping → extraction → condensation → structure → content → images → variants → theming
+- Updates prospect status in DB at each stage (`scraping`, `analyzing`, `generating`, `sourcing_images`, `assembling`, `ready`)
+- On error: sets status to `failed`, stores error in `notes`, re-throws
+- Created `next-app/src/lib/ai/assign-images.ts` — stub passthrough for TASK-53
+- 11 unit tests all pass; full suite (94 tests) passes; TypeScript compiles clean
 
 ---
 

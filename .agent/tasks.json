@@ -47,7 +47,7 @@
   { "id": "TASK-46", "title": "Implement content generation via generateObject (Stage 3)", "category": "functional", "specFilePath": ".agent/tasks/TASK-46.json", "passes": true },
   { "id": "TASK-47", "title": "Implement variant assignment via deterministic hash (Stage 5)", "category": "functional", "specFilePath": ".agent/tasks/TASK-47.json", "passes": true },
   { "id": "TASK-48", "title": "Implement color theming logic (Stage 6 — brand-derived or palette-mapped)", "category": "functional", "specFilePath": ".agent/tasks/TASK-48.json", "passes": true },
-  { "id": "TASK-49", "title": "Implement main pipeline orchestrator (pipeline.ts)", "category": "functional", "specFilePath": ".agent/tasks/TASK-49.json", "passes": false },
+  { "id": "TASK-49", "title": "Implement main pipeline orchestrator (pipeline.ts)", "category": "functional", "specFilePath": ".agent/tasks/TASK-49.json", "passes": true },
   { "id": "TASK-50", "title": "Implement single section regeneration (regenerate-section.ts)", "category": "functional", "specFilePath": ".agent/tasks/TASK-50.json", "passes": false },
   { "id": "TASK-51", "title": "Implement Pexels API client", "category": "integration", "specFilePath": ".agent/tasks/TASK-51.json", "passes": false },
   { "id": "TASK-52", "title": "Create industry query map (Pexels search queries per slot per industry)", "category": "functional", "specFilePath": ".agent/tasks/TASK-52.json", "passes": false },
