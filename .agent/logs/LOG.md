@@ -1,4 +1,11 @@
 
+## 2026-02-28 — TASK-95: Vitest unit tests for interpolate utility
+
+- Test file already existed at `src/lib/utils/__tests__/interpolate.test.ts` (11 tests)
+- Updated `vitest.config.mjs` to include `src/**/__tests__/**/*.{test,spec}.{ts,tsx}` in addition to `__unit-tests/**`
+- Removed duplicate `__unit-tests/utils/interpolate.test.ts`
+- All 164 unit tests pass
+
 ## 2026-02-28 — TASK-94: Vitest unit tests for AI pipeline stages
 
 - All 6 required AI pipeline test files already existed and were passing
