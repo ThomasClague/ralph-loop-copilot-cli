@@ -8,9 +8,20 @@
 
 ----------------------------------------------
 
-## Session Log
+## 2026-02-28 — TASK-26: Implement CTA Banner section variants (cta-centered, cta-split)
 
-## 2026-02-28 — TASK-25: Implement FAQ section variants (faq-accordion, faq-two-col)
+- Created `src/components/shared/cta_banner/CtaCentered.tsx` — full-width section with `--color-primary` background; centered h2 headline, p subheadline, large button with `--color-background` bg and `--color-primary` text; phone number below button
+- Created `src/components/shared/cta_banner/CtaSplit.tsx` — two-column layout: left side headline + subheadline on primary bg, right side CTA button + phone; stacks on mobile via flex-col md:flex-row
+- Both accept `{ content: CtaBannerContent, business: BusinessInfo }` props; CTA button links to `content.ctaHref` (defaults to `#contact`)
+- All colors use CSS custom properties (`--color-primary`, `--color-background`, `--color-text-inverted`)
+- Exported from `src/components/shared/cta_banner/index.ts`
+- Added `app/test-cta-banner/page.tsx` for visual verification
+- Playwright smoke test: both variants render correctly with blue backgrounds, white text, white button; screenshot saved to `.agent/screenshots/TASK-26-1.png`
+- TypeScript: no errors; all 23 unit tests pass
+
+---
+
+
 
 - Added shadcn/ui Accordion component via `npx shadcn@latest add accordion`
 - Created `src/components/shared/faq/FaqAccordion.tsx` — client component with `<Accordion type="single" collapsible>` from shadcn/ui; each item has question as trigger and answer as content; "call us" footer with phone link
