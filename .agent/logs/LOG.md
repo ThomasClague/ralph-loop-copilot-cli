@@ -4,7 +4,18 @@
 =================
 **Last Updated:** 2026-02-28
 
-## 2026-02-28 — TASK-75: GET /api/email/preview endpoint
+## 2026-02-28 — TASK-76: DELETE /api/prospects/[slug] and DELETE /api/batches/[id]
+
+- Added `deleteProspect(id)` and `deleteBatch(id)` to `src/db/repository.ts`
+  - `deleteProspect`: deletes sent_emails for prospect, then deletes prospect
+  - `deleteBatch`: deletes sent_emails for all batch prospects, media for batch, all prospects, then the batch
+- Added DELETE handler to `app/api/prospects/[slug]/route.ts` — returns 204 on success, 404 if not found
+- Added DELETE handler to `app/api/batches/[id]/route.ts` — returns 204 on success, 404 if not found
+- Integration verified: DELETE prospect returns 204, re-fetch returns 404; DELETE batch returns 204, re-fetch returns 404, prospects query returns empty
+- All 135 unit tests pass; TypeScript compiles clean
+
+---
+
 
 - Created `app/api/email/preview/route.ts` — GET endpoint accepting `prospectSlug` and `templateId` query params
 - Returns 400 if either param is missing, 404 if prospect not found, 400 if template not found

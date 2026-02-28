@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import {
   getProspectBySlug,
   updateProspect,
+  deleteProspect,
   type UpdateProspect,
 } from "@/src/db/repository";
 
@@ -27,8 +28,10 @@ export async function PATCH(req: NextRequest, { params }: Params) {
     const body = (await req.json()) as Record<string, unknown>;
     const updates: UpdateProspect = {};
 
-    if (body.business_name !== undefined) updates.businessName = body.business_name as string;
-    if (body.businessName !== undefined) updates.businessName = body.businessName as string;
+    if (body.business_name !== undefined)
+      updates.businessName = body.business_name as string;
+    if (body.businessName !== undefined)
+      updates.businessName = body.businessName as string;
     if (body.industry !== undefined) updates.industry = body.industry as string;
     if (body.location !== undefined) updates.location = body.location as string;
     if (body.phone !== undefined) updates.phone = body.phone as string | null;
@@ -38,7 +41,9 @@ export async function PATCH(req: NextRequest, { params }: Params) {
     // page_data maps to siteContent; accept pre-stringified or object
     if (body.page_data !== undefined) {
       updates.siteContent =
-        typeof body.page_data === "string" ? body.page_data : JSON.stringify(body.page_data);
+        typeof body.page_data === "string"
+          ? body.page_data
+          : JSON.stringify(body.page_data);
     }
     if (body.siteContent !== undefined) {
       updates.siteContent =
@@ -59,6 +64,19 @@ export async function PATCH(req: NextRequest, { params }: Params) {
     return NextResponse.json(updated);
   } catch (err) {
     console.error("[PATCH /api/prospects/[slug]]", err);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
+}
+
+export async function DELETE(_req: NextRequest, { params }: Params) {
+  const { slug } = await params;
+  const prospect = await getProspectBySlug(slug);
+  if (!prospect) {
+    return NextResponse.json({ error: "Prospect not found" }, { status: 404 });
+  }
+  await deleteProspect(prospect.id);
+  return new NextResponse(null, { status: 204 });
 }

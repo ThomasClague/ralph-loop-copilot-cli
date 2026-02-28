@@ -1,7 +1,7 @@
-import { eq, and } from 'drizzle-orm';
-import type { InferInsertModel, InferSelectModel } from 'drizzle-orm';
-import { db } from './index';
-import { batches, prospects, media, sentEmails, settings } from './schema';
+import { eq, and } from "drizzle-orm";
+import type { InferInsertModel, InferSelectModel } from "drizzle-orm";
+import { db } from "./index";
+import { batches, prospects, media, sentEmails, settings } from "./schema";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -12,7 +12,7 @@ export type NewBatch = InferInsertModel<typeof batches>;
 
 export type Prospect = InferSelectModel<typeof prospects>;
 export type NewProspect = InferInsertModel<typeof prospects>;
-export type UpdateProspect = Partial<Omit<NewProspect, 'id' | 'createdAt'>>;
+export type UpdateProspect = Partial<Omit<NewProspect, "id" | "createdAt">>;
 
 export type Media = InferSelectModel<typeof media>;
 export type NewMedia = InferInsertModel<typeof media>;
@@ -25,7 +25,11 @@ export type NewSentEmail = InferInsertModel<typeof sentEmails>;
 // ---------------------------------------------------------------------------
 
 export async function createBatch(data: NewBatch): Promise<Batch> {
-  const row = { ...data, id: data.id ?? crypto.randomUUID(), createdAt: data.createdAt ?? Date.now() };
+  const row = {
+    ...data,
+    id: data.id ?? crypto.randomUUID(),
+    createdAt: data.createdAt ?? Date.now(),
+  };
   await db.insert(batches).values(row);
   return row as Batch;
 }
@@ -46,26 +50,53 @@ export async function listBatches(): Promise<Batch[]> {
 function parseProspect(row: Prospect): Prospect {
   return {
     ...row,
-    scrapedRaw: row.scrapedRaw ? JSON.parse(row.scrapedRaw as string) as string : row.scrapedRaw,
-    scrapedBranding: row.scrapedBranding ? JSON.parse(row.scrapedBranding as string) as string : row.scrapedBranding,
-    extractedData: row.extractedData ? JSON.parse(row.extractedData as string) as string : row.extractedData,
-    condensedProfile: row.condensedProfile ? JSON.parse(row.condensedProfile as string) as string : row.condensedProfile,
-    structure: row.structure ? JSON.parse(row.structure as string) as string : row.structure,
-    siteContent: row.siteContent ? JSON.parse(row.siteContent as string) as string : row.siteContent,
-    siteConfig: row.siteConfig ? JSON.parse(row.siteConfig as string) as string : row.siteConfig,
-    customPalette: row.customPalette ? JSON.parse(row.customPalette as string) as string : row.customPalette,
+    scrapedRaw: row.scrapedRaw
+      ? (JSON.parse(row.scrapedRaw as string) as string)
+      : row.scrapedRaw,
+    scrapedBranding: row.scrapedBranding
+      ? (JSON.parse(row.scrapedBranding as string) as string)
+      : row.scrapedBranding,
+    extractedData: row.extractedData
+      ? (JSON.parse(row.extractedData as string) as string)
+      : row.extractedData,
+    condensedProfile: row.condensedProfile
+      ? (JSON.parse(row.condensedProfile as string) as string)
+      : row.condensedProfile,
+    structure: row.structure
+      ? (JSON.parse(row.structure as string) as string)
+      : row.structure,
+    siteContent: row.siteContent
+      ? (JSON.parse(row.siteContent as string) as string)
+      : row.siteContent,
+    siteConfig: row.siteConfig
+      ? (JSON.parse(row.siteConfig as string) as string)
+      : row.siteConfig,
+    customPalette: row.customPalette
+      ? (JSON.parse(row.customPalette as string) as string)
+      : row.customPalette,
   };
 }
 
 /** Serialize JSON blob fields to strings before insert/update. */
 function serializeProspect<T extends Partial<NewProspect>>(data: T): T {
   const jsonFields: (keyof NewProspect)[] = [
-    'scrapedRaw', 'scrapedBranding', 'extractedData', 'condensedProfile',
-    'structure', 'siteContent', 'siteConfig', 'customPalette',
+    "scrapedRaw",
+    "scrapedBranding",
+    "extractedData",
+    "condensedProfile",
+    "structure",
+    "siteContent",
+    "siteConfig",
+    "customPalette",
   ];
   const out = { ...data } as Record<string, unknown>;
   for (const field of jsonFields) {
-    if (field in out && out[field] !== null && out[field] !== undefined && typeof out[field] !== 'string') {
+    if (
+      field in out &&
+      out[field] !== null &&
+      out[field] !== undefined &&
+      typeof out[field] !== "string"
+    ) {
       out[field] = JSON.stringify(out[field]);
     }
   }
@@ -84,32 +115,70 @@ export async function createProspect(data: NewProspect): Promise<Prospect> {
   return parseProspect(row as Prospect);
 }
 
-export async function createProspects(data: NewProspect[]): Promise<Prospect[]> {
+export async function createProspects(
+  data: NewProspect[],
+): Promise<Prospect[]> {
   return Promise.all(data.map(createProspect));
 }
 
 export async function getProspect(id: string): Promise<Prospect | undefined> {
-  const row = await db.query.prospects.findFirst({ where: eq(prospects.id, id) });
+  const row = await db.query.prospects.findFirst({
+    where: eq(prospects.id, id),
+  });
   return row ? parseProspect(row) : undefined;
 }
 
-export async function getProspectBySlug(slug: string): Promise<Prospect | undefined> {
-  const row = await db.query.prospects.findFirst({ where: eq(prospects.slug, slug) });
+export async function getProspectBySlug(
+  slug: string,
+): Promise<Prospect | undefined> {
+  const row = await db.query.prospects.findFirst({
+    where: eq(prospects.slug, slug),
+  });
   return row ? parseProspect(row) : undefined;
 }
 
 export async function listProspects(batchId: string): Promise<Prospect[]> {
-  const rows = await db.select().from(prospects).where(eq(prospects.batchId, batchId));
+  const rows = await db
+    .select()
+    .from(prospects)
+    .where(eq(prospects.batchId, batchId));
   return rows.map(parseProspect);
 }
 
-export async function updateProspect(id: string, data: UpdateProspect): Promise<void> {
+export async function updateProspect(
+  id: string,
+  data: UpdateProspect,
+): Promise<void> {
   const serialized = serializeProspect({ ...data, updatedAt: Date.now() });
   await db.update(prospects).set(serialized).where(eq(prospects.id, id));
 }
 
-export async function updateProspectStatus(id: string, status: string): Promise<void> {
-  await db.update(prospects).set({ status, updatedAt: Date.now() }).where(eq(prospects.id, id));
+export async function updateProspectStatus(
+  id: string,
+  status: string,
+): Promise<void> {
+  await db
+    .update(prospects)
+    .set({ status, updatedAt: Date.now() })
+    .where(eq(prospects.id, id));
+}
+
+export async function deleteProspect(id: string): Promise<void> {
+  await db.delete(sentEmails).where(eq(sentEmails.prospectId, id));
+  await db.delete(prospects).where(eq(prospects.id, id));
+}
+
+export async function deleteBatch(id: string): Promise<void> {
+  const batchProspects = await db
+    .select({ id: prospects.id })
+    .from(prospects)
+    .where(eq(prospects.batchId, id));
+  for (const p of batchProspects) {
+    await db.delete(sentEmails).where(eq(sentEmails.prospectId, p.id));
+  }
+  await db.delete(media).where(eq(media.batchId, id));
+  await db.delete(prospects).where(eq(prospects.batchId, id));
+  await db.delete(batches).where(eq(batches.id, id));
 }
 
 // ---------------------------------------------------------------------------
@@ -117,7 +186,11 @@ export async function updateProspectStatus(id: string, status: string): Promise<
 // ---------------------------------------------------------------------------
 
 export async function createMedia(data: NewMedia): Promise<Media> {
-  const row = { ...data, id: data.id ?? crypto.randomUUID(), createdAt: data.createdAt ?? Date.now() };
+  const row = {
+    ...data,
+    id: data.id ?? crypto.randomUUID(),
+    createdAt: data.createdAt ?? Date.now(),
+  };
   await db.insert(media).values(row);
   return row as Media;
 }
@@ -134,7 +207,13 @@ export async function getMediaBySlotAndIndustry(
   return db
     .select()
     .from(media)
-    .where(and(eq(media.batchId, batchId), eq(media.slot, slot), eq(media.industry, industry)));
+    .where(
+      and(
+        eq(media.batchId, batchId),
+        eq(media.slot, slot),
+        eq(media.industry, industry),
+      ),
+    );
 }
 
 // ---------------------------------------------------------------------------
@@ -147,8 +226,13 @@ export async function createSentEmail(data: NewSentEmail): Promise<SentEmail> {
   return row as SentEmail;
 }
 
-export async function listSentEmailsByProspect(prospectId: string): Promise<SentEmail[]> {
-  return db.select().from(sentEmails).where(eq(sentEmails.prospectId, prospectId));
+export async function listSentEmailsByProspect(
+  prospectId: string,
+): Promise<SentEmail[]> {
+  return db
+    .select()
+    .from(sentEmails)
+    .where(eq(sentEmails.prospectId, prospectId));
 }
 
 export interface SentEmailWithProspect extends SentEmail {
@@ -183,12 +267,17 @@ export async function listAllSentEmails(): Promise<SentEmailWithProspect[]> {
 // ---------------------------------------------------------------------------
 
 export async function getSetting(key: string): Promise<string | undefined> {
-  const row = await db.query.settings.findFirst({ where: eq(settings.key, key) });
+  const row = await db.query.settings.findFirst({
+    where: eq(settings.key, key),
+  });
   return row?.value;
 }
 
 export async function setSetting(key: string, value: string): Promise<void> {
-  await db.insert(settings).values({ key, value }).onConflictDoUpdate({ target: settings.key, set: { value } });
+  await db
+    .insert(settings)
+    .values({ key, value })
+    .onConflictDoUpdate({ target: settings.key, set: { value } });
 }
 
 export async function getAllSettings(): Promise<Record<string, string>> {
