@@ -30,7 +30,7 @@
   { "id": "TASK-29", "title": "Implement Team section variant", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-29.json", "passes": true },
   { "id": "TASK-30", "title": "Implement Certifications section variant", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-30.json", "passes": true },
   { "id": "TASK-31", "title": "Implement Emergency section variant", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-31.json", "passes": true },
-  { "id": "TASK-32", "title": "Implement Benefits section variants", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-32.json", "passes": false },
+  { "id": "TASK-32", "title": "Implement Benefits section variants", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-32.json", "passes": true },
   { "id": "TASK-33", "title": "Implement Comparison section variant", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-33.json", "passes": false },
   { "id": "TASK-34", "title": "Implement Brands section variant", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-34.json", "passes": false },
   { "id": "TASK-35", "title": "Implement Blog Preview section variant", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-35.json", "passes": false },

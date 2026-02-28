@@ -3,8 +3,20 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 20
-**Current Task:** TASK-31 Complete
+**Tasks Completed:** 21
+**Current Task:** TASK-32 Complete
+
+---
+
+## 2026-02-28 — TASK-32: Implement Benefits section variants (benefits-icons, benefits-checklist)
+
+- Created `src/components/shared/benefits/BenefitsIcons.tsx` — 3-column responsive grid of benefit cards; each card has a blue circle icon (CheckCircle on `--color-primary` bg), title (h3), description; falls back to 3 placeholder items
+- Created `src/components/shared/benefits/BenefitsChecklist.tsx` — two-column checklist on desktop; each item has CheckCircle2 icon in `--color-primary`, bold title, muted description; falls back to 6 placeholder items
+- All colors use CSS custom properties (`--color-bg`, `--color-surface`, `--color-heading`, `--color-text`, `--color-border`, `--color-primary`, `--color-text-inverted`)
+- Exported from `src/components/shared/benefits/index.ts`
+- Added `app/test-benefits/page.tsx` for visual verification
+- Playwright smoke test: 6 icon cards in 3-column grid visible; 6 checklist items in 2-column layout with checkmarks; screenshot saved to `.agent/screenshots/TASK-32-1.png`
+- TypeScript: no errors; all 23 unit tests pass
 
 ---
 
