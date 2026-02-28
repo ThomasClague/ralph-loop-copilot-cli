@@ -31,6 +31,16 @@
 
 ---
 
+## 2026-02-28 — TASK-4: Create and apply Drizzle migration
+
+- Added `fs.mkdirSync('./data', { recursive: true })` to `migrate.ts` for fresh-machine safety
+- Added auto-migration call in `index.ts` using `drizzle-orm/better-sqlite3/migrator`
+- Migration SQL file already existed from TASK-3 in `drizzle/0000_flat_silver_samurai.sql`
+- Ran `npm run db:migrate` — created `data/prospectforge.db` with all 5 tables: batches, media, prospects, sent_emails, settings
+- Verified tables via Python sqlite3 query
+
+---
+
 ## 2026-02-28 — TASK-3: Define database schema for all tables
 
 - Defined all 5 tables in `next-app/src/db/schema.ts`: `batches`, `prospects`, `media`, `sentEmails`, `settings`

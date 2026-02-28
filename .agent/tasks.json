@@ -2,7 +2,7 @@
   { "id": "TASK-1",  "title": "Install and configure infrastructure dependencies", "category": "functional", "specFilePath": ".agent/tasks/TASK-1.json", "passes": true },
   { "id": "TASK-2",  "title": "Configure Drizzle ORM with SQLite", "category": "data-model", "specFilePath": ".agent/tasks/TASK-2.json", "passes": true },
   { "id": "TASK-3",  "title": "Define database schema for all tables", "category": "data-model", "specFilePath": ".agent/tasks/TASK-3.json", "passes": true },
-  { "id": "TASK-4",  "title": "Create and apply Drizzle migration", "category": "data-model", "specFilePath": ".agent/tasks/TASK-4.json", "passes": false },
+  { "id": "TASK-4",  "title": "Create and apply Drizzle migration", "category": "data-model", "specFilePath": ".agent/tasks/TASK-4.json", "passes": true },
   { "id": "TASK-5",  "title": "Implement repository pattern with all CRUD functions", "category": "data-model", "specFilePath": ".agent/tasks/TASK-5.json", "passes": false },
   { "id": "TASK-6",  "title": "Set up Express sidecar server entry point", "category": "functional", "specFilePath": ".agent/tasks/TASK-6.json", "passes": false },
   { "id": "TASK-7",  "title": "Update package.json scripts with concurrently", "category": "functional", "specFilePath": ".agent/tasks/TASK-7.json", "passes": false },
