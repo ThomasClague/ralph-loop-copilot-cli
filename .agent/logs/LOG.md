@@ -10,7 +10,17 @@
 
 ## Session Log
 
-## 2026-02-28 — TASK-10: Implement Crawlee CheerioCrawler service
+## 2026-02-28 — TASK-11: Implement page data extraction
+
+- Implemented `extractPageData($, url, rawHtml)` in `next-app/src/scraper/extract.ts`
+- Extracts title, meta description, h1-h6 headings, clean body text (stripped nav/header/footer/scripts/styles, capped at 10k chars), links, images (filtered data URIs), phones (UK/US regex), emails (regex)
+- Deduplicates phones and emails
+- Added 8 unit tests in `__unit-tests/scraper/extract.test.ts` — all pass
+- TypeScript compiles without errors; scraper server starts on port 3001
+
+---
+
+
 
 - Implemented `crawlSite(url, maxPages)` in `next-app/src/scraper/crawlee-service.ts`
 - CheerioCrawler with maxConcurrency=3, requestHandlerTimeoutSecs=30, navigationTimeoutSecs=30
