@@ -2,3 +2,21 @@
 > next-app@0.1.0 dev
 > concurrently "next dev" "tsx src/scraper/server.ts"
 
+[0] ⚠ Port 3000 is in use by process 22984, using available port 3001 instead.
+[0] ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+[0]  We detected multiple lockfiles and selected the directory of C:\git\ralph-loop-copilot-cli\package-lock.json as the root directory.
+[0]  To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+[0]    See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+[0]  Detected additional lockfiles: 
+[0]    * C:\git\ralph-loop-copilot-cli\next-app\package-lock.json
+[0] 
+[0] ▲ Next.js 16.1.6 (Turbopack)
+[0] - Local:         http://localhost:3001
+[0] - Network:       http://172.22.16.1:3001
+[0] 
+[0] ✓ Starting...
+[0] ⨯ Unable to acquire lock at C:\git\ralph-loop-copilot-cli\next-app\.next\dev\lock, is another instance of next dev running?
+[0]   Suggestion: If you intended to restart next dev, terminate the other process, and then try again.
+[0] [?25h
+[0] next dev exited with code 1
+[1] Scraping API running on port 3001
