@@ -1,4 +1,14 @@
 
+## 2026-02-28 — TASK-99: Playwright E2E test for generation flow
+
+- Created `next-app/tests/e2e/generation.spec.ts` — E2E test for landing page generation
+- Uses `request` fixture to create batch + 1 prospect via API, navigates to batch detail page
+- Clicks "Generate All Pending", polls `/api/batches/[id]/prospects` every 3s until status = 'ready' (up to 120s)
+- Verifies Preview link appears after generation completes
+- Teardown via `DELETE /api/batches/[id]` in afterEach
+- Used `test.setTimeout(180_000)` to ensure test has enough time for AI pipeline (~60s)
+- Screenshot: `.agent/screenshots/TASK-99-1.png`
+
 ## 2026-02-28 — TASK-98: Playwright E2E test for batch creation flow
 
 - Updated `playwright.config.ts` to scan both `__playwright-tests/` and `tests/e2e/` directories
