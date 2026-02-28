@@ -1,8 +1,6 @@
 ---
 name: e2e-tester
-description: >
-  Playwright E2E testing patterns.
-  Use when writing Playwright E2E tests (Page Object Model, selectors, MCP exploration workflow).
+description: "Playwright E2E testing patterns. Use when writing Playwright E2E tests (Page Object Model, selectors, MCP exploration workflow)."
 ---
 
 Before you start:
