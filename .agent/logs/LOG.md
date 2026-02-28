@@ -635,3 +635,15 @@
 - Added `data/` and `data/*.db` to `.gitignore`
 - Added `db:migrate` script to `package.json`
 - TypeScript compiles without errors; unit tests pass
+
+---
+
+## 2026-02-28 - TASK-55: Implement root layout with sidebar navigation
+
+- Created `config/nav-links.ts` with Dashboard, Batches, Settings nav items using Lucide icons
+- Created `components/app-sidebar.tsx` (client component) using shadcn/ui Sidebar with active route highlighting via `usePathname`
+- Created `components/admin-shell.tsx` (client component) wrapping `SidebarProvider` + `AppSidebar` + main content area
+- Restructured to route group `app/(admin)/` with sidebar layout; root `app/layout.tsx` is now HTML-only shell
+- Moved root page to `app/(admin)/page.tsx`; preview/edit routes will use root layout (no sidebar)
+- All 117 unit tests pass
+- Screenshot: .agent/screenshots/TASK-55-1.png
