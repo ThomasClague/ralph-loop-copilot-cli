@@ -18,27 +18,27 @@ export interface SiteConfig {
 }
 
 export type SectionType =
-  | 'hero'
-  | 'services'
-  | 'about'
-  | 'trust_indicators'
-  | 'testimonials'
-  | 'process'
-  | 'service_area'
-  | 'gallery'
-  | 'faq'
-  | 'cta_banner'
-  | 'contact'
-  | 'pricing'
-  | 'team'
-  | 'certifications'
-  | 'emergency'
-  | 'benefits'
-  | 'comparison'
-  | 'brands'
-  | 'blog_preview'
-  | 'video'
-  | 'guarantee';
+  | "hero"
+  | "services"
+  | "about"
+  | "trust_indicators"
+  | "testimonials"
+  | "process"
+  | "service_area"
+  | "gallery"
+  | "faq"
+  | "cta_banner"
+  | "contact"
+  | "pricing"
+  | "team"
+  | "certifications"
+  | "emergency"
+  | "benefits"
+  | "comparison"
+  | "brands"
+  | "blog_preview"
+  | "video"
+  | "guarantee";
 
 export interface SiteSection {
   id: string;
@@ -60,6 +60,7 @@ export interface HeroContent {
 }
 
 export interface ServicesContent {
+  headline?: string;
   items: Array<{ title: string; description: string; icon?: string }>;
 }
 
@@ -75,7 +76,12 @@ export interface TrustIndicatorsContent {
 }
 
 export interface TestimonialsContent {
-  items: Array<{ quote: string; author: string; role?: string; rating?: number }>;
+  items: Array<{
+    quote: string;
+    author: string;
+    role?: string;
+    rating?: number;
+  }>;
 }
 
 export interface ProcessContent {
@@ -114,12 +120,22 @@ export interface ContactContent {
 
 export interface PricingContent {
   headline: string;
-  tiers: Array<{ name: string; price: string; features: string[]; highlighted?: boolean }>;
+  tiers: Array<{
+    name: string;
+    price: string;
+    features: string[];
+    highlighted?: boolean;
+  }>;
 }
 
 export interface TeamContent {
   headline: string;
-  members: Array<{ name: string; role: string; bio?: string; imageUrl?: string }>;
+  members: Array<{
+    name: string;
+    role: string;
+    bio?: string;
+    imageUrl?: string;
+  }>;
 }
 
 export interface CertificationsContent {
@@ -151,7 +167,12 @@ export interface BrandsContent {
 
 export interface BlogPreviewContent {
   headline: string;
-  posts: Array<{ title: string; excerpt: string; date: string; imageUrl?: string }>;
+  posts: Array<{
+    title: string;
+    excerpt: string;
+    date: string;
+    imageUrl?: string;
+  }>;
 }
 
 export interface VideoContent {

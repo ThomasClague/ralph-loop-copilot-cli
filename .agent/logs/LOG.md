@@ -10,7 +10,22 @@
 
 ## Session Log
 
-## 2026-02-28 — TASK-17: Implement Hero section variants (hero-centered, hero-split)
+## 2026-02-28 — TASK-18: Implement Services section variants (services-grid, services-list)
+
+- Created `src/components/shared/services/ServicesGrid.tsx` — responsive 3-column card grid with icon, title, description
+- Created `src/components/shared/services/ServicesList.tsx` — vertical list with icon/number badge, title, description, dividers
+- Both accept `{ content: ServicesContent, business: BusinessInfo }` props
+- Added `headline?: string` to `ServicesContent` type in `src/types/site.ts`
+- Renders 3 dummy placeholder items when `content.items` is empty
+- All colors use CSS custom properties (`--color-bg`, `--color-surface`, `--color-border`, `--color-primary`, etc.)
+- Exported from `src/components/shared/services/index.ts`
+- Added `app/test-services/page.tsx` for visual verification
+- Screenshots: `.agent/screenshots/TASK-18-1.png` — both grid and list variants visible
+- TypeScript: no errors; 23 unit tests pass
+
+---
+
+
 
 - Created `src/components/shared/hero/HeroCentered.tsx` — full-viewport centered hero with background image overlay
 - Created `src/components/shared/hero/HeroSplit.tsx` — two-column layout, content left / image right, responsive
