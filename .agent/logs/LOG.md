@@ -3,12 +3,22 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 41
-**Current Task:** TASK-52 Complete
+**Tasks Completed:** 42
+**Current Task:** TASK-53 Complete
 
 ---
 
-## 2026-02-28 — TASK-52: Create industry query map
+## 2026-02-28 — TASK-53: Implement image assignment logic (3-tier priority)
+
+- Replaced stub in `next-app/src/lib/ai/assign-images.ts` with full implementation
+- Tier 1: manual uploads matched via `getMediaBySlotAndIndustry(batchId, slot, industry)`
+- Tier 2: scraped images from `prospect.scrapedRaw` — filtered (no icons/logos/favicons/sprites/data URIs), homepage-first
+- Tier 3: Pexels fallback via `searchPhotos(getImageQuery(industry, slot))`
+- Image slots covered: hero (imageUrl), about (imageUrl), gallery (images array), team (members[].imageUrl)
+- Pexels calls made sequentially to avoid rate limiting; gallery uses slight query variation for subsequent images
+- 108 unit tests pass; TypeScript compiles clean
+
+---
 
 - Created `next-app/src/lib/images/industry-queries.ts` — exports `INDUSTRY_IMAGE_QUERIES` and `getImageQuery(industry, slot)`
 - Queries defined for 10 industries: roofing, plumbing, electrical, landscaping, cleaning, painting, hvac, construction, locksmith, pest_control
