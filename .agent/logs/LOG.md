@@ -8,7 +8,19 @@
 
 ----------------------------------------------
 
-## 2026-02-28 — TASK-28: Implement Pricing section variant (pricing-cards)
+## 2026-02-28 — TASK-29: Implement Team section variant (team-cards)
+
+- Created `src/components/shared/team/TeamCards.tsx` — 4-column grid of team member cards; each card shows circular avatar (photo if available, otherwise initials with primary color bg), name (h3), role in primary color, optional bio truncated to 3 lines
+- Fallback avatar renders initials (up to 2 chars) on `--color-primary` background
+- All colors use CSS custom properties (`--color-bg`, `--color-surface`, `--color-heading`, `--color-text`, `--color-primary`, `--color-border`, `--color-text-inverted`)
+- Exported from `src/components/shared/team/index.ts`
+- Added `app/test-team/page.tsx` for visual verification
+- Playwright smoke test: all 4 cards visible with circular avatars, names, roles; screenshot saved to `.agent/screenshots/TASK-29-1.png`
+- TypeScript: no errors; all 23 unit tests pass
+
+---
+
+
 
 - Created `src/components/shared/pricing/PricingCards.tsx` — three-column grid of pricing tier cards; highlighted tier has `border-2 border-[--color-primary]`, scale-105, and "Most Popular" badge; non-highlighted tiers have outlined CTA button; highlighted tier has filled CTA button
 - Each card renders: tier name (h3), price in primary color, feature list with SVG checkmarks, and CTA button linking to `#contact`
