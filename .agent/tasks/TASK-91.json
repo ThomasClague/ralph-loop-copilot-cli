@@ -1,0 +1,43 @@
+{
+  "id": "TASK-91",
+  "title": "Implement email templates",
+  "category": "functional",
+  "description": "Implement the outreach email templates. Create at least 2 templates (cold outreach, follow-up). Each template is an HTML/text function that accepts business data and returns formatted email content.",
+  "acceptanceCriteria": [
+    "At least 2 email templates defined in src/lib/email/templates/",
+    "Each template exports a function: template(data: TemplateData): { subject, html, text }",
+    "Templates reference: businessName, previewUrl, agentName, prospectName",
+    "HTML templates use inline CSS (email client safe)",
+    "Text versions are plain-text equivalents",
+    "Templates are listed in a TEMPLATES registry object",
+    "Verify templates render correctly with sample data"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/lib/email/templates/coldOutreach.ts",
+      "details": "Export function `coldOutreach(data: TemplateData)`. Returns subject: 'I built a free website for {businessName}', html: full HTML email with preview link, text: plain text version.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Create src/lib/email/templates/followUp.ts",
+      "details": "Export function `followUp(data: TemplateData)`. Returns subject: 'Following up — your free site is still live', html and text versions.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Create src/lib/email/templates/index.ts",
+      "details": "Export `TEMPLATES = { coldOutreach, followUp }` registry. Export `TemplateData` type: `{ businessName, previewUrl, agentName, prospectName? }`.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify templates",
+      "details": "Call `coldOutreach({ businessName: 'ABC Roofing', previewUrl: 'http://localhost:3000/preview/abc-roofing', agentName: 'John' })`. Verify subject, html, and text are non-empty and contain the business name.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-87"],
+  "estimatedComplexity": "medium"
+}

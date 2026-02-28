@@ -1,0 +1,36 @@
+{
+  "id": "TASK-28",
+  "title": "Implement Pricing section variant (pricing-cards)",
+  "category": "ui-ux",
+  "description": "Implement a Pricing section with tiered pricing cards. The most popular tier can be visually highlighted. Suitable for businesses offering tiered service packages.",
+  "acceptanceCriteria": [
+    "`PricingCards` component exists in `src/components/shared/pricing/`",
+    "Accepts `{ content: PricingContent, business: BusinessInfo }` props",
+    "Renders all pricing tiers with name, price, and feature list",
+    "Highlighted tier is visually distinct (border, scale, badge)",
+    "CTA button on each tier links to `#contact`",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create component files",
+      "details": "Create `src/components/shared/pricing/PricingCards.tsx`, `index.ts`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement PricingCards",
+      "details": "Headline + grid of tier cards `grid-cols-1 md:grid-cols-3`. Each card: tier name (h3), price, feature list with checkmarks. Highlighted card: `border-2 border-[--color-primary]`, 'Most Popular' badge, slightly scaled up. CTA button per card.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Verify highlighted tier is visually distinct, feature checkmarks are visible.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-16", "TASK-39"],
+  "estimatedComplexity": "low"
+}

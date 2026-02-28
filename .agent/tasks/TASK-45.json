@@ -1,0 +1,47 @@
+{
+  "id": "TASK-45",
+  "title": "Implement structure decision via generateObject (Stage 2)",
+  "category": "functional",
+  "description": "Implement src/lib/ai/generate-structure.ts. This calls Claude with the condensed business profile and asks it to select and order 7-10 sections from the 21 available types. Returns a typed StructureDecision with section list, tone, and palette hint.",
+  "acceptanceCriteria": [
+    "`generateStructure(profile, prospect)` exists in `src/lib/ai/generate-structure.ts`",
+    "Returns a `StructureDecision` with sections array (7-10 items), tone, paletteHint",
+    "Sections array always starts with 'hero' and ends with 'contact' or 'cta_banner'",
+    "Uses `generateObject` with `structureSchema`",
+    "Prompt includes business name, industry, location, and condensed profile summary",
+    "Uses `model` from client.ts"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/lib/ai/generate-structure.ts",
+      "details": "Import `generateObject` from `ai`, `model` from `./client`, `structureSchema` and `StructureDecision` from `./schemas`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Write the structure decision prompt",
+      "details": "The prompt in `src/lib/ai/prompts.ts`:\n```\nYou are designing the structure of a professional website for: ${businessName}, a ${industry} business in ${location}.\n\nBusiness profile: ${summary}\n\nSelect 7-10 sections from this list that would make the most compelling website for this specific business: [list all 21 types with descriptions].\n\nRules:\n- hero MUST be first\n- contact or cta_banner MUST be last  \n- Minimum 7, maximum 10 sections\n- Be specific to the industry and location\n- Choose sections that showcase what makes this business valuable\n```",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement generateStructure function",
+      "details": "Call `generateObject({ model, schema: structureSchema, prompt: buildStructurePrompt(profile, prospect) })`. After receiving the result, enforce the rules: if sections[0].type !== 'hero', prepend a hero section. If last section is not 'contact' or 'cta_banner', append a contact section.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Test with a real prospect",
+      "details": "Call `generateStructure` with a test profile and inspect the returned sections. Verify: 7-10 sections, hero first, contact last. Check that the sections make sense for the given industry.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-41", "TASK-42", "TASK-44"],
+  "estimatedComplexity": "medium",
+  "technicalNotes": [
+    "The prompt should include descriptions of each section type to help the AI choose appropriately.",
+    "The variant field in the structure decision can be left to the AI or hardcoded to 'default' and resolved later by TASK-47 (variant assignment).",
+    "Cost: ~$0.003 per call (small input/output)."
+  ]
+}

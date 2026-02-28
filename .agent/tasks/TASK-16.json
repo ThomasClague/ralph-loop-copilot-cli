@@ -1,0 +1,60 @@
+{
+  "id": "TASK-16",
+  "title": "Define shared TypeScript types for all section content and site types",
+  "category": "functional",
+  "description": "Create src/types/site.ts with all TypeScript interfaces and types needed for the site data model: BusinessInfo, SiteConfig, SiteSection, and content types for all 21 section types. These types are shared between the admin app, the AI pipeline, and the exported sites.",
+  "acceptanceCriteria": [
+    "`src/types/site.ts` exports `BusinessInfo`, `SiteConfig`, `SiteSection`, `SectionType`",
+    "Content types exist for all 21 section types (HeroContent, ServicesContent, etc.)",
+    "Each content type is the union of all fields any variant of that type needs",
+    "Optional fields are typed as `field?: type`",
+    "`SiteSection` has: id (string), type (SectionType), variant (string), visible (boolean), content (typed per section)",
+    "`SiteConfig` has: businessInfo, sections, paletteId, customPalette (optional)",
+    "Types are importable without TypeScript errors"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Define BusinessInfo and SiteConfig types",
+      "details": "```ts\nexport interface BusinessInfo {\n  name: string;\n  phone: string;\n  email: string;\n  location: string;\n  address?: string;\n  industry: string;\n}\n\nexport interface SiteConfig {\n  slug: string;\n  businessInfo: BusinessInfo;\n  sections: SiteSection[];\n  paletteId: string;\n  customPalette?: Record<string, string>;\n}\n```",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Define SectionType enum and SiteSection interface",
+      "details": "```ts\nexport type SectionType = 'hero' | 'services' | 'about' | 'trust_indicators' | 'testimonials' | 'process' | 'service_area' | 'gallery' | 'faq' | 'cta_banner' | 'contact' | 'pricing' | 'team' | 'certifications' | 'emergency' | 'benefits' | 'comparison' | 'brands' | 'blog_preview' | 'video' | 'guarantee';\n\nexport interface SiteSection {\n  id: string;\n  type: SectionType;\n  variant: string;\n  visible: boolean;\n  content: SectionContent;\n}\n```",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Define content types for hero, services, about, trust_indicators, testimonials, process",
+      "details": "Define: `HeroContent` (headline, subheadline, ctaText, ctaHref, imageUrl, badgeText?), `ServicesContent` (items: Array<{title, description, icon?}>), `AboutContent` (headline, body, imageUrl?, stats?: Array<{value, label}>), `TrustIndicatorsContent` (items: Array<{icon?, label, value}>), `TestimonialsContent` (items: Array<{quote, author, role?, rating?}>), `ProcessContent` (headline, steps: Array<{number, title, description}>).",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Define content types for service_area, gallery, faq, cta_banner, contact",
+      "details": "Define: `ServiceAreaContent` (headline, areas: string[], mapEmbedUrl?), `GalleryContent` (headline, images: Array<{url, alt, caption?}>), `FaqContent` (headline, items: Array<{question, answer}>), `CtaBannerContent` (headline, subheadline?, ctaText, ctaHref), `ContactContent` (headline, showForm: boolean, showMap?: boolean).",
+      "pass": false
+    },
+    {
+      "step": 5,
+      "description": "Define content types for the remaining 11 section types",
+      "details": "Define: `PricingContent` (headline, tiers: Array<{name, price, features: string[], highlighted?}>), `TeamContent` (headline, members: Array<{name, role, bio?, imageUrl?}>), `CertificationsContent` (headline, items: Array<{name, imageUrl?, year?}>), `EmergencyContent` (headline, phone, availability, services?: string[]), `BenefitsContent` (headline, items: Array<{title, description, icon?}>), `ComparisonContent` (headline, columns: Array<{label, features: string[]}>), `BrandsContent` (headline?, brands: Array<{name, logoUrl?}>), `BlogPreviewContent` (headline, posts: Array<{title, excerpt, date, imageUrl?}>), `VideoContent` (headline, videoUrl, poster?), `GuaranteeContent` (headline, body, badgeText?).",
+      "pass": false
+    },
+    {
+      "step": 6,
+      "description": "Create SectionContent union type",
+      "details": "```ts\nexport type SectionContent = HeroContent | ServicesContent | AboutContent | TrustIndicatorsContent | TestimonialsContent | ProcessContent | ServiceAreaContent | GalleryContent | FaqContent | CtaBannerContent | ContactContent | PricingContent | TeamContent | CertificationsContent | EmergencyContent | BenefitsContent | ComparisonContent | BrandsContent | BlogPreviewContent | VideoContent | GuaranteeContent;\n```",
+      "pass": false
+    }
+  ],
+  "dependencies": [],
+  "estimatedComplexity": "medium",
+  "technicalNotes": [
+    "These types serve as the single source of truth for the AI pipeline's Zod schemas (TASK-42), component props, and the export config.",
+    "Every content type field that is used by at least one variant must be included. Optional fields (used by some variants but not others) are typed as `field?: type`.",
+    "This file should be co-located in both `src/types/site.ts` (admin app) and `site-template/src/types/site.ts` (exported sites) — or symlinked/copied at export time."
+  ]
+}

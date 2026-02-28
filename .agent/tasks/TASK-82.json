@@ -1,0 +1,43 @@
+{
+  "id": "TASK-82",
+  "title": "Implement content editor drawer",
+  "category": "ui-ux",
+  "description": "Implement the ContentEditorDrawer component. Clicking a section in the section list opens a slide-over drawer with editable fields for all text/image content in that section.",
+  "acceptanceCriteria": [
+    "ContentEditorDrawer is a slide-over drawer (from right) triggered by clicking a section",
+    "Shows all editable fields for the selected section",
+    "Text fields are input/textarea elements",
+    "Image fields have an 'Upload' button and show current image preview",
+    "Changes update page_data state in real-time (preview updates)",
+    "Drawer can be closed without saving (auto-save handled by parent)",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/components/editor/ContentEditorDrawer.tsx",
+      "details": "Client component using shadcn/ui Sheet component. Props: `section: Section | null, onContentChange: (sectionType, field, value) => void, onClose: () => void`. When section is null, drawer is closed.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement dynamic field rendering",
+      "details": "Based on section type, render the appropriate fields. Use a `SECTION_FIELDS` map: `{ hero: ['headline', 'subheadline', 'ctaText', 'backgroundImage'], services: ['title', 'items[].name', 'items[].description'], ... }`. Render Text, Textarea, or ImageUpload fields per entry.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement image upload within drawer",
+      "details": "Image fields: show current image (50x50px thumbnail). 'Change Image' button opens file picker. On file select: POST to /api/batches/[id]/media with the file. Update field value with returned URL.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot with drawer open. Edit a headline field. Verify the preview updates with the new text.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-80", "TASK-16"],
+  "estimatedComplexity": "high"
+}

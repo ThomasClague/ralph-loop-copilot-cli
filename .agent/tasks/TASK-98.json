@@ -1,0 +1,40 @@
+{
+  "id": "TASK-98",
+  "title": "Write Playwright E2E test: batch creation and management",
+  "category": "testing",
+  "description": "Write Playwright end-to-end tests covering the main batch creation workflow. Tests that a user can create a batch with CSV import and see the prospects in the batch detail page.",
+  "acceptanceCriteria": [
+    "E2E test file exists at tests/e2e/batchCreation.spec.ts",
+    "Tests cover: navigate to /batches/new, enter batch name, paste CSV data, parse, verify preview table, submit, redirect to batch detail, verify prospects in table",
+    "Tests pass with `npm run test:e2e`",
+    "Tests use Page Object Model pattern"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create Page Object for batch creation",
+      "details": "Create `tests/e2e/pages/NewBatchPage.ts`. Methods: `goto()`, `setBatchName(name)`, `setIndustry(industry)`, `pasteCSV(data)`, `clickParse()`, `getPreviewRowCount()`, `submit()`, `getRedirectUrl()`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Create Page Object for batch detail",
+      "details": "Create `tests/e2e/pages/BatchDetailPage.ts`. Methods: `goto(id)`, `getProspectCount()`, `getProspectStatus(businessName)`, `clickGenerate()`.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Write batch creation test",
+      "details": "Test: navigate to /batches/new. Enter 'Test Roofing Batch' as name. Select 'roofing' as industry. Paste 3-row CSV. Click Parse. Assert 3 rows in preview. Click 'Create Batch'. Assert redirect to /batches/[id]. Assert 3 prospects in table.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Run E2E tests and verify",
+      "details": "Run `npm run test:e2e`. All tests pass against the dev server.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-58", "TASK-61"],
+  "estimatedComplexity": "medium"
+}

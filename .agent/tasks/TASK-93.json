@@ -1,0 +1,47 @@
+{
+  "id": "TASK-93",
+  "title": "Write Vitest unit tests for the repository layer",
+  "category": "testing",
+  "description": "Write Vitest unit tests for all repository functions in src/db/repository.ts. Use an in-memory SQLite database for test isolation.",
+  "acceptanceCriteria": [
+    "Test file exists at src/db/__tests__/repository.test.ts",
+    "All CRUD operations tested: createBatch, listBatches, getBatch, createProspects, getProspectsByBatch, getProspectBySlug, updateProspect, createMedia, upsertSetting, getSetting",
+    "Each test uses a fresh in-memory DB (beforeEach setup)",
+    "Tests pass with `npm test`",
+    "Coverage ≥ 80% for repository.ts"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Set up test DB utility",
+      "details": "Create `src/db/__tests__/testDb.ts`. Export `createTestDb()` that creates an in-memory SQLite DB, runs migrations, and returns the DB instance + repository functions.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Write batch repository tests",
+      "details": "Test: createBatch returns object with id and timestamps. listBatches returns all batches. getBatch returns correct batch by id. getBatch returns null for unknown id.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Write prospect repository tests",
+      "details": "Test: createProspects inserts all and returns them. getProspectsByBatch filters correctly. getProspectBySlug finds by slug. updateProspect patches only specified fields.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Write settings repository tests",
+      "details": "Test: upsertSetting creates new setting. upsertSetting updates existing setting. getSetting returns null for unknown key.",
+      "pass": false
+    },
+    {
+      "step": 5,
+      "description": "Run tests and verify",
+      "details": "Run `npm test`. All tests should pass. Fix any failures.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-5", "TASK-4"],
+  "estimatedComplexity": "medium"
+}

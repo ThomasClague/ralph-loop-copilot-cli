@@ -1,0 +1,29 @@
+{
+  "id": "TASK-35",
+  "title": "Implement Blog Preview section variant (blog-preview-cards)",
+  "category": "ui-ux",
+  "description": "Implement a Blog Preview section showing 3 recent blog post preview cards with title, excerpt, date, and optional image.",
+  "acceptanceCriteria": [
+    "`BlogPreviewCards` component exists in `src/components/shared/blog_preview/`",
+    "Accepts `{ content: BlogPreviewContent, business: BusinessInfo }` props",
+    "Renders up to 3 blog post cards with title, excerpt, date, optional image",
+    "Card links are placeholder (#) since this is a demo site",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create component files and implement",
+      "details": "Create `src/components/shared/blog_preview/BlogPreviewCards.tsx`, `index.ts`. Grid of 3 cards `grid-cols-1 md:grid-cols-3`. Each card: image (if present) at top, date (small muted), title (h3), excerpt (truncated to 3 lines), 'Read More' link. Card: border, hover shadow.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Verify 3 cards are visible with title, excerpt, date.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-16", "TASK-39"],
+  "estimatedComplexity": "low"
+}

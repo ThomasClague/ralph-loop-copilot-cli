@@ -1,0 +1,47 @@
+{
+  "id": "TASK-94",
+  "title": "Write Vitest unit tests for the AI pipeline stages",
+  "category": "testing",
+  "description": "Write Vitest unit tests for the AI pipeline stages. Mock all AI SDK calls using vi.mock. Test each stage function in isolation.",
+  "acceptanceCriteria": [
+    "Test files exist for: extractionStage, condensationStage, structureDecision, contentGeneration, variantAssignment, colorTheming",
+    "All AI SDK calls are mocked with vi.mock('@ai-sdk/anthropic') and vi.mock('ai')",
+    "Each test verifies the output structure matches the Zod schema",
+    "Tests pass with `npm test`",
+    "No real API calls made during tests"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/lib/pipeline/__tests__/ directory with test files",
+      "details": "Create test files: variantAssignment.test.ts (no mocks needed, pure function), colorTheming.test.ts (no mocks), structureDecision.test.ts (mock generateObject).",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Write variantAssignment tests",
+      "details": "Test: same businessName+industry always returns same variant index. Different inputs return different variants. Variant index is within bounds for the section type's variant count.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Write structureDecision tests with mocked AI",
+      "details": "Mock `generateObject` to return a valid StructureDecisionSchema output. Test that structureDecision correctly passes business data to the AI and returns the section list.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Write contentGeneration tests",
+      "details": "Mock `generateObject` to return valid ContentSchema output. Test that contentGeneration calls AI with correct prompts and returns content for each section.",
+      "pass": false
+    },
+    {
+      "step": 5,
+      "description": "Run tests and verify",
+      "details": "Run `npm test`. All tests pass. No actual API calls are made (no API key needed).",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-43", "TASK-44", "TASK-45", "TASK-46", "TASK-47", "TASK-48"],
+  "estimatedComplexity": "high"
+}

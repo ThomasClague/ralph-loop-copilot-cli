@@ -1,0 +1,44 @@
+{
+  "id": "TASK-27",
+  "title": "Implement Contact section variants (contact-form, contact-details)",
+  "category": "ui-ux",
+  "description": "Implement two Contact section variants. contact-form shows a contact form with name/email/message fields alongside business contact details. contact-details shows only business contact info (phone, email, address) in a formatted layout without a form.",
+  "acceptanceCriteria": [
+    "`ContactForm` and `ContactDetails` components exist in `src/components/shared/contact/`",
+    "Both accept `{ content: ContactContent, business: BusinessInfo }` props",
+    "ContactForm renders a form with name, email, message fields and submit button",
+    "ContactDetails renders phone, email, address in a clean layout",
+    "Form shows section id='contact' for anchor link navigation",
+    "Phone number is a clickable `<a href='tel:...'>` link",
+    "Email is a clickable `<a href='mailto:...'>` link",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create component files",
+      "details": "Create `src/components/shared/contact/ContactForm.tsx`, `ContactDetails.tsx`, `index.ts`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement ContactForm",
+      "details": "Section with `id='contact'`. Two-column layout: left side has form (name, email, message textarea, submit button), right side has contact details (phone, email, address). Form is presentational only in the exported site — no actual form submission needed for the demo.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement ContactDetails",
+      "details": "Section with `id='contact'`. Single column or two-column. Show: phone (`<a href='tel:...'>`), email (`<a href='mailto:...'>`), address, business hours if available. Icons for each contact method using Lucide React.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Verify phone and email are clickable links. Verify form fields render correctly.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-16", "TASK-39"],
+  "estimatedComplexity": "low"
+}

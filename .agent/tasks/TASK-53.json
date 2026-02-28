@@ -1,0 +1,54 @@
+{
+  "id": "TASK-53",
+  "title": "Implement image assignment logic (3-tier priority: uploads > scraped > Pexels)",
+  "category": "functional",
+  "description": "Implement src/lib/images/assign.ts which assigns images to each section using 3-tier priority: 1) Manual uploads from the batch media library (matched by filename convention), 2) Scraped images from the crawl, 3) Pexels API fallback.",
+  "acceptanceCriteria": [
+    "`assignImages(sections, prospect, batchId)` exists in `src/lib/images/assign.ts`",
+    "Returns sections with image URLs populated for all relevant sections",
+    "Priority order: manual uploads > scraped images > Pexels",
+    "Manual uploads matched by slot and industry from filename convention: `{slot}-{industry}-{descriptor}.{ext}`",
+    "Scraped images filtered to exclude tiny icons (skip images with w/h hints < 100px or src containing 'icon', 'logo', 'favicon')",
+    "Pexels used as last resort with industry-specific queries",
+    "No images left as empty strings if any tier has results"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/lib/images/assign.ts",
+      "details": "Import `searchPhotos` from `./pexels`, `getImageQuery` from `./industry-queries`, repository media functions. Define `assignImages(sections: SiteSection[], prospect: Prospect, batchId: string): Promise<SiteSection[]>`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement manual upload matching (Tier 1)",
+      "details": "For each section that needs an image (hero, gallery, about, etc.), call `getMediaBySlotAndIndustry(batchId, slot, prospect.industry)`. If found, use the file path as the image URL. Mark as 'used' to avoid reuse in the same batch.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement scraped image assignment (Tier 2)",
+      "details": "From `prospect.scraped_raw`, get all page images. Filter: remove images where src contains 'icon', 'logo', 'favicon', 'sprite', or src is a data URI. Sort by appearing on the homepage first. Assign to sections that still need images.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Implement Pexels fallback (Tier 3)",
+      "details": "For sections that still need images after tiers 1 and 2, call `searchPhotos(getImageQuery(prospect.industry, slot), 1)` per section. Assign the first result's URL. Make these calls sequentially (not parallel) to avoid rate limiting.",
+      "pass": false
+    },
+    {
+      "step": 5,
+      "description": "Test with a real prospect",
+      "details": "Test with a prospect that has an existing_url. Verify: scraped images are used where available, Pexels images fill in the rest. Test with a prospect without a URL — verify Pexels images are used for all slots.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-52", "TASK-5"],
+  "estimatedComplexity": "medium",
+  "technicalNotes": [
+    "Image slots per section type: hero (1 image), gallery (4-8 images), about (1 image), services (optional per service), team (per member).",
+    "The gallery section may need multiple images — call Pexels multiple times with slight query variations if needed.",
+    "External image URLs from Pexels are downloaded to /public/images/ during export (TASK-86) so they work in the standalone Next.js project."
+  ]
+}

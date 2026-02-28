@@ -1,0 +1,49 @@
+{
+  "id": "TASK-67",
+  "title": "Implement POST /api/batches/[id]/media route",
+  "category": "api-endpoint",
+  "description": "Create the media upload API route. Accepts multipart form data with image files, validates filename convention, saves files to the media directory, and records them in the media table.",
+  "acceptanceCriteria": [
+    "POST /api/batches/[id]/media accepts multipart/form-data",
+    "Validates each file's name matches {slot}-{industry}-{descriptor}.{ext}",
+    "Files with invalid names return 400 with details of which files failed",
+    "Valid files are saved to public/uploads/{batchId}/",
+    "Each file is recorded in the media table (batch_id, slot, industry, url, source='upload')",
+    "Returns 201 with array of created media records",
+    "Verify with a test upload"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/app/api/batches/[id]/media/route.ts",
+      "details": "Export POST handler. Use `request.formData()` to parse the multipart body. Extract all File entries.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Validate filenames",
+      "details": "For each file, run regex: `/^([a-z_]+)-([a-z_]+)-([a-z0-9_]+)\\.(jpg|jpeg|png|webp)$/i`. Collect invalid filenames. If any invalid, return 400 JSON with `{ errors: ['filename.jpg: invalid name format'] }`.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Save files to disk",
+      "details": "Create directory `public/uploads/{batchId}/` if not exists. Write each file's ArrayBuffer to disk using `fs.writeFile`. Relative URL: `/uploads/{batchId}/{filename}`.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Record in media table",
+      "details": "For each saved file, parse slot and industry from filename. Insert record into media table via `createMedia({ batchId, slot, industry, url, source: 'upload' })`. Return 201 with all created records.",
+      "pass": false
+    },
+    {
+      "step": 5,
+      "description": "Verify endpoint",
+      "details": "Upload a valid test image via curl with `--form`. Verify the file appears in public/uploads/ and the DB record is created. Test with an invalid filename and verify 400 response.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-54", "TASK-65"],
+  "estimatedComplexity": "medium"
+}

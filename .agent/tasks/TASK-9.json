@@ -1,0 +1,47 @@
+{
+  "id": "TASK-9",
+  "title": "Initialize shadcn/ui in the project",
+  "category": "functional",
+  "description": "Initialize shadcn/ui using the CLI and install the core components needed throughout the admin dashboard. shadcn/ui copies components into the project — they are not a dependency. This provides the building blocks (tables, forms, dialogs, dropdowns, sidebars, badges, buttons, etc.) for all admin UI.",
+  "acceptanceCriteria": [
+    "`components.json` exists at project root with shadcn/ui configuration",
+    "`src/components/ui/` directory contains installed components",
+    "Core components are installed: button, badge, card, dialog, dropdown-menu, form, input, label, select, separator, sheet, sidebar, table, tabs, textarea, toast",
+    "shadcn/ui components import successfully without TypeScript errors",
+    "Tailwind CSS configuration supports shadcn/ui CSS variables"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Initialize shadcn/ui",
+      "details": "Run `npx shadcn@latest init`. When prompted: choose Default style, select base color (Slate or Neutral), confirm the global CSS file (app/globals.css), confirm tailwind.config, confirm components path as `src/components/ui`. This creates `components.json`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Install core UI components",
+      "details": "Run: `npx shadcn@latest add button badge card dialog dropdown-menu form input label select separator sheet sidebar table tabs textarea`. Install each or all at once. These are the core components needed for the admin dashboard.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Install additional components",
+      "details": "Run: `npx shadcn@latest add progress avatar tooltip popover command`. These are needed for the batch status progress indicators, palette picker, and search/command palette.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify components work",
+      "details": "Import `Button` from `@/components/ui/button` in any test file and confirm it renders without errors. Check that `src/components/ui/` contains the installed component files.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-1"],
+  "estimatedComplexity": "low",
+  "technicalNotes": [
+    "shadcn/ui components are copied into the project — they live in src/components/ui/ and can be customized freely.",
+    "shadcn/ui requires Tailwind CSS to be configured. Since Tailwind 4.2.1 is already installed, the init should detect it automatically.",
+    "If using Tailwind CSS v4, shadcn/ui may require additional configuration — check the shadcn/ui docs for v4 compatibility.",
+    "The `cn()` utility function from `src/lib/utils.ts` is installed by shadcn/ui and used for conditional class names."
+  ]
+}

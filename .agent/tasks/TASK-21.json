@@ -1,0 +1,42 @@
+{
+  "id": "TASK-21",
+  "title": "Implement Testimonials section variants (testimonials-cards, testimonials-carousel)",
+  "category": "ui-ux",
+  "description": "Implement two Testimonials variants. testimonials-cards shows all testimonials as a grid of cards. testimonials-carousel shows them one at a time with previous/next navigation.",
+  "acceptanceCriteria": [
+    "`TestimonialsCards` and `TestimonialsCarousel` components exist in `src/components/shared/testimonials/`",
+    "Both accept `{ content: TestimonialsContent, business: BusinessInfo }` props",
+    "Each testimonial shows quote, author name, optional role, optional star rating",
+    "Carousel has working prev/next buttons and shows current testimonial index",
+    "Star rating renders correctly (1-5 stars) if present",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create component files",
+      "details": "Create `src/components/shared/testimonials/TestimonialsCards.tsx`, `TestimonialsCarousel.tsx`, `index.ts`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement TestimonialsCards",
+      "details": "Grid of cards `grid-cols-1 md:grid-cols-2 lg:grid-cols-3`. Each card: large quote mark, quote text, author name (bold), role (muted), star rating (if present). Card background `--color-surface`, border `--color-border`.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement TestimonialsCarousel",
+      "details": "Client component (`'use client'`). Single testimonial displayed at a time. Prev/next buttons. Dot indicators showing position. Use `useState` for current index. Quote, author, role, stars. Smooth transition between items.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Click next/prev on carousel and verify testimonial changes. Verify star ratings render correctly.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-16", "TASK-39"],
+  "estimatedComplexity": "medium"
+}

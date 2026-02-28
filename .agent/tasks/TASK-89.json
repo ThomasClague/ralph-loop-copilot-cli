@@ -1,0 +1,36 @@
+{
+  "id": "TASK-89",
+  "title": "Implement Resend email service",
+  "category": "functional",
+  "description": "Implement the live email service using the Resend API. Used when EMAIL_MODE=live. Requires RESEND_API_KEY in settings.",
+  "acceptanceCriteria": [
+    "ResendEmailService implements EmailService interface",
+    "Uses @resend/node SDK to send emails",
+    "Reads RESEND_API_KEY from settings table (not process.env)",
+    "Returns EmailResult with mode='live' and the Resend messageId",
+    "Throws a descriptive error if RESEND_API_KEY is not configured",
+    "Verify by calling send() in a test (use a test API key or mock the SDK)"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Install Resend SDK",
+      "details": "Run `npm install resend`. Import in the service file.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Create src/lib/email/resend.ts",
+      "details": "Export class `ResendEmailService implements EmailService`. Constructor: accept apiKey string. Implement `send(payload)`: create Resend client with apiKey. Call `resend.emails.send({ from, to, subject, html })`. Return `{ success: true, messageId: data.id, mode: 'live' }`.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Handle errors",
+      "details": "If `resend.emails.send` returns an error object, return `{ success: false, mode: 'live', error: error.message }`. Do not throw.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-87"],
+  "estimatedComplexity": "low"
+}

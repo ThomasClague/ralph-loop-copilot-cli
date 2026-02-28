@@ -1,0 +1,48 @@
+{
+  "id": "TASK-13",
+  "title": "Implement POST /api/crawl endpoint on Express",
+  "category": "api-endpoint",
+  "description": "Implement the main scraping endpoint on the Express sidecar server. Accepts a URL and optional maxPages, runs the Crawlee crawler, extracts page data and branding, and returns structured JSON. This is called by the Next.js app's pipeline.",
+  "acceptanceCriteria": [
+    "POST /api/crawl accepts `{ url: string, maxPages?: number }` in request body",
+    "Returns `{ success: true, pages: PageData[], branding: BrandingData }` on success",
+    "Returns `{ success: false, error: string }` with 400 if URL is missing or invalid",
+    "Returns `{ success: false, error: string }` with 500 on crawl failure",
+    "URL is validated before crawling (must be a valid http/https URL)",
+    "maxPages defaults to 10 if not provided",
+    "Endpoint handles concurrent requests without collision (each crawl is isolated)"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Add POST /api/crawl route handler in server.ts",
+      "details": "In `src/scraper/server.ts`, import `crawlSite` from `./crawlee-service` and `extractPageData` from `./extract`. Register: `app.post('/api/crawl', async (req, res) => { ... })`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Validate request body",
+      "details": "Check that `req.body.url` exists and is a valid URL. Use `new URL(req.body.url)` wrapped in try/catch. If invalid, return `res.status(400).json({ success: false, error: 'Invalid URL' })`. Check protocol is http or https.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Run crawler and build response",
+      "details": "Call `crawlSite(url, maxPages)` to get raw pages. For each raw page, call `extractPageData($, url, rawHtml)` to produce a `PageData` object. Run `extractBranding(homepageRawHtml, url)` on the first page. Return `{ success: true, pages, branding }`.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Test the endpoint manually",
+      "details": "With the Express server running, send a test request: `curl -X POST http://localhost:3001/api/crawl -H 'Content-Type: application/json' -d '{\"url\":\"https://example.com\",\"maxPages\":3}'`. Verify the response contains `success: true`, a `pages` array, and a `branding` object.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-12"],
+  "estimatedComplexity": "low",
+  "technicalNotes": [
+    "Each crawl uses its own Crawlee storage context to avoid collisions between concurrent requests.",
+    "The endpoint is only called from localhost (Next.js app on port 3000) so no authentication is needed.",
+    "Log request start/end with timing for debugging: `console.log('Crawling', url, '- completed in', elapsed, 'ms')`"
+  ]
+}

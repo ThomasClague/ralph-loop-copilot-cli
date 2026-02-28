@@ -1,0 +1,30 @@
+{
+  "id": "TASK-75",
+  "title": "Implement POST /api/export/[slug] route",
+  "category": "api-endpoint",
+  "description": "Create the API route that triggers site export for a prospect. Runs the export engine to generate a static HTML bundle and updates the prospect with the export URL.",
+  "acceptanceCriteria": [
+    "POST /api/export/[slug] triggers export for a ready prospect",
+    "Returns 400 if prospect is not in 'ready' status",
+    "Export engine generates a static bundle and saves it",
+    "Prospect record is updated with export_url",
+    "Returns 200 with { exportUrl: string }",
+    "Verify by calling endpoint and checking the export file exists"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/app/api/export/[slug]/route.ts",
+      "details": "Export POST handler. Load prospect by slug. If status != 'ready', return 400. Call `exportEngine.generate(prospect)`. Get the zip/folder URL. Update prospect `export_url`. Return 200 `{ exportUrl }`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Verify endpoint",
+      "details": "Generate a prospect first. Then POST /api/export/[slug]. Verify 200 response. Verify the export file exists at the returned URL.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-86", "TASK-68"],
+  "estimatedComplexity": "low"
+}

@@ -1,0 +1,66 @@
+{
+  "id": "TASK-49",
+  "title": "Implement main pipeline orchestrator (pipeline.ts)",
+  "category": "functional",
+  "description": "Implement src/lib/pipeline.ts which orchestrates all 6 pipeline stages for a single prospect: data gathering → condensation → structure decision → content generation → image sourcing → variant assignment + color theming. Updates prospect status at each stage via the repository.",
+  "acceptanceCriteria": [
+    "`runPipeline(prospectId)` function exists in `src/lib/pipeline.ts`",
+    "Updates prospect status at each pipeline stage",
+    "Handles errors gracefully — sets status to 'failed' with error details on any failure",
+    "Saves intermediate results to the database at each stage",
+    "Returns the completed SiteConfig on success",
+    "Full pipeline runs end-to-end for a test prospect"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/lib/pipeline.ts with the orchestration function",
+      "details": "Import all pipeline stage functions and repository functions. Define `async function runPipeline(prospectId: string): Promise<SiteConfig>`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Stage 1: Data gathering",
+      "details": "Load prospect from repository. If `existing_url` is set: call `crawlUrl(existing_url)`, save `scraped_raw` and `scraped_branding` to DB. Update status to 'analyzing'. If no URL: skip scraping, proceed with prospect fields only.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Stage 1b: Extraction and condensation",
+      "details": "Call `extractBusinessData(crawlResult, prospect)`. If token estimate >= 4000: call `condenseBusinessData(...)`. Save `extracted_data` and `condensed_profile` to DB. Update status to 'generating'.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Stage 2 & 3: Structure and content",
+      "details": "Call `generateStructure(profile, prospect)`. Save `structure` to DB. Call `generateContent(structure, profile, prospect)`. Save `site_content` to DB.",
+      "pass": false
+    },
+    {
+      "step": 5,
+      "description": "Stage 4, 5, 6: Images, variants, theming",
+      "details": "Update status to 'sourcing_images'. Call `assignImages(sections, prospect, batchId)` (from TASK-53). Update status to 'assembling'. Call `assignVariants(sections, prospect.businessName, prospect.industry)`. Call `selectPalette(branding, structure.paletteHint)`. Build final `SiteConfig`. Save `site_config` to DB. Update status to 'ready'.",
+      "pass": false
+    },
+    {
+      "step": 6,
+      "description": "Add error handling",
+      "details": "Wrap the entire function in try/catch. On error: call `updateProspectStatus(prospectId, 'failed')` and store the error message in the prospect notes or a dedicated error field. Re-throw so the API route can return a 500.",
+      "pass": false
+    },
+    {
+      "step": 7,
+      "description": "Test the full pipeline",
+      "details": "Call `runPipeline` with a test prospect ID for a real roofing business with a website. Monitor the console and database to verify status progresses through all stages and `site_config` is saved with complete data.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-44", "TASK-45", "TASK-46", "TASK-47", "TASK-48", "TASK-53"],
+  "estimatedComplexity": "high",
+  "technicalNotes": [
+    "The pipeline is called from the Next.js API route (TASK-70) which returns immediately after starting the pipeline. Status updates are polled by the UI.",
+    "Consider running the pipeline in a background promise (`runPipeline(id).catch(...)`) so the API route can return 202 Accepted immediately.",
+    "Each DB save of intermediate data allows resuming or debugging if something fails partway through.",
+    "Total cost per full pipeline run: ~$0.013-0.018 (Anthropic only)."
+  ]
+}

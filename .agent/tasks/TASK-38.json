@@ -1,0 +1,48 @@
+{
+  "id": "TASK-38",
+  "title": "Implement section renderer component (shared between admin and exports)",
+  "category": "functional",
+  "description": "Implement the SectionRenderer component in src/components/shared/SectionRenderer.tsx. This maps a SiteSection (type + variant) to the correct React component from a registry and renders it with the correct content and business props. This is the single rendering engine used by both the admin preview and exported sites.",
+  "acceptanceCriteria": [
+    "`SectionRenderer` component exists in `src/components/shared/SectionRenderer.tsx`",
+    "Accepts `{ section: SiteSection, business: BusinessInfo }` props",
+    "Maps all 21 section types + their variants to the correct component",
+    "Returns null for unknown type/variant combinations (no crash)",
+    "A `SiteRenderer` component iterates all visible sections and renders each",
+    "Both components work without errors for all section types",
+    "TypeScript compiles without errors"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create the component registry (component-map.ts)",
+      "details": "Create `src/lib/component-map.ts` that exports a `COMPONENT_MAP` constant:\n```ts\nexport const COMPONENT_MAP: Record<string, Record<string, React.ComponentType<any>>> = {\n  hero: { centered: HeroCentered, split: HeroSplit },\n  services: { grid: ServicesGrid, list: ServicesList },\n  // ... all 21 section types\n};\n```\nImport all section components.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement SectionRenderer",
+      "details": "```tsx\nexport function SectionRenderer({ section, business }: { section: SiteSection, business: BusinessInfo }) {\n  const Component = COMPONENT_MAP[section.type]?.[section.variant];\n  if (!Component) return null;\n  return <Component content={section.content as any} business={business} />;\n}\n```",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement SiteRenderer",
+      "details": "```tsx\nexport function SiteRenderer({ config }: { config: SiteConfig }) {\n  const visibleSections = config.sections.filter(s => s.visible);\n  return (\n    <div>\n      {visibleSections.map(section => (\n        <SectionRenderer key={section.id} section={section} business={config.businessInfo} />\n      ))}\n    </div>\n  );\n}\n```",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify all section types are registered",
+      "details": "Check that COMPONENT_MAP has entries for all 21 section types. Run `npx tsc --noEmit` to confirm no TypeScript errors. Navigate to a preview page and confirm the site renders without console errors.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-17", "TASK-18", "TASK-19", "TASK-20", "TASK-21", "TASK-22", "TASK-23", "TASK-24", "TASK-25", "TASK-26", "TASK-27", "TASK-28", "TASK-29", "TASK-30", "TASK-31", "TASK-32", "TASK-33", "TASK-34", "TASK-35", "TASK-36", "TASK-37"],
+  "estimatedComplexity": "low",
+  "technicalNotes": [
+    "The COMPONENT_MAP is the single source of truth for which variants are available for each section type. The AI pipeline and edit UI both use this to know valid variant options.",
+    "When a section has `visible: false`, SiteRenderer skips it — this powers the section toggle in the edit UI.",
+    "This file is shared between the admin preview and exported sites."
+  ]
+}

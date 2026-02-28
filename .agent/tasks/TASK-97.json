@@ -1,0 +1,41 @@
+{
+  "id": "TASK-97",
+  "title": "Write Vitest unit tests for email services",
+  "category": "testing",
+  "description": "Write Vitest unit tests for MockEmailService, ResendEmailService, and the email factory. Mock the Resend SDK.",
+  "acceptanceCriteria": [
+    "Test file exists at src/lib/email/__tests__/email.test.ts",
+    "MockEmailService.send() always returns success=true with mode='mock'",
+    "ResendEmailService.send() calls Resend SDK correctly (mocked)",
+    "Email factory returns correct service based on EMAIL_MODE setting",
+    "Tests pass with `npm test`"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/lib/email/__tests__/email.test.ts",
+      "details": "Import MockEmailService, ResendEmailService, getEmailService. Mock resend package with vi.mock('resend'). Mock repository with vi.mock('../../../db/repository').",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Write MockEmailService tests",
+      "details": "Test: send() returns { success: true, mode: 'mock' }. Test: send() does not throw even with minimal payload.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Write factory tests",
+      "details": "Test: factory returns MockEmailService when getSetting('email_mode') returns 'mock'. Test: factory throws when mode='live' and no API key. Test: factory returns ResendEmailService when mode='live' with key.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Run tests and verify",
+      "details": "Run `npm test`. All tests pass.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-87", "TASK-88", "TASK-89", "TASK-90"],
+  "estimatedComplexity": "medium"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "TASK-74",
+  "title": "Implement GET /api/batches/[id]/prospects route (status polling)",
+  "category": "api-endpoint",
+  "description": "Create the API route for polling all prospect statuses in a batch. Used by the generation trigger UI for real-time progress updates.",
+  "acceptanceCriteria": [
+    "GET /api/batches/[id]/prospects returns all prospects for the batch",
+    "Response includes: id, slug, business_name, status, error_message",
+    "Returns 404 if batch not found",
+    "Fast enough for 3-second polling (< 200ms response time)",
+    "Verify with curl"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/app/api/batches/[id]/prospects/route.ts",
+      "details": "Export GET handler. Check batch exists. Call `getProspectsByBatch(id)` — return id, slug, business_name, status, error_message fields only (not full page_data which is large). Return JSON array.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Verify endpoint",
+      "details": "GET /api/batches/[id]/prospects. Verify response is fast and includes all prospect status fields but NOT page_data.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-65", "TASK-5"],
+  "estimatedComplexity": "low"
+}

@@ -1,0 +1,55 @@
+{
+  "id": "TASK-11",
+  "title": "Implement page data extraction (title, meta, headings, body, links, images, phones, emails)",
+  "category": "functional",
+  "description": "Implement src/scraper/extract.ts which takes the raw Cheerio `$` object from a crawled page and extracts structured data: title, meta description, headings (h1-h6), full body text (stripped of nav/scripts/styles), all internal image URLs with alt text, phone numbers, and email addresses.",
+  "acceptanceCriteria": [
+    "`extractPageData($, url)` returns a PageData object with all required fields",
+    "Body text has scripts, styles, nav, header, and footer stripped before extraction",
+    "All h1-h6 headings are collected and grouped by level",
+    "Phone numbers are extracted with UK and US formats (regex)",
+    "Email addresses are extracted via regex",
+    "Images include src URL and alt text",
+    "Returns empty arrays (never undefined) for missing fields"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/scraper/extract.ts with extractPageData function",
+      "details": "Create function `extractPageData($: CheerioAPI, url: string, rawHtml: string): PageData`. The `$` argument is the Cheerio instance from Crawlee's requestHandler. Import `PageData` from `./types`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Extract title and meta description",
+      "details": "Title: `$('title').text().trim()`. Meta description: `$('meta[name=\"description\"]').attr('content') || ''`. Also try `$('meta[property=\"og:description\"]').attr('content')` as fallback.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Extract headings by level",
+      "details": "For each level h1 through h6, collect all text: `const h1s = $('h1').map((_, el) => $(el).text().trim()).get().filter(Boolean)`. Build a headings object: `{ h1: [...], h2: [...], h3: [...], h4: [...], h5: [...], h6: [...] }`.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Extract clean body text",
+      "details": "Clone the body, remove noise elements: `$('script, style, nav, header, footer, [role=\"navigation\"]').remove()`. Then get text: `$('body').text().replace(/\\s+/g, ' ').trim()`. Limit to 10,000 characters to avoid token overflow.",
+      "pass": false
+    },
+    {
+      "step": 5,
+      "description": "Extract images, phones, and emails",
+      "details": "Images: `$('img').map((_, el) => ({ src: $(el).attr('src') || '', alt: $(el).attr('alt') || '' })).get()` — filter out empty src and data URIs. Phones: apply regex `/(?:\\+44|0)\\s*\\d[\\d\\s-]{8,14}\\d|(?:\\+1)?\\s*\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}/g` to full body text. Emails: apply regex `/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/g`.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-6"],
+  "estimatedComplexity": "medium",
+  "technicalNotes": [
+    "Use the raw HTML (before Cheerio parsing) for branding extraction (colors/fonts/logo) — see TASK-12. Pass rawHtml as a separate argument.",
+    "Phone regex needs to handle common UK and US formats: +44, 0xxx, (xxx) xxx-xxxx, xxx.xxx.xxxx etc.",
+    "Deduplicate phones and emails before returning.",
+    "Body text length cap (10,000 chars) prevents single page from blowing up the token budget in later AI stages."
+  ]
+}

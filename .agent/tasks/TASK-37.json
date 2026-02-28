@@ -1,0 +1,29 @@
+{
+  "id": "TASK-37",
+  "title": "Implement Guarantee section variant (guarantee-badge)",
+  "category": "ui-ux",
+  "description": "Implement a Guarantee section with a prominent guarantee badge, headline, and supporting copy. Used to build trust (e.g., 'Satisfaction Guarantee', '100% Money Back', 'Lifetime Warranty').",
+  "acceptanceCriteria": [
+    "`GuaranteeBadge` component exists in `src/components/shared/guarantee/`",
+    "Accepts `{ content: GuaranteeContent, business: BusinessInfo }` props",
+    "Renders headline, body text, and a large visual guarantee badge",
+    "Badge has badgeText prominently displayed",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create component files and implement",
+      "details": "Create `src/components/shared/guarantee/GuaranteeBadge.tsx`, `index.ts`. Two-column layout: left side has large circular badge with badgeText (styled with --color-primary border and text), right side has headline + body copy. Badge should look like a physical guarantee stamp/seal using CSS (circle, bold text, dashed border).",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Verify guarantee badge is prominent and visually distinct.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-16", "TASK-39"],
+  "estimatedComplexity": "low"
+}

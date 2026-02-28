@@ -1,0 +1,52 @@
+{
+  "id": "TASK-2",
+  "title": "Configure Drizzle ORM with SQLite",
+  "category": "data-model",
+  "description": "Set up the Drizzle ORM configuration files: the database client (src/db/index.ts), the migration runner (src/db/migrate.ts), and the Drizzle config file (drizzle.config.ts). Creates the data directory and initializes the SQLite database file.",
+  "acceptanceCriteria": [
+    "`src/db/index.ts` exports a `db` instance connected to `./data/prospectforge.db`",
+    "`drizzle.config.ts` exists and points to the correct schema and output directory",
+    "`data/` directory is created and included in `.gitignore`",
+    "`src/db/migrate.ts` can be run to apply migrations without error",
+    "TypeScript compiles without errors in the db directory"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create data directory and add it to .gitignore",
+      "details": "Create `./data/` directory. Add `data/` and `data/*.db` to `.gitignore` so the SQLite database file is not committed. Also add `.env.local` to .gitignore if not already present.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Create src/db/index.ts — Drizzle client",
+      "details": "Create `src/db/index.ts`:\n```ts\nimport { drizzle } from 'drizzle-orm/better-sqlite3';\nimport Database from 'better-sqlite3';\nimport * as schema from './schema';\n\nconst sqlite = new Database('./data/prospectforge.db');\nexport const db = drizzle(sqlite, { schema });\n```\nThis is the only place the raw SQLite client is instantiated.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Create drizzle.config.ts",
+      "details": "Create `drizzle.config.ts` at project root:\n```ts\nimport type { Config } from 'drizzle-kit';\nexport default {\n  schema: './src/db/schema.ts',\n  out: './drizzle',\n  dialect: 'sqlite',\n  dbCredentials: { url: './data/prospectforge.db' },\n} satisfies Config;\n```",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Create src/db/migrate.ts — migration runner",
+      "details": "Create `src/db/migrate.ts`:\n```ts\nimport { migrate } from 'drizzle-orm/better-sqlite3/migrator';\nimport { db } from './index';\nmigrate(db, { migrationsFolder: './drizzle' });\nconsole.log('Migrations applied successfully');\n```\nAdd a script to package.json: `\"db:migrate\": \"tsx src/db/migrate.ts\"`",
+      "pass": false
+    },
+    {
+      "step": 5,
+      "description": "Verify TypeScript compilation",
+      "details": "Run `npx tsc --noEmit` and confirm no TypeScript errors in the db directory. At this stage, schema.ts does not exist yet — create a temporary empty export or add schema creation as a dependency (TASK-3).",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-1"],
+  "estimatedComplexity": "low",
+  "technicalNotes": [
+    "Use `drizzle-orm/better-sqlite3` (not the edge or neon variants) since this is a local Node.js app.",
+    "The `data/` directory must exist before the database client is instantiated — create it in the startup path.",
+    "Supabase migration path (v2): swap to `drizzle-orm/postgres-js`, update drizzle.config.ts dialect to 'postgresql'. Only this file + schema.ts + repository.ts change."
+  ]
+}

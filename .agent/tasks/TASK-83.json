@@ -1,0 +1,36 @@
+{
+  "id": "TASK-83",
+  "title": "Implement business info editor component",
+  "category": "ui-ux",
+  "description": "Implement the BusinessInfoEditor component for the editor. Allows editing core business info (name, phone, email, address) with changes reflected in all sections that use these fields.",
+  "acceptanceCriteria": [
+    "BusinessInfoEditor renders in the editor left panel",
+    "Fields: business_name, phone, email, address/location",
+    "Changes update the prospect's business data in page_data",
+    "Sections that display business info (hero, contact, cta) reflect changes in the preview",
+    "Changes are auto-saved (parent handles debounce)",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/components/editor/BusinessInfoEditor.tsx",
+      "details": "Client component. Props: `business: BusinessData, onChange: (field: string, value: string) => void`. Render as a collapsible section card with inputs for business_name, phone, email, location.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Wire up change propagation",
+      "details": "Each field `onChange` calls parent `onChange(field, value)`. Parent updates the `business` object in page_data. SectionRenderer uses this updated business data to re-render sections.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Change the business name. Verify hero section in preview updates with new name.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-79"],
+  "estimatedComplexity": "low"
+}

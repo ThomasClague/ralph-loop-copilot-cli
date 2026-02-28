@@ -1,0 +1,34 @@
+{
+  "id": "TASK-102",
+  "title": "Write Playwright E2E test: export flow",
+  "category": "testing",
+  "description": "Write Playwright E2E test for the site export flow. Tests that a ZIP export can be triggered and downloaded for a ready prospect.",
+  "acceptanceCriteria": [
+    "E2E test file exists at tests/e2e/export.spec.ts",
+    "Test uses a ready prospect",
+    "Tests: export button is visible in editor, clicking Export as ZIP triggers a download, downloaded file is a valid ZIP containing index.html",
+    "Tests pass with `npm run test:e2e`"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Write export trigger test",
+      "details": "Navigate to /edit/[slug]. Find the ExportButton. Click 'Export as ZIP'. Listen for the download event with `page.waitForEvent('download')`. Assert download.suggestedFilename() ends with '.zip'.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Verify ZIP contents",
+      "details": "Save the downloaded file to a temp path. Use `jszip` in Node.js to open the ZIP. Assert it contains 'index.html'. Assert index.html size > 1000 bytes.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Run E2E tests and verify",
+      "details": "Run `npm run test:e2e tests/e2e/export.spec.ts`. Tests pass.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-86", "TASK-84"],
+  "estimatedComplexity": "medium"
+}

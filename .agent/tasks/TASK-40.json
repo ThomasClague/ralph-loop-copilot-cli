@@ -1,0 +1,78 @@
+{
+  "id": "TASK-40",
+  "title": "Create 8-10 default palette JSON files",
+  "category": "functional",
+  "description": "Create 8-10 well-designed color palette JSON files in config/palettes/. Each palette is a complete set of all 22 CSS custom property tokens. Palettes should be harmonious, professional, and suitable for service business websites.",
+  "acceptanceCriteria": [
+    "At least 8 palette JSON files exist in `config/palettes/`",
+    "Each file contains all 22 CSS custom property tokens",
+    "All palettes have unique IDs and descriptive names",
+    "Palette colors have sufficient contrast ratios (text on backgrounds pass WCAG AA)",
+    "Palettes cover a range of color schemes (blue, green, red, neutral, warm, cool, etc.)",
+    "`listPalettes()` returns all 8-10 palettes without errors"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create ocean-blue.json palette",
+      "details": "Primary: #2563eb (blue). Create complete 22-token palette. Save to `config/palettes/ocean-blue.json`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Create forest-green.json palette",
+      "details": "Primary: #16a34a (green). Save to `config/palettes/forest-green.json`.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Create slate-professional.json palette",
+      "details": "Primary: #334155 (dark slate). Accent: #f59e0b. Professional neutral look. Save to `config/palettes/slate-professional.json`.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Create crimson-bold.json palette",
+      "details": "Primary: #dc2626 (red). Suitable for emergency/urgent services. Save to `config/palettes/crimson-bold.json`.",
+      "pass": false
+    },
+    {
+      "step": 5,
+      "description": "Create amber-trade.json palette",
+      "details": "Primary: #d97706 (amber/orange). Suitable for construction, trades. Save to `config/palettes/amber-trade.json`.",
+      "pass": false
+    },
+    {
+      "step": 6,
+      "description": "Create indigo-modern.json palette",
+      "details": "Primary: #4f46e5 (indigo/purple). Modern professional look. Save to `config/palettes/indigo-modern.json`.",
+      "pass": false
+    },
+    {
+      "step": 7,
+      "description": "Create teal-clean.json palette",
+      "details": "Primary: #0d9488 (teal). Clean, trustworthy look. Save to `config/palettes/teal-clean.json`.",
+      "pass": false
+    },
+    {
+      "step": 8,
+      "description": "Create charcoal-minimal.json palette",
+      "details": "Primary: #1f2937 (charcoal). Minimal, high-end look with white/light backgrounds. Save to `config/palettes/charcoal-minimal.json`.",
+      "pass": false
+    },
+    {
+      "step": 9,
+      "description": "Verify all palettes load",
+      "details": "Call `listPalettes()` and verify all 8 palettes are returned. For each palette, verify all 22 tokens are present. Switch between palettes in the preview and verify each one applies correctly.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-39"],
+  "estimatedComplexity": "low",
+  "technicalNotes": [
+    "For each palette: primary-hover should be 10% darker than primary. primary-light should be a very light tint (90% lighter). primary-dark should be 20% darker.",
+    "Background is typically #ffffff, surface is slightly off-white (#f8fafc), surface-alt is slightly darker (#f1f5f9).",
+    "Text-primary is near-black, text-secondary is medium gray, text-inverted is white.",
+    "Ensure --color-overlay is always `rgba(0,0,0,0.5)` or similar dark transparent — it's used for hero image overlays."
+  ]
+}

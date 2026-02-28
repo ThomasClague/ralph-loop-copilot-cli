@@ -1,0 +1,30 @@
+{
+  "id": "TASK-14",
+  "title": "Implement GET /api/health endpoint on Express",
+  "category": "api-endpoint",
+  "description": "Implement a health check endpoint on the Express scraping server. Used by the Next.js app to verify the scraping sidecar is running before attempting crawls.",
+  "acceptanceCriteria": [
+    "GET /api/health returns 200 with `{ status: 'ok', timestamp: number }`",
+    "Response time is under 50ms",
+    "Next.js app can call this endpoint to verify the scraper is available"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Add GET /api/health route in server.ts",
+      "details": "Add `app.get('/api/health', (req, res) => { res.json({ status: 'ok', timestamp: Date.now() }); });` to the Express server. This should already be a stub from TASK-6 — implement it now.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Test the endpoint",
+      "details": "Run `curl http://localhost:3001/api/health`. Confirm response is `{\"status\":\"ok\",\"timestamp\":...}` with HTTP 200.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-6"],
+  "estimatedComplexity": "low",
+  "technicalNotes": [
+    "The Next.js app should call /api/health before triggering a crawl and surface a helpful error message if the scraper is not running."
+  ]
+}

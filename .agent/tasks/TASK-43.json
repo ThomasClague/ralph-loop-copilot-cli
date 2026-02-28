@@ -1,0 +1,54 @@
+{
+  "id": "TASK-43",
+  "title": "Implement programmatic data extraction from scraped pages (Stage 1b Part A)",
+  "category": "functional",
+  "description": "Implement src/lib/ai/extract.ts which takes the raw crawl result and performs programmatic (no API) extraction into a structured object: business name, phones, emails, addresses, service keywords, testimonial paragraphs, and headings structure. This runs before the AI condensation step.",
+  "acceptanceCriteria": [
+    "`extractBusinessData(crawlResult, inputData)` function exists in `src/lib/ai/extract.ts`",
+    "Extracts and deduplicates phones, emails from all crawled pages",
+    "Extracts UK postcodes using regex",
+    "Matches service keywords against industry-specific dictionaries",
+    "Identifies testimonial-like paragraphs (contains quote patterns or review language)",
+    "Returns a structured `ExtractedData` object",
+    "Runs without any API calls — pure JavaScript/TypeScript"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/lib/ai/extract.ts with industry keyword dictionaries",
+      "details": "Create a `INDUSTRY_KEYWORDS` map: `Record<string, string[]>`. Example: `roofing: ['roof repair', 'tile replacement', 'guttering', 'flat roof', 'lead work', 'fascia', 'soffit']`. Create entries for: roofing, plumbing, electrical, landscaping, cleaning, painting, construction, hvac, pest_control, locksmith.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement phone/email/address extraction",
+      "details": "Merge phones and emails from all pages in the crawl result. Deduplicate. Apply UK postcode regex: `/\\b[A-Z]{1,2}\\d[\\dA-Z]?\\s*\\d[A-Z]{2}\\b/i` to extract addresses. Prioritize data from the homepage (first page) over inner pages.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement service keyword matching",
+      "details": "Get the keyword list for the prospect's industry. Search all page body texts for matches. Return unique matched keywords. If no keywords match, return an empty array (AI will generate generic industry content).",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Implement testimonial paragraph detection",
+      "details": "From all page body texts, find paragraphs that: (a) are quoted with quotation marks, (b) contain review-like patterns ('highly recommend', 'great service', 'excellent work', 'very professional', etc.), or (c) are preceded by a name pattern (e.g., '— John S.'). Return up to 5 such paragraphs.",
+      "pass": false
+    },
+    {
+      "step": 5,
+      "description": "Combine and return ExtractedData",
+      "details": "Return: `{ businessName, phones, emails, address, services (matched keywords), testimonials, headings (from homepage h1/h2), imageUrls, totalTokenEstimate }`. Calculate `totalTokenEstimate` by summing all body text lengths divided by 4 (rough token estimate).",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-15"],
+  "estimatedComplexity": "medium",
+  "technicalNotes": [
+    "The `totalTokenEstimate` field is used by the pipeline to decide whether to run AI condensation (Stage 1b Part B). If < 4000 tokens, skip condensation.",
+    "Business name: prefer the most common h1 text across pages, or fall back to the input business_name.",
+    "The industry keyword dictionaries should be in a separate `industry-keywords.ts` file for easy extension."
+  ]
+}

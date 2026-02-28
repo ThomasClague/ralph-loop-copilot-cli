@@ -1,0 +1,60 @@
+{
+  "id": "TASK-86",
+  "title": "Implement export engine",
+  "category": "functional",
+  "description": "Implement the export engine that takes a prospect's page_data and generates a complete static HTML site bundle as a ZIP file. Uses the site template scaffold and replaces all tokens with real content.",
+  "acceptanceCriteria": [
+    "Export engine accepts a prospect and returns a ZIP file buffer",
+    "ZIP contains: index.html, styles.css, scripts.js, and all referenced images",
+    "All {{token}} placeholders are replaced with real content from page_data",
+    "CSS custom properties are set with the prospect's assigned palette values",
+    "Images are inlined as relative paths within the ZIP's /images/ folder",
+    "Resulting ZIP can be unzipped and opened in a browser with full functionality",
+    "Verify by exporting a real prospect and inspecting the ZIP"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/lib/export/exportEngine.ts",
+      "details": "Function: `export async function generateExport(prospect: Prospect): Promise<Buffer>`. Loads template files. Replaces tokens. Fetches and embeds images. Creates ZIP. Returns buffer.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement token replacement",
+      "details": "For each section in page_data, load the corresponding section HTML snippet. Replace all `{{fieldName}}` tokens with values from section content. Handle array fields (e.g., services items) by repeating the item template snippet.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement palette injection",
+      "details": "Load the prospect's palette. Inject CSS custom property values into the `:root { }` block in styles.css.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Implement image embedding",
+      "details": "Collect all image URLs from page_data. Download each image. Add to ZIP under `images/` folder. Replace image URLs in HTML with relative paths `images/{filename}`.",
+      "pass": false
+    },
+    {
+      "step": 5,
+      "description": "Create ZIP and save",
+      "details": "Use `jszip` library to create the ZIP bundle. Save to `public/exports/{slug}.zip`. Return the path as exportUrl.",
+      "pass": false
+    },
+    {
+      "step": 6,
+      "description": "Verify export",
+      "details": "Generate a full prospect. Run the export engine. Unzip and open index.html in browser. Verify all sections render with real content and images.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-85", "TASK-49"],
+  "estimatedComplexity": "high",
+  "technicalNotes": [
+    "Install jszip: `npm install jszip`",
+    "Image downloads should use native fetch with a timeout of 10 seconds.",
+    "For images that fail to download, use a fallback placeholder image from the template."
+  ]
+}

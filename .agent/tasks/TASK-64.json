@@ -1,0 +1,35 @@
+{
+  "id": "TASK-64",
+  "title": "Implement POST /api/batches Next.js API route",
+  "category": "api-endpoint",
+  "description": "Create the API route for creating a new batch. Validates input, inserts the batch record, and returns the created batch.",
+  "acceptanceCriteria": [
+    "POST /api/batches accepts { name, industry } JSON body",
+    "Returns 201 with created batch object on success",
+    "Returns 400 if name or industry is missing",
+    "Batch is persisted to the DB via repository",
+    "Verify with curl or Playwright API test"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/app/api/batches/route.ts",
+      "details": "Export async POST handler. Parse body, validate name and industry are non-empty strings. Call `createBatch({ name, industry })` from repository. Return NextResponse.json(batch, { status: 201 }).",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Add error handling",
+      "details": "Wrap in try/catch. Return 400 for validation errors, 500 for unexpected errors with a JSON error body { error: string }.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Verify endpoint",
+      "details": "Run: `curl -s -X POST http://localhost:3000/api/batches -H 'Content-Type: application/json' -d '{\"name\":\"Test Batch\",\"industry\":\"roofing\"}'`. Verify 201 response with batch data.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-5"],
+  "estimatedComplexity": "low"
+}

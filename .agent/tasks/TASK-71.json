@@ -1,0 +1,35 @@
+{
+  "id": "TASK-71",
+  "title": "Implement POST /api/generate/batch/[id] route",
+  "category": "api-endpoint",
+  "description": "Create the API route that triggers generation for all pending/failed prospects in a batch. Runs generation concurrently with a concurrency limit.",
+  "acceptanceCriteria": [
+    "POST /api/generate/batch/[id] triggers generation for all pending+failed prospects",
+    "Limits concurrency to 3 simultaneous prospects",
+    "Returns 202 immediately",
+    "Each prospect is processed via the single-prospect pipeline",
+    "Verify by triggering and watching status updates in the DB"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/app/api/generate/batch/[id]/route.ts",
+      "details": "Export POST handler. Load batch. Get all prospects with status 'pending' or 'failed'. Return 202 immediately. In background: run pipeline for each with concurrency=3.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement concurrency-limited execution",
+      "details": "Use a simple concurrency limiter: split prospects into chunks of 3, process each chunk with `Promise.all`, then proceed to the next chunk. Each item calls `runPipeline(prospect)` from the orchestrator.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Verify endpoint",
+      "details": "Create a batch with 5 prospects. POST to endpoint. Poll prospect statuses. Verify all eventually reach 'ready' or 'failed' (not stuck at 'pending').",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-70"],
+  "estimatedComplexity": "medium"
+}

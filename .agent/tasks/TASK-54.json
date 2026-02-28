@@ -1,0 +1,48 @@
+{
+  "id": "TASK-54",
+  "title": "Implement media upload handling for batch media library",
+  "category": "functional",
+  "description": "Implement the server-side media upload handler: a Next.js API route that accepts image file uploads for a batch, stores them in the uploads/ directory with the original filename, and creates a media record in the database.",
+  "acceptanceCriteria": [
+    "POST /api/batches/[id]/media accepts multipart file uploads",
+    "Files are saved to `uploads/{batchId}/{filename}`",
+    "Filename convention is validated: `{slot}-{industry}-{descriptor}.{ext}`",
+    "Invalid filenames are rejected with 400 and helpful error message",
+    "Media records are created in the database via repository",
+    "Only image files are accepted (jpg, jpeg, png, webp)",
+    "Response includes the created media record"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create API route for media upload",
+      "details": "Create `src/app/api/batches/[id]/media/route.ts`. Use Next.js's built-in `request.formData()` to handle multipart uploads. No external multer needed.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Validate filename convention",
+      "details": "Validate filename matches `/^(hero|gallery|about|services|team)-(\\w+)-([a-z0-9-]+)\\.(jpg|jpeg|png|webp)$/i`. Extract slot and industry from the filename. Return 400 with error message if invalid.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Save file to disk and create DB record",
+      "details": "Save file: `fs.mkdirSync(uploadDir, { recursive: true })`, write file buffer to `uploads/{batchId}/{filename}`. Create media record: `createMedia({ id: randomUUID(), batchId, filename, slot, industry, path: fullPath, createdAt: Date.now() })`.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Test file upload",
+      "details": "Send a test upload via curl: `curl -X POST http://localhost:3000/api/batches/{id}/media -F 'file=@hero-roofing-tiles.jpg'`. Verify file appears in uploads/ and media record is in the database.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-5"],
+  "estimatedComplexity": "medium",
+  "technicalNotes": [
+    "Add `uploads/` to .gitignore.",
+    "Limit file size to 10MB. Reject oversized files with 413.",
+    "The upload path returned in the media record should be relative to the project root for portability."
+  ]
+}

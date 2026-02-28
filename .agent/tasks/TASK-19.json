@@ -1,0 +1,42 @@
+{
+  "id": "TASK-19",
+  "title": "Implement About section variants (about-left, about-right)",
+  "category": "ui-ux",
+  "description": "Implement two About section variants. about-left has the image on the left and text on the right. about-right reverses the layout. Both optionally display stat badges (e.g. '20+ years experience').",
+  "acceptanceCriteria": [
+    "`AboutLeft` and `AboutRight` components exist in `src/components/shared/about/`",
+    "Both accept `{ content: AboutContent, business: BusinessInfo }` props",
+    "Both render headline, body text, optional image, optional stats array",
+    "Layout reverses correctly between left/right variants",
+    "Stats are displayed as highlighted badge chips if present",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create component files",
+      "details": "Create `src/components/shared/about/AboutLeft.tsx`, `AboutRight.tsx`, `index.ts`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement AboutLeft",
+      "details": "Two-column grid: image column on left, content column on right. Content: h2 headline, p body text, stat chips (if content.stats). On mobile: stack vertically. Image: rounded corners, object-cover.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement AboutRight",
+      "details": "Same as AboutLeft but image column on right (use CSS `order-2` or `flex-row-reverse`). Code should share a base structure — consider a single component with an `imagePosition` prop, or simply duplicate with reversed grid order.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Verify image appears on correct side for each variant. Check stats chips are visible if provided.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-16", "TASK-39"],
+  "estimatedComplexity": "low"
+}

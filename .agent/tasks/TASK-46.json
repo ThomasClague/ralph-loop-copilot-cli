@@ -1,0 +1,55 @@
+{
+  "id": "TASK-46",
+  "title": "Implement content generation via generateObject (Stage 3)",
+  "category": "functional",
+  "description": "Implement src/lib/ai/generate-content.ts. This calls Claude with the business profile and structure decision, and generates all copy for every selected section. Returns typed content objects for each section.",
+  "acceptanceCriteria": [
+    "`generateContent(structure, profile, prospect)` exists in `src/lib/ai/generate-content.ts`",
+    "Returns content objects for all sections in the structure decision",
+    "Uses `generateObject` with section-specific Zod schemas",
+    "Content is specific to: city/location, industry, actual services from the profile",
+    "Content is never generic or salesy — always specific and value-focused",
+    "Content expands beyond the existing site — always more comprehensive",
+    "Uses `model` from client.ts"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/lib/ai/generate-content.ts",
+      "details": "Import `generateObject` from `ai`, `model` from `./client`, content schemas from `./schemas`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Write the content generation prompt",
+      "details": "Build prompt in `prompts.ts`:\n```\nGenerate compelling, specific website content for ${businessName}, a ${industry} business in ${location}.\n\nBusiness profile: ${JSON.stringify(profile)}\n\nWebsite sections to generate: ${sections.map(s => s.type).join(', ')}\n\nInstructions:\n- Be specific to ${location} and surrounding areas — mention real local places\n- Reference actual services: ${profile.services.join(', ')}\n- Mention specific materials, techniques, standards for ${industry}\n- Include social proof using: ${profile.testimonials.slice(0,2).join('; ')}\n- Never be generic or salesy\n- Always exceed the content depth of the existing site\n- Tone: ${tone}\n```",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement generateContent with parallel section generation",
+      "details": "For efficiency, generate content for all sections in a single `generateObject` call using the full content schema (which covers all section types). The schema has all sections as optional keys, and the AI fills in only the ones that are in the structure. This is one API call, not one per section.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Map generated content back to SiteSection array",
+      "details": "After getting the content object, map each section from the structure decision to its content: `structure.sections.map(s => ({ ...s, content: generatedContent[s.type] }))`. Return the complete array of sections with content.",
+      "pass": false
+    },
+    {
+      "step": 5,
+      "description": "Test with real business data",
+      "details": "Call `generateContent` with a test roofing business in London. Inspect the returned content for the hero section — verify it mentions London, roofing-specific services, and uses a specific headline (not 'We provide quality roofing services').",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-41", "TASK-42", "TASK-45"],
+  "estimatedComplexity": "high",
+  "technicalNotes": [
+    "Cost: ~$0.01 per call (largest of the pipeline calls — most input and output tokens).",
+    "The content schema uses .optional() on all fields — if the AI doesn't generate a field, it's just undefined rather than a validation error.",
+    "For businesses with no existing URL (no scraped data), the AI generates entirely from the input fields (business_name, industry, location, notes).",
+    "The prompt's quality determines the output quality — iterate on it with real test data."
+  ]
+}

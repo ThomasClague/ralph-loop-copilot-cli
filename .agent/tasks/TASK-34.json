@@ -1,0 +1,30 @@
+{
+  "id": "TASK-34",
+  "title": "Implement Brands section variant (brands-logos)",
+  "category": "ui-ux",
+  "description": "Implement a Brands/Partners section showing partner or supplier brand logos in a horizontal scrolling row.",
+  "acceptanceCriteria": [
+    "`BrandsLogos` component exists in `src/components/shared/brands/`",
+    "Accepts `{ content: BrandsContent, business: BusinessInfo }` props",
+    "Renders all brand items with logo image or text name fallback",
+    "Horizontal scrolling or wrap layout",
+    "Optional headline",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create component files and implement",
+      "details": "Create `src/components/shared/brands/BrandsLogos.tsx`, `index.ts`. Implement: optional headline, flex-wrap row of brand items. Each item: logo img (if logoUrl present) or styled text. Grayscale filter on images with hover color. Consistent height (40-60px) for all items.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Verify brand logos or names are displayed in a row.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-16", "TASK-39"],
+  "estimatedComplexity": "low"
+}

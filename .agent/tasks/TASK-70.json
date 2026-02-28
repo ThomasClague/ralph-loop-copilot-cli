@@ -1,0 +1,48 @@
+{
+  "id": "TASK-70",
+  "title": "Implement POST /api/generate/prospect/[slug] route",
+  "category": "api-endpoint",
+  "description": "Create the API route that triggers full AI pipeline generation for a single prospect. Updates prospect status throughout the pipeline and saves page_data on completion.",
+  "acceptanceCriteria": [
+    "POST /api/generate/prospect/[slug] triggers the full pipeline for one prospect",
+    "Prospect status is set to 'processing' immediately",
+    "On pipeline completion, page_data is saved and status set to 'ready'",
+    "On pipeline failure, status is set to 'failed' with error_message saved",
+    "Returns 202 Accepted immediately (generation runs asynchronously)",
+    "Verify by triggering generation and polling prospect status until complete"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/app/api/generate/prospect/[slug]/route.ts",
+      "details": "Export POST handler. Look up prospect by slug. Set status='processing'. Start pipeline in background (do NOT await — return 202 immediately). Use `.then()` and `.catch()` handlers on the pipeline promise.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Wire up pipeline success handler",
+      "details": "In `.then(pageData)`: call `updateProspect(slug, { page_data: JSON.stringify(pageData), status: 'ready' })`.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Wire up pipeline failure handler",
+      "details": "In `.catch(error)`: call `updateProspect(slug, { status: 'failed', error_message: error.message })`.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Return 202 response",
+      "details": "Return `NextResponse.json({ message: 'Generation started', slug }, { status: 202 })` before the pipeline promise resolves.",
+      "pass": false
+    },
+    {
+      "step": 5,
+      "description": "Verify endpoint",
+      "details": "POST to endpoint. Verify 202 response. Poll GET /api/prospects/[slug] every 2s until status changes from 'processing' to 'ready' or 'failed'.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-49", "TASK-68"],
+  "estimatedComplexity": "medium"
+}

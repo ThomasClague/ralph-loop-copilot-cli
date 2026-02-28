@@ -1,0 +1,54 @@
+{
+  "id": "TASK-17",
+  "title": "Implement Hero section variants (hero-centered, hero-split)",
+  "category": "ui-ux",
+  "description": "Implement two Hero section variants. Both accept the same HeroContent and BusinessInfo props. hero-centered shows headline/subheadline/CTA centered over a full-width background image. hero-split shows content on the left half and image on the right half.",
+  "acceptanceCriteria": [
+    "`HeroCentered` and `HeroSplit` components exist in `src/components/shared/hero/`",
+    "Both accept `{ content: HeroContent, business: BusinessInfo }` props",
+    "Both render the headline, subheadline, CTA button, and background/feature image",
+    "CTA button links to the `contact` section via `href='#contact'`",
+    "Colors come from CSS custom properties (--color-primary, etc.) — not hardcoded",
+    "Components render correctly in Storybook or browser without errors",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create directory and component files",
+      "details": "Create `src/components/shared/hero/HeroCentered.tsx` and `src/components/shared/hero/HeroSplit.tsx`. Export both from `src/components/shared/hero/index.ts`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement HeroCentered",
+      "details": "Full viewport height section. Background image as `style={{ backgroundImage: 'url(...)' }}` with overlay using `--color-overlay` CSS var. Content centered (flexbox). Render: badge (if content.badgeText), h1 headline, p subheadline, CTA button with `--color-primary` background. Phone number from `business.phone` below the CTA.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement HeroSplit",
+      "details": "Two-column layout (CSS grid, 50/50). Left column: badge, h1, subheadline, CTA button, phone. Right column: `<img>` with content.imageUrl. On mobile: stack vertically (image below content). Use Tailwind `md:grid-cols-2`.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Apply CSS custom property theming",
+      "details": "All colors reference CSS variables: CTA button `bg-[--color-primary] text-[--color-text-inverted]`, headline `text-[--color-heading]`, etc. Never hardcode hex colors in components.",
+      "pass": false
+    },
+    {
+      "step": 5,
+      "description": "Verify in browser",
+      "details": "Start the dev server (`npm run dev`). Navigate to the preview of a test prospect. Take a Playwright screenshot and confirm both variants render without visual errors. Verify text is readable, button is visible, image loads.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-16", "TASK-39"],
+  "estimatedComplexity": "medium",
+  "technicalNotes": [
+    "All section components follow the same pattern: accept `content` and `business` props, use CSS custom properties for colors, use Tailwind for layout.",
+    "The component must be responsive — all sections should be usable on mobile and desktop.",
+    "The exported site uses the exact same component files as the admin preview — they live in `src/components/shared/` and are copied to `site-template/src/components/` at export time."
+  ]
+}

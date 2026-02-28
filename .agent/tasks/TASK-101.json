@@ -1,0 +1,35 @@
+{
+  "id": "TASK-101",
+  "title": "Write Playwright E2E test: email sending",
+  "category": "testing",
+  "description": "Write Playwright E2E test for the email sending flow. Tests that an outreach email can be sent (in mock mode) for a ready prospect.",
+  "acceptanceCriteria": [
+    "E2E test file exists at tests/e2e/email.spec.ts",
+    "Test uses a ready prospect (generated or fixture)",
+    "Tests: email form renders, send button submits the email, success toast appears, sent email record appears in GET /api/email/sent",
+    "Tests pass with EMAIL_MODE=mock (no real emails sent)",
+    "Tests pass with `npm run test:e2e`"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Write email send test",
+      "details": "Navigate to /batches/[id] with a ready prospect. Find the 'Send Email' action for the prospect. Click it. Select template 'coldOutreach'. Confirm send. Assert success toast appears.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Verify sent email record",
+      "details": "After sending, call GET /api/email/sent via page.request. Assert the response includes a record with the prospect's business name and mode='mock'.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Run E2E tests and verify",
+      "details": "Run `npm run test:e2e tests/e2e/email.spec.ts`. Tests pass. Verify mock email file created in public/mock-emails/.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-73", "TASK-91", "TASK-88"],
+  "estimatedComplexity": "medium"
+}

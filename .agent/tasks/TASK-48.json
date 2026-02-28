@@ -1,0 +1,48 @@
+{
+  "id": "TASK-48",
+  "title": "Implement color theming logic (Stage 6 — brand-derived or palette-mapped)",
+  "category": "functional",
+  "description": "Implement src/lib/ai/theming.ts which selects or derives the color palette for a site. If branding was extracted from the crawl, derives a full palette from the brand colors. If no branding, maps the AI's palette hint (from the structure decision) to the closest pre-built palette.",
+  "acceptanceCriteria": [
+    "`selectPalette(branding, paletteHint)` exists in `src/lib/ai/theming.ts`",
+    "Returns a `{ paletteId: string, customPalette?: Record<string, string> }` object",
+    "If branding.colors has entries: derives a full 22-token palette using the primary brand color",
+    "If no branding colors: maps paletteHint string to the closest pre-built palette by name matching",
+    "Derived palettes have correct hover, light, dark variants calculated from primary color",
+    "Returns a valid palette in all cases (never undefined)"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/lib/ai/theming.ts",
+      "details": "Import palette utilities from `src/lib/palettes.ts`. Define the function signature: `selectPalette(branding: BrandingData, paletteHint: string): { paletteId: string, customPalette?: Record<string, string> }`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement palette hint matching (no-branding path)",
+      "details": "When no brand colors: compare `paletteHint.toLowerCase()` against palette names and IDs. Simple substring matching: if 'blue' in hint, try 'ocean-blue'. If 'green', try 'forest-green', etc. Fallback: return the first available palette. Return `{ paletteId: matchedId }`.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement brand color-derived palette",
+      "details": "When brand colors exist: take the most prominent brand color (first in the array). Use it as `--color-primary`. Derive:\n- primary-hover: darken by 10% (subtract ~20 from each RGB channel)\n- primary-light: lighten to 90% luminosity (mix 90% white)\n- primary-dark: darken by 20%\n- accent: use second brand color if available, else amber fallback\nAll other tokens (background, surfaces, text) use sensible light-theme defaults. Return `{ paletteId: 'custom', customPalette: derivedTokens }`.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Test with sample brand colors",
+      "details": "Call with `branding = { colors: ['#c41e3a', '#ffffff', '#1a1a2e'] }` (red/white/dark site). Verify the derived palette has a red primary, appropriate lighter/darker variants, and readable text colors.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-40"],
+  "estimatedComplexity": "medium",
+  "technicalNotes": [
+    "Color math: to darken a hex color by N%, parse to RGB, multiply each channel by (1 - N/100), convert back to hex.",
+    "To lighten: mix with white: `channel = channel + (255 - channel) * (N/100)`.",
+    "Ensure text contrast: if derived primary is very dark, use white text-inverted; if very light, use dark text-inverted.",
+    "The derived palette is stored in the `custom_palette` JSON field on the prospect record."
+  ]
+}

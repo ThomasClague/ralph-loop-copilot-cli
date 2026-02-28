@@ -1,0 +1,55 @@
+{
+  "id": "TASK-58",
+  "title": "Implement new batch page — Tab A (paste/CSV import with parsing)",
+  "category": "ui-ux",
+  "description": "Implement the CSV/paste import tab on the new batch page. Accepts a textarea of CSV/TSV/one-per-line data, parses it into a prospect table preview, detects duplicates, and allows editing before submitting.",
+  "acceptanceCriteria": [
+    "New batch page renders at /batches/new",
+    "Tab A has a textarea for paste input and a 'Parse' button",
+    "Parse button converts the input into a preview table",
+    "Table columns: business_name, industry, location, phone, email, existing_url, notes",
+    "Duplicate rows (same business_name + industry) are highlighted with a warning",
+    "Industry field has a dropdown selector in the preview table",
+    "Submit creates the batch and all prospects via the API",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/app/batches/new/page.tsx with Tabs",
+      "details": "Client component. Render batch name input, industry dropdown (for the batch), then shadcn/ui Tabs with 'Paste List' (Tab A) and 'Single Entry' (Tab B).",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement CSV parsing logic",
+      "details": "When 'Parse' is clicked: split input by newlines, detect delimiter (comma, tab, pipe). Parse each row into prospect fields. First row detection: if first row looks like headers, skip it. Handle quoted fields (CSV standard). Use `useState` to store parsed rows.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Render the preview table",
+      "details": "Show parsed prospects in a shadcn/ui Table. Each row is editable (input fields for each cell). Highlight duplicate rows in amber. Show row count: 'X prospects ready to import'.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Implement form submission",
+      "details": "'Create Batch' button: POST to /api/batches with batch name + industry. Then POST to /api/prospects with all parsed prospects. On success, navigate to /batches/[newBatchId].",
+      "pass": false
+    },
+    {
+      "step": 5,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Paste a sample CSV, click Parse, verify table renders. Submit and verify redirect to batch detail page.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-55", "TASK-64", "TASK-66"],
+  "estimatedComplexity": "high",
+  "technicalNotes": [
+    "The CSV parser should handle: comma-separated, tab-separated, and one-per-line (business names only, with industry inferred from batch industry).",
+    "Required fields: business_name. All other fields optional — empty cells are fine.",
+    "Consider using a small CSV parsing library (csv-parse) rather than rolling a custom one."
+  ]
+}

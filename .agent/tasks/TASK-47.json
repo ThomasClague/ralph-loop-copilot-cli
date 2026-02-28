@@ -1,0 +1,46 @@
+{
+  "id": "TASK-47",
+  "title": "Implement variant assignment via deterministic hash (Stage 5)",
+  "category": "functional",
+  "description": "Implement src/lib/ai/assign-variants.ts. This assigns a specific component variant to each section using a deterministic hash of business_name + industry. The same business always gets the same layout — consistent across regenerations.",
+  "acceptanceCriteria": [
+    "`assignVariants(sections, businessName, industry)` exists in `src/lib/ai/assign-variants.ts`",
+    "Returns sections with the `variant` field set for each",
+    "Same businessName + industry always produces the same variant assignment",
+    "Only assigns valid variants (variants that exist in COMPONENT_MAP)",
+    "Hash is deterministic — no randomness"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/lib/ai/assign-variants.ts with hash function",
+      "details": "Create a simple string hash function:\n```ts\nfunction hash(str: string): number {\n  let h = 0;\n  for (let i = 0; i < str.length; i++) {\n    h = ((h << 5) - h) + str.charCodeAt(i);\n    h = h & h; // 32-bit int\n  }\n  return Math.abs(h);\n}\n```",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Define variant options per section type",
+      "details": "Create `SECTION_VARIANTS: Record<SectionType, string[]>` — the list of available variant names for each section type. Example: `hero: ['centered', 'split'], services: ['grid', 'list']`, etc. This mirrors what's registered in COMPONENT_MAP.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement assignVariants",
+      "details": "For each section:\n```ts\nconst seed = `${businessName}-${industry}-${section.type}`;\nconst h = hash(seed);\nconst variants = SECTION_VARIANTS[section.type] || ['default'];\nconst variant = variants[h % variants.length];\nreturn { ...section, variant };\n```",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify determinism",
+      "details": "Call `assignVariants` twice with the same input and verify the output is identical. Call with a different businessName and verify at least some variants differ.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-38"],
+  "estimatedComplexity": "low",
+  "technicalNotes": [
+    "The variant assigned here is the default — users can swap it manually in the edit UI.",
+    "The hash seed includes the section type so that different sections of the same site can have different variants without correlating.",
+    "No cryptographic security needed — simple djb2 or similar hash is fine."
+  ]
+}

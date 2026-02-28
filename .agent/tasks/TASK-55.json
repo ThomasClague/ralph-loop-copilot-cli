@@ -1,0 +1,47 @@
+{
+  "id": "TASK-55",
+  "title": "Implement root layout with sidebar navigation",
+  "category": "ui-ux",
+  "description": "Implement the root Next.js app layout (src/app/layout.tsx) with a sidebar navigation using shadcn/ui Sidebar. The sidebar contains links to Dashboard, Batches, and Settings. The main content area renders route children.",
+  "acceptanceCriteria": [
+    "Root layout renders sidebar + main content area",
+    "Sidebar has links to: Dashboard (/), Batches (/batches), Settings (/settings)",
+    "Active route is visually highlighted in the sidebar",
+    "Layout uses shadcn/ui Sidebar component",
+    "App name 'ProspectForge' is shown in the sidebar header",
+    "Layout is responsive (sidebar collapses on mobile)",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Update src/app/layout.tsx",
+      "details": "Wrap the page content in a sidebar layout using shadcn/ui's Sidebar components: `SidebarProvider`, `Sidebar`, `SidebarHeader`, `SidebarContent`, `SidebarMenu`, `SidebarMenuItem`, `SidebarMenuButton`. Import from `@/components/ui/sidebar`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Create navigation items",
+      "details": "Create a `nav-links.ts` config with the navigation items: `[{ href: '/', label: 'Dashboard', icon: LayoutDashboard }, { href: '/batches', label: 'Batches', icon: Users }, { href: '/settings', label: 'Settings', icon: Settings }]`. Use Lucide React icons.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement active link highlighting",
+      "details": "Create a client component `AppSidebar` that uses `usePathname()` from `next/navigation` to determine the active route. Apply `isActive` prop to `SidebarMenuButton` for the current route.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify layout in browser",
+      "details": "Take a Playwright screenshot. Verify sidebar is visible with all 3 nav items. Click each link and verify navigation works. Check the active item is highlighted.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-9"],
+  "estimatedComplexity": "low",
+  "technicalNotes": [
+    "The admin layout (with sidebar) should NOT apply to the /preview/* routes — those render full-width without admin chrome.",
+    "Create a separate layout for /preview/[slug] and /edit/[slug] that doesn't include the admin sidebar."
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "id": "TASK-5",
+  "title": "Implement repository pattern with all CRUD functions",
+  "category": "data-model",
+  "description": "Create src/db/repository.ts as the single point of database access for the entire application. All other files import from repository.ts — never from schema.ts or index.ts directly. This isolates all DB logic and makes the Supabase migration a one-file change.",
+  "acceptanceCriteria": [
+    "`src/db/repository.ts` exports functions for all CRUD operations on all tables",
+    "No other file in src/ imports from `src/db/index.ts` or `src/db/schema.ts` directly",
+    "All repository functions are typed with proper TypeScript return types",
+    "Repository functions for prospects include status update helpers",
+    "Batch CRUD functions work correctly (create, list, get by id)",
+    "Prospect functions include: create, list by batch, get by id, get by slug, update, update status",
+    "Media functions include: create, list by batch",
+    "Email functions include: create sent email record",
+    "Settings functions include: get by key, set by key, get all"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/db/repository.ts with batch CRUD",
+      "details": "Export functions: `createBatch(data)`, `getBatch(id)`, `listBatches()`. Use Drizzle's `db.insert().values()`, `db.select().from()`, `db.query.batches.findFirst()` pattern. All IDs should be generated with `crypto.randomUUID()` by the caller or inside the function.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Add prospect CRUD functions",
+      "details": "Export: `createProspect(data)`, `createProspects(data[])`, `getProspect(id)`, `getProspectBySlug(slug)`, `listProspects(batchId)`, `updateProspect(id, data)`, `updateProspectStatus(id, status)`. The `updateProspectStatus` function should also update `updated_at` to `Date.now()`.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Add media CRUD functions",
+      "details": "Export: `createMedia(data)`, `listMediaByBatch(batchId)`, `getMediaBySlotAndIndustry(batchId, slot, industry)`. The last function is used by the image assignment logic to find manual uploads.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Add sent email and settings functions",
+      "details": "Email: `createSentEmail(data)`, `listSentEmailsByProspect(prospectId)`. Settings: `getSetting(key)`, `setSetting(key, value)`, `getAllSettings()`. Settings uses upsert pattern: `db.insert(settings).values({key, value}).onConflictDoUpdate({target: settings.key, set: {value}})`.",
+      "pass": false
+    },
+    {
+      "step": 5,
+      "description": "Add TypeScript types for repository inputs",
+      "details": "Export TypeScript types: `NewBatch`, `NewProspect`, `UpdateProspect`, `NewMedia`, `NewSentEmail` using Drizzle's `InferInsertModel` and `InferSelectModel` helpers. Example: `export type Prospect = InferSelectModel<typeof prospects>`.",
+      "pass": false
+    },
+    {
+      "step": 6,
+      "description": "Verify no direct db/schema imports outside repository",
+      "details": "Search the codebase for imports of `src/db/index` or `src/db/schema` outside of `src/db/repository.ts` and `src/db/migrate.ts`. There should be none. All app code should import from `src/db/repository`.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-4"],
+  "estimatedComplexity": "medium",
+  "technicalNotes": [
+    "The repository pattern is critical for the Supabase migration path. When we swap SQLite for Postgres, only schema.ts, index.ts, repository.ts, and drizzle.config.ts change — the rest of the app is untouched.",
+    "JSON blob fields should be serialized/deserialized in the repository: accept objects, store as JSON.stringify(), return as JSON.parse().",
+    "Use `Date.now()` for integer timestamps (Unix milliseconds)."
+  ]
+}

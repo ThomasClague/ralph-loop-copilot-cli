@@ -1,0 +1,48 @@
+{
+  "id": "TASK-79",
+  "title": "Implement edit page layout (/edit/[slug])",
+  "category": "ui-ux",
+  "description": "Implement the edit page layout for the visual editor at /edit/[slug]. This is a split-pane view: left panel for editing controls, right panel for the live preview. Client component.",
+  "acceptanceCriteria": [
+    "Edit page renders at /edit/[slug]",
+    "Left panel contains the section list, palette picker, and edit controls",
+    "Right panel shows the live landing page preview (re-renders as edits are made)",
+    "Page loads with current page_data from the DB",
+    "Changes are reflected in the right panel in real-time",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/app/edit/[slug]/page.tsx",
+      "details": "Client component. Fetch prospect via GET /api/prospects/[slug] on mount. Store page_data in state. Render a two-column layout: 340px left panel + flex-1 right panel.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement left panel structure",
+      "details": "Left panel contains: BusinessInfoEditor (TASK-83), PalettePicker (TASK-81), SectionListPanel (TASK-80), ContentEditorDrawer trigger (TASK-82), ExportButton (TASK-84). Stack vertically with scroll.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement right panel preview",
+      "details": "Right panel: a scaled/scrollable rendering of the landing page using SectionRenderer, driven by the current page_data state. Updates on every state change (no debounce needed for palette; debounce 500ms for text edits).",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Implement auto-save",
+      "details": "Debounce page_data state changes by 1500ms. On change, PATCH /api/prospects/[slug] with updated page_data. Show a small 'Saved' indicator in the top bar.",
+      "pass": false
+    },
+    {
+      "step": 5,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Verify split-pane layout. Verify right panel shows the landing page.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-38", "TASK-80", "TASK-81", "TASK-82", "TASK-83", "TASK-84", "TASK-68"],
+  "estimatedComplexity": "high"
+}

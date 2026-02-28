@@ -1,0 +1,36 @@
+{
+  "id": "TASK-31",
+  "title": "Implement Emergency section variant (emergency-callout)",
+  "category": "ui-ux",
+  "description": "Implement an Emergency/24-7 Service section with a prominent phone number callout. Suitable for emergency plumbers, roofers, locksmiths, etc.",
+  "acceptanceCriteria": [
+    "`EmergencyCallout` component exists in `src/components/shared/emergency/`",
+    "Accepts `{ content: EmergencyContent, business: BusinessInfo }` props",
+    "Renders headline, large clickable phone number, availability text, optional services list",
+    "Phone number is styled prominently and is a `tel:` link",
+    "Section has high-contrast warning/urgent appearance",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create component files",
+      "details": "Create `src/components/shared/emergency/EmergencyCallout.tsx`, `index.ts`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement EmergencyCallout",
+      "details": "High-contrast section (use `--color-primary` or bold accent background). Large headline. Extra-large phone number as `<a href='tel:...'>` with bell/phone icon. Availability text (e.g., '24/7 Emergency Service'). Services list as badges if present. Bold, urgent visual design.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Confirm phone number is large and prominent.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-16", "TASK-39"],
+  "estimatedComplexity": "low"
+}

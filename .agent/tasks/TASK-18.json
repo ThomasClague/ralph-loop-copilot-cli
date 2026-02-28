@@ -1,0 +1,46 @@
+{
+  "id": "TASK-18",
+  "title": "Implement Services section variants (services-grid, services-list)",
+  "category": "ui-ux",
+  "description": "Implement two Services section variants. services-grid shows services in a responsive card grid. services-list shows services as a vertical list with icon + title + description.",
+  "acceptanceCriteria": [
+    "`ServicesGrid` and `ServicesList` components exist in `src/components/shared/services/`",
+    "Both accept `{ content: ServicesContent, business: BusinessInfo }` props",
+    "Both render all items from content.items",
+    "Each item shows title and description; icon shown if present",
+    "Colors use CSS custom properties only",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create component files",
+      "details": "Create `src/components/shared/services/ServicesGrid.tsx`, `src/components/shared/services/ServicesList.tsx`, and `src/components/shared/services/index.ts`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement ServicesGrid",
+      "details": "Section with a headline (content.headline or 'Our Services'). Responsive grid: `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6`. Each card: icon (emoji or lucide icon), title (h3), description. Card background: `bg-[--color-surface]`, border: `border-[--color-border]`.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement ServicesList",
+      "details": "Section with headline. Vertical list of items. Each item: flex row with icon/number on left, title + description on right. Divider between items using `--color-border`. Alternating background on hover.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify in browser",
+      "details": "Take a Playwright screenshot of a generated site preview that includes a services section. Confirm cards/list items are visible, text is readable, layout is responsive.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-16", "TASK-39"],
+  "estimatedComplexity": "low",
+  "technicalNotes": [
+    "If content.items is empty, render a placeholder with 3 dummy items to avoid layout breaks during development.",
+    "Use Lucide React icons for service icons if available, otherwise use colored circle with initials as fallback."
+  ]
+}

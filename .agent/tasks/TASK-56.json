@@ -1,0 +1,47 @@
+{
+  "id": "TASK-56",
+  "title": "Implement dashboard page (/)",
+  "category": "ui-ux",
+  "description": "Implement the main dashboard page showing overview stats and recent batches. Entry point for the admin app.",
+  "acceptanceCriteria": [
+    "Dashboard page renders at /",
+    "Shows summary stats: total batches, total prospects, prospects ready, prospects failed",
+    "Shows a list of recent batches with name, industry, date, prospect count, and a link to the batch detail",
+    "'New Batch' button navigates to /batches/new",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/app/page.tsx (dashboard)",
+      "details": "Server component. Load stats via repository: `listBatches()`, count prospects by status. Render the dashboard UI.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement stat cards",
+      "details": "Four shadcn/ui Cards showing: Total Batches, Total Prospects, Ready (status='ready'), Failed (status='failed'). Use large numbers with muted labels.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement recent batches list",
+      "details": "Table or card list of the 5 most recent batches. Columns: Name, Industry, Date Created, Prospect Count. Each row links to `/batches/{id}`.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Add New Batch button",
+      "details": "Prominent 'New Batch' button at the top right linking to `/batches/new`.",
+      "pass": false
+    },
+    {
+      "step": 5,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Verify stats cards and recent batches list are visible.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-55", "TASK-5"],
+  "estimatedComplexity": "low"
+}

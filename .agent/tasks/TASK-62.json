@@ -1,0 +1,53 @@
+{
+  "id": "TASK-62",
+  "title": "Implement generation trigger UI with real-time status",
+  "category": "ui-ux",
+  "description": "Implement the generation trigger section on the batch detail page. Allows running generation for all pending prospects with real-time status updates via polling or SSE.",
+  "acceptanceCriteria": [
+    "'Generate All Pending' button is visible when there are pending/failed prospects",
+    "Clicking the button triggers POST /api/generate/batch/[id]",
+    "While generation runs, a progress indicator shows (e.g., X of Y complete)",
+    "Prospect table updates in real-time (status changes from pending → processing → ready/failed)",
+    "Failed prospects show an error message or tooltip with the failure reason",
+    "Button is disabled and shows 'Generating...' while in progress",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Add GenerateTrigger client component to batch detail page",
+      "details": "Create `src/components/admin/GenerateTrigger.tsx`. Shows 'Generate All Pending' button if batch has pending or failed prospects. On click, POST to `/api/generate/batch/[id]`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement polling for status updates",
+      "details": "After triggering generation, poll GET `/api/batches/[id]/prospects` every 3 seconds. Update the prospect list state with fresh statuses. Stop polling when all are done (no pending/processing).",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Show progress indicator",
+      "details": "During generation: show a progress bar or 'X of Y generated' counter. Use shadcn/ui Progress component.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Handle completion and errors",
+      "details": "On completion: show a toast 'Generation complete. X succeeded, Y failed.' Failed rows show error_message in a tooltip on the status badge.",
+      "pass": false
+    },
+    {
+      "step": 5,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot showing the generation trigger section with progress indicator visible.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-61", "TASK-49", "TASK-74"],
+  "estimatedComplexity": "high",
+  "technicalNotes": [
+    "Generation runs asynchronously in the API route — the response returns 202 immediately, client polls for updates.",
+    "Use setInterval with cleanup (clearInterval in useEffect cleanup) for polling."
+  ]
+}

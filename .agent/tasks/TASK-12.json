@@ -1,0 +1,55 @@
+{
+  "id": "TASK-12",
+  "title": "Implement branding extraction (colors, fonts, logo from homepage HTML)",
+  "category": "functional",
+  "description": "Implement src/scraper/branding.ts which extracts brand colors, fonts, and logo URL from the raw HTML of the homepage. This runs on the raw HTML before Cheerio strips style tags. Uses regex patterns — no API calls.",
+  "acceptanceCriteria": [
+    "`extractBranding(rawHtml: string, pageUrl: string): BrandingData` function exists and works",
+    "Hex color codes are extracted from CSS (e.g., `#2563eb`, `#fff`)",
+    "RGB/RGBA colors are extracted and converted to hex",
+    "Font family names are extracted from font-family declarations and Google Fonts link tags",
+    "Logo URL is extracted from img tags near header or with 'logo' in src/alt/class",
+    "Returns deduplicated, non-trivial colors (excludes white, black, near-white, near-black)",
+    "Returns empty arrays/null gracefully if nothing is found"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/scraper/branding.ts with extractBranding function",
+      "details": "Create `extractBranding(rawHtml: string, pageUrl: string): BrandingData`. Import `BrandingData` from `./types`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Extract hex and RGB colors from CSS",
+      "details": "Apply regex to the full rawHtml string:\n- Hex colors: `/#([0-9a-fA-F]{3,8})\\b/g` \n- RGB: `/rgb\\(\\s*(\\d+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)\\s*\\)/g`\nConvert RGB to hex. Deduplicate. Filter out near-white (#f8f8f8 and above) and near-black (#111 and below) and pure white/black. Return up to 5 most unique colors.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Extract font family names",
+      "details": "Two approaches:\n1. CSS font-family declarations: `/font-family\\s*:\\s*([^;\"'{}]+)/gi` — extract family names, split by comma, clean quotes.\n2. Google Fonts URL: `/fonts\\.googleapis\\.com\\/css[^\"']*family=([^\"'&]+)/g` — decode the font names from the URL param.\nDeduplicate and return clean font names (remove generic families like 'sans-serif', 'serif', 'monospace').",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Extract logo URL",
+      "details": "Use Cheerio to parse rawHtml. Look for img tags that satisfy any of: `src` contains 'logo', `alt` contains 'logo' (case-insensitive), `class` contains 'logo', or the img is inside a `<header>` or element with class/id containing 'header'. Return the first match's absolute URL. Resolve relative URLs against pageUrl.",
+      "pass": false
+    },
+    {
+      "step": 5,
+      "description": "Wire branding extraction into the crawl service",
+      "details": "In `crawlee-service.ts`, after collecting all pages, call `extractBranding(homepageRawHtml, url)` on the first page's raw HTML. Include the result in the return value alongside the pages array.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-11"],
+  "estimatedComplexity": "medium",
+  "technicalNotes": [
+    "Run branding extraction on raw HTML BEFORE passing to Cheerio for text extraction — Cheerio strips style tags.",
+    "Color filtering: remove colors that are too light (luminance > 0.9) or too dark (luminance < 0.05) since these are background/text defaults, not brand colors.",
+    "Logo URL must be absolute. Use `new URL(relativeSrc, pageUrl).href` to resolve relative paths.",
+    "This is a best-effort extraction — many sites won't have easily extractable branding. Graceful fallback to AI-suggested palette is handled in TASK-48."
+  ]
+}

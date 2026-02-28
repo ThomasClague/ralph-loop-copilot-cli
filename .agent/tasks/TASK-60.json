@@ -1,0 +1,43 @@
+{
+  "id": "TASK-60",
+  "title": "Implement media upload area on new batch page",
+  "category": "ui-ux",
+  "description": "Add a media library upload section to the new batch creation page. Allows uploading curated stock images with the naming convention {slot}-{industry}-{descriptor}.{ext} before running generation.",
+  "acceptanceCriteria": [
+    "Media upload area is visible on the new batch page (after batch name/industry are set)",
+    "Drag-and-drop or click-to-upload UI is present",
+    "Filename convention is explained with examples in the UI",
+    "Uploaded files show in a list with filename, slot, and industry parsed from the name",
+    "Files with invalid names show an error inline",
+    "Upload sends files to POST /api/batches/[id]/media",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Add media upload section to new batch page",
+      "details": "Below the tab section, add a collapsible 'Media Library (Optional)' section. Expand to show the upload area with instructions: 'Name files as: {slot}-{industry}-{descriptor}.jpg (e.g., hero-roofing-tiles.jpg)'.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement file input with drag-and-drop",
+      "details": "Create a `MediaUploadArea` client component. Use a hidden `<input type='file' accept='image/*' multiple>` triggered by clicking or dragging onto a styled dropzone div. On drop/select, validate filenames and show preview list.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Show upload status and preview",
+      "details": "For each file: show filename, inferred slot and industry (parsed from name), status (valid/invalid/uploading/uploaded). Invalid filenames show a red error. After batch is created, upload files to the batch's media endpoint.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Drag a file onto the dropzone and verify it appears in the list with correct slot/industry parsed.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-54", "TASK-58"],
+  "estimatedComplexity": "medium"
+}

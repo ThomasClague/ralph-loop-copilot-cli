@@ -1,0 +1,49 @@
+{
+  "id": "TASK-42",
+  "title": "Define Zod schemas for all AI pipeline outputs",
+  "category": "functional",
+  "description": "Create Zod schemas in src/lib/ai/schemas.ts for all three AI pipeline generateObject calls: the condensation schema (condensed business profile), the structure decision schema (section list + metadata), and the content generation schema (all section content). These schemas replace manual JSON parsing and provide automatic validation.",
+  "acceptanceCriteria": [
+    "`src/lib/ai/schemas.ts` exports `condensationSchema`, `structureSchema`, and `contentSchema`",
+    "All schemas are valid Zod schemas usable with AI SDK `generateObject`",
+    "`structureSchema` validates: sections array (type + variant + reasoning), tone, paletteHint",
+    "`contentSchema` validates all content fields for all 21 section types",
+    "`condensationSchema` validates the condensed business profile fields",
+    "TypeScript infers correct types from all schemas",
+    "TypeScript compiles without errors"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/lib/ai/schemas.ts with condensationSchema",
+      "details": "```ts\nimport { z } from 'zod';\nexport const condensationSchema = z.object({\n  businessName: z.string(),\n  phones: z.array(z.string()),\n  emails: z.array(z.string()),\n  address: z.string().optional(),\n  services: z.array(z.string()),\n  testimonials: z.array(z.string()),\n  uniquePoints: z.array(z.string()),\n  yearsInBusiness: z.number().optional(),\n  summary: z.string(),\n});\n```",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Add structureSchema",
+      "details": "```ts\nexport const structureSchema = z.object({\n  sections: z.array(z.object({\n    type: z.enum(['hero', 'services', 'about', 'trust_indicators', 'testimonials', 'process', 'service_area', 'gallery', 'faq', 'cta_banner', 'contact', 'pricing', 'team', 'certifications', 'emergency', 'benefits', 'comparison', 'brands', 'blog_preview', 'video', 'guarantee']),\n    variant: z.string(),\n    reasoning: z.string(),\n  })).min(7).max(10),\n  tone: z.enum(['professional', 'friendly', 'urgent', 'premium', 'trustworthy']),\n  paletteHint: z.string().describe('A color description like \"deep blue\" or \"forest green\" to help select a palette'),\n});\n```",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Add contentSchema",
+      "details": "Define a Zod schema for each of the 21 section content types. Mirror the TypeScript interfaces from TASK-16. Use `z.string()`, `z.array()`, `z.object()`, `.optional()` as appropriate. Create a discriminated union schema for all section content keyed by section type.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Export inferred TypeScript types",
+      "details": "Export inferred types: `export type CondensedProfile = z.infer<typeof condensationSchema>`, `export type StructureDecision = z.infer<typeof structureSchema>`. These are used as the typed return values of the AI pipeline functions.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-16"],
+  "estimatedComplexity": "high",
+  "technicalNotes": [
+    "The contentSchema for the full content generation call is the most complex. Consider defining it as a Zod object where each key corresponds to a section type: `z.object({ hero: heroContentSchema, services: servicesContentSchema, ... })`.",
+    "Use `.describe()` on Zod fields to give the AI better hints about what each field should contain.",
+    "The AI SDK's generateObject uses the Zod schema to validate the AI response and retry automatically if validation fails.",
+    "Make all fields in content schemas .optional() to be lenient — the AI may not always fill in every field."
+  ]
+}

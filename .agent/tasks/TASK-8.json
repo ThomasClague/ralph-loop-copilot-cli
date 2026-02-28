@@ -1,0 +1,40 @@
+{
+  "id": "TASK-8",
+  "title": "Create .env.local.example with all required environment variables",
+  "category": "security",
+  "description": "Create a .env.local.example file documenting all required and optional environment variables. Ensure .env.local is in .gitignore. This prevents accidental secret commits and documents the setup for new developers.",
+  "acceptanceCriteria": [
+    "`.env.local.example` exists at project root with all variables documented",
+    "`.env.local` is listed in `.gitignore`",
+    "All API keys have placeholder values and comments explaining how to obtain them",
+    "`EMAIL_MODE` defaults to `mock` in the example",
+    "No actual secrets are committed to the repository"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create .env.local.example",
+      "details": "Create `.env.local.example` at project root with the following content:\n```\n# Anthropic API Key (required) — get at https://console.anthropic.com/\nANTHROPIC_API_KEY=your_anthropic_api_key_here\n\n# Pexels API Key (required) — get at https://www.pexels.com/api/\nPEXELS_API_KEY=your_pexels_api_key_here\n\n# Resend API Key (optional — only needed for EMAIL_MODE=live) — get at https://resend.com/\nRESEND_API_KEY=your_resend_api_key_here\n\n# Email mode: 'mock' (default, never sends) or 'live' (sends via Resend)\nEMAIL_MODE=mock\n\n# From email address (used in live email mode)\nEMAIL_FROM=noreply@yourdomain.com\n```",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Ensure .env.local is in .gitignore",
+      "details": "Open `.gitignore` and confirm `.env.local` and `.env*.local` are listed. Also add `data/` and `exports/` and `uploads/` to .gitignore if not already present.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Create src/lib/env.ts for server-side environment variable validation",
+      "details": "Create `src/lib/env.ts` that validates required env vars on startup:\n```ts\nexport function validateEnv() {\n  if (!process.env.ANTHROPIC_API_KEY) throw new Error('ANTHROPIC_API_KEY is required');\n  if (!process.env.PEXELS_API_KEY) throw new Error('PEXELS_API_KEY is required');\n}\n```\nCall this in the pipeline before the first API call, not at module load time (to allow tests to run without keys).",
+      "pass": false
+    }
+  ],
+  "dependencies": [],
+  "estimatedComplexity": "low",
+  "technicalNotes": [
+    "Never commit .env.local — it contains API keys.",
+    "The EMAIL_MODE=mock default is a safety mechanism. Developers must explicitly set EMAIL_MODE=live to send real emails.",
+    "Add a note in README.md instructing developers to copy .env.local.example to .env.local and fill in their keys."
+  ]
+}

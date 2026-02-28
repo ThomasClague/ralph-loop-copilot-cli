@@ -1,0 +1,43 @@
+{
+  "id": "TASK-84",
+  "title": "Implement export button with status dropdown",
+  "category": "ui-ux",
+  "description": "Implement the ExportButton component in the editor. Shows current export status and provides a dropdown with actions: Export as ZIP, Copy Public URL (if deployed).",
+  "acceptanceCriteria": [
+    "ExportButton renders in the editor right panel/top bar",
+    "Shows 'Export' button with a dropdown arrow",
+    "Dropdown options: 'Export as ZIP', 'View Published' (if export_url exists)",
+    "'Export as ZIP' triggers POST /api/export/[slug] and downloads the ZIP",
+    "Shows loading state while export is running",
+    "Shows success/error toast on completion",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/components/editor/ExportButton.tsx",
+      "details": "Client component. Props: `slug: string, exportUrl: string | null`. Render a shadcn/ui Button with a dropdown menu (DropdownMenu from shadcn).",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement Export as ZIP action",
+      "details": "On click: POST /api/export/[slug] with `{ format: 'zip' }`. When response returns with a download URL, trigger `window.location.href = url` to start the download. Show loading spinner on button during request.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement View Published action",
+      "details": "If `exportUrl` is set, show 'View Published' option in dropdown. On click, open the URL in a new tab.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot with dropdown open. Trigger Export as ZIP for a ready prospect and verify download initiates.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-75"],
+  "estimatedComplexity": "low"
+}

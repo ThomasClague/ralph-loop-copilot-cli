@@ -1,0 +1,42 @@
+{
+  "id": "TASK-26",
+  "title": "Implement CTA Banner section variants (cta-centered, cta-split)",
+  "category": "ui-ux",
+  "description": "Implement two CTA Banner variants. cta-centered shows centered headline, subheadline, and a large CTA button on a colored background. cta-split shows text on the left and CTA button on the right.",
+  "acceptanceCriteria": [
+    "`CtaCentered` and `CtaSplit` components exist in `src/components/shared/cta_banner/`",
+    "Both accept `{ content: CtaBannerContent, business: BusinessInfo }` props",
+    "Both render headline, optional subheadline, and CTA button",
+    "CTA button links to `#contact`",
+    "Background uses `--color-primary` or `--color-secondary`",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create component files",
+      "details": "Create `src/components/shared/cta_banner/CtaCentered.tsx`, `CtaSplit.tsx`, `index.ts`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement CtaCentered",
+      "details": "Full-width section with `--color-primary` background. Centered: h2 headline (`--color-text-inverted`), p subheadline (muted inverted), large button with contrasting color (`--color-background` bg, `--color-primary` text). Phone number below button.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement CtaSplit",
+      "details": "Two-column: left side has headline + subheadline (text on `--color-primary` bg), right side has CTA button + phone (centered vertically). On mobile: stack with button below text.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Verify text is readable on colored background, button is visible.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-16", "TASK-39"],
+  "estimatedComplexity": "low"
+}

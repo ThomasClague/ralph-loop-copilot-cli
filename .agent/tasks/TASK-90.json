@@ -1,0 +1,30 @@
+{
+  "id": "TASK-90",
+  "title": "Implement email factory",
+  "category": "functional",
+  "description": "Implement the email factory that returns the correct email service implementation based on the EMAIL_MODE setting. Centralizes the mock/live decision.",
+  "acceptanceCriteria": [
+    "emailFactory.getService() returns MockEmailService when EMAIL_MODE=mock",
+    "emailFactory.getService() returns ResendEmailService when EMAIL_MODE=live",
+    "Factory reads EMAIL_MODE from the settings table",
+    "Factory reads RESEND_API_KEY from settings when mode=live",
+    "Throws if mode=live and RESEND_API_KEY is not set",
+    "Verify by calling getService() in both modes"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/lib/email/factory.ts",
+      "details": "Export async function `getEmailService(): Promise<EmailService>`. Load settings from repository. Read `email_mode` setting (default 'mock'). If 'mock': return new MockEmailService(). If 'live': read resend_api_key. If not set, throw Error('RESEND_API_KEY not configured in settings'). Return new ResendEmailService(resendApiKey).",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Verify factory",
+      "details": "Call getEmailService() in mock mode. Verify returns MockEmailService. Set email_mode to 'live' in settings. Verify it throws if no API key, or returns ResendEmailService if key is present.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-88", "TASK-89", "TASK-5"],
+  "estimatedComplexity": "low"
+}

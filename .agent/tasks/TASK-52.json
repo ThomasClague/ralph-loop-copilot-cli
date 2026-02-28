@@ -1,0 +1,35 @@
+{
+  "id": "TASK-52",
+  "title": "Create industry query map (Pexels search queries per slot per industry)",
+  "category": "functional",
+  "description": "Create src/lib/images/industry-queries.ts with predefined Pexels search queries for each image slot (hero, gallery, about, etc.) per industry. This ensures industry-appropriate images are fetched automatically.",
+  "acceptanceCriteria": [
+    "`src/lib/images/industry-queries.ts` exports `INDUSTRY_IMAGE_QUERIES`",
+    "Queries exist for all major image slots: hero, gallery, about, services, team",
+    "Queries exist for at least 10 industries: roofing, plumbing, electrical, landscaping, cleaning, painting, hvac, construction, locksmith, pest_control",
+    "`getImageQuery(industry, slot)` returns a query string",
+    "Fallback query returned when industry/slot combination not found"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/lib/images/industry-queries.ts",
+      "details": "Define the structure:\n```ts\nexport const INDUSTRY_IMAGE_QUERIES: Record<string, Record<string, string>> = {\n  roofing: {\n    hero: 'roofing contractor working on roof',\n    gallery: 'roof tiles new installation',\n    about: 'roofing team professionals',\n    services: 'roof repair services',\n    team: 'construction workers roofing'\n  },\n  plumbing: { hero: 'plumber pipe installation', gallery: 'bathroom plumbing work', ... },\n  // ... etc\n};\n```",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Add queries for all 10 industries",
+      "details": "For each industry (roofing, plumbing, electrical, landscaping, cleaning, painting, hvac, construction, locksmith, pest_control) define at minimum: hero, gallery, about, services queries. Make queries specific enough to get relevant results from Pexels.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement getImageQuery helper",
+      "details": "```ts\nexport function getImageQuery(industry: string, slot: string): string {\n  return INDUSTRY_IMAGE_QUERIES[industry]?.[slot] \n    ?? INDUSTRY_IMAGE_QUERIES['construction']?.[slot] \n    ?? `${industry} professional service`;\n}\n```",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-51"],
+  "estimatedComplexity": "low"
+}

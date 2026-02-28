@@ -1,0 +1,34 @@
+{
+  "id": "TASK-96",
+  "title": "Write Vitest unit tests for the scraping service",
+  "category": "testing",
+  "description": "Write Vitest unit tests for the scraping client (TASK-15) that proxies to the Express sidecar. Mock the fetch calls.",
+  "acceptanceCriteria": [
+    "Test file exists at src/lib/scraping/__tests__/scrapingClient.test.ts",
+    "All fetch calls are mocked with vi.mock or vi.spyOn",
+    "Tests cover: successful crawl returns structured data, network error returns error object, invalid URL returns error, sidecar unreachable returns error with helpful message",
+    "Tests pass with `npm test`"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create test file and mock fetch",
+      "details": "Create src/lib/scraping/__tests__/scrapingClient.test.ts. Use `vi.stubGlobal('fetch', vi.fn())` to mock global fetch. Write tests for each scenario.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Write test cases",
+      "details": "Test 1: mock fetch returns 200 with valid crawl data — verify client returns parsed result. Test 2: mock fetch throws network error — verify client returns { error: 'Crawl service unavailable' }. Test 3: mock fetch returns 400 — verify client returns error.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Run tests and verify",
+      "details": "Run `npm test`. All tests pass.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-15"],
+  "estimatedComplexity": "low"
+}

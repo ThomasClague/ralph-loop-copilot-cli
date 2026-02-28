@@ -1,0 +1,42 @@
+{
+  "id": "TASK-32",
+  "title": "Implement Benefits section variants (benefits-icons, benefits-checklist)",
+  "category": "ui-ux",
+  "description": "Implement two Benefits section variants. benefits-icons shows benefits as icon cards. benefits-checklist shows benefits as a two-column checklist.",
+  "acceptanceCriteria": [
+    "`BenefitsIcons` and `BenefitsChecklist` components exist in `src/components/shared/benefits/`",
+    "Both accept `{ content: BenefitsContent, business: BusinessInfo }` props",
+    "Both render all benefit items with title and description",
+    "benefits-icons shows a prominent icon above each benefit",
+    "benefits-checklist shows a checkmark icon before each benefit",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create component files",
+      "details": "Create `src/components/shared/benefits/BenefitsIcons.tsx`, `BenefitsChecklist.tsx`, `index.ts`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement BenefitsIcons",
+      "details": "Grid `grid-cols-1 md:grid-cols-2 lg:grid-cols-3`. Each item: large colored icon (--color-primary background circle), title (h3), description. Clean card layout.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement BenefitsChecklist",
+      "details": "Two-column grid on desktop, single on mobile. Each item: checkmark icon (--color-primary color), title (bold), description (muted). Dense, list-style layout.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Verify icons/checkmarks are visible, text is readable.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-16", "TASK-39"],
+  "estimatedComplexity": "low"
+}

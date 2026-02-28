@@ -1,0 +1,61 @@
+{
+  "id": "TASK-10",
+  "title": "Implement Crawlee CheerioCrawler service",
+  "category": "integration",
+  "description": "Implement the core Crawlee CheerioCrawler service in src/scraper/crawlee-service.ts. This service crawls a given URL, follows internal links up to maxPages, and collects raw page data for extraction. Runs locally for free — no external API costs.",
+  "acceptanceCriteria": [
+    "`crawlSite(url, maxPages)` function crawls the given URL and follows internal links",
+    "Only same-domain links are followed (no crawling off to Facebook, Google, etc.)",
+    "Respects maxPages cap (default 10)",
+    "Has a 30-second overall timeout — returns whatever pages collected so far",
+    "Returns an array of raw page objects with URL and raw HTML",
+    "Sets a realistic browser User-Agent string",
+    "Concurrency is limited to 3 concurrent requests"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/scraper/crawlee-service.ts with CheerioCrawler setup",
+      "details": "Import `CheerioCrawler` from `crawlee`. Create async function `crawlSite(url: string, maxPages = 10)`. Initialize CheerioCrawler with:\n- `maxRequestsPerCrawl: maxPages`\n- `maxConcurrency: 3`\n- `requestHandlerTimeoutSecs: 30`\n- `navigationTimeoutSecs: 30`\n- `additionalMimeTypes: ['text/html']`",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement same-domain link filtering",
+      "details": "In the requestHandler, parse the input URL to get the base domain (using `new URL(url).hostname`). In `enqueueLinks`, use a `transformRequestFunction` or `urlPatternMatcher` that only allows links where `new URL(link).hostname === baseDomain`. This prevents crawling off-site.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement page data collection in requestHandler",
+      "details": "In the requestHandler, collect: `request.url`, `$.html()` (full raw HTML), `$('title').text()` for title. Push each result to a `pages` array using a closure. After crawler finishes, return the pages array.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Set realistic User-Agent string",
+      "details": "Configure the crawler with a realistic browser User-Agent via `useSessionPool: true` or the `headers` option: `'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'`",
+      "pass": false
+    },
+    {
+      "step": 5,
+      "description": "Add timeout handling",
+      "details": "Wrap the `crawler.run([url])` call in a `Promise.race` with a 30-second timeout. If the timeout fires, call `crawler.teardown()` and return whatever pages have been collected so far.",
+      "pass": false
+    },
+    {
+      "step": 6,
+      "description": "Test the crawler manually",
+      "details": "Create a quick test script (or use tsx directly) to call `crawlSite('https://example.com', 3)` and log the number of pages returned. Verify it returns at least 1 page with raw HTML.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-6"],
+  "estimatedComplexity": "medium",
+  "technicalNotes": [
+    "Crawlee writes temporary files to ./storage/ during crawls. Add ./storage/ to .gitignore.",
+    "CheerioCrawler is the lightweight option (no headless browser). It handles all static HTML sites perfectly. Target market uses WordPress/Wix/Squarespace/hand-coded HTML — all CheerioCrawler compatible.",
+    "If a prospect has a JS SPA (React, Vue), CheerioCrawler will get the empty shell. This is acceptable — they likely don't need our services anyway.",
+    "Crawlee may log verbose output — consider setting `Configuration.getGlobalConfig().set('logLevel', LogLevel.WARNING')`"
+  ]
+}

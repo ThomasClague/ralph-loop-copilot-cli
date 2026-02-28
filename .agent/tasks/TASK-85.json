@@ -1,0 +1,47 @@
+{
+  "id": "TASK-85",
+  "title": "Implement site-template scaffold",
+  "category": "functional",
+  "description": "Create the static site template scaffold that forms the base of every exported landing page. Standalone HTML/CSS/JS file structure, no Next.js dependencies.",
+  "acceptanceCriteria": [
+    "Template directory exists at src/templates/site/",
+    "index.html template with placeholder tokens for dynamic content",
+    "styles.css with base reset and CSS custom properties for theming",
+    "No React or Next.js imports — pure vanilla HTML/CSS",
+    "Template renders correctly when opened directly in a browser",
+    "All 21 section types have corresponding HTML template snippets",
+    "Verify by opening template in browser"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/templates/site/ directory and base files",
+      "details": "Create: index.html (base shell with `<head>`, `<body>`, nav, footer placeholders), styles.css (CSS reset + palette custom properties: `--color-primary`, `--color-secondary`, `--color-accent`, `--bg`, `--text`, etc.).",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Create section HTML snippets",
+      "details": "For each of the 21 section types, create a `sections/{type}.html` snippet with Handlebars-style `{{variable}}` placeholders. Example: `sections/hero.html` with `{{headline}}`, `{{subheadline}}`, `{{ctaText}}`, `{{backgroundImage}}`.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement JavaScript for interactions",
+      "details": "Create `scripts.js` with minimal JavaScript: mobile nav toggle, smooth scrolling, lazy image loading. No frameworks.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify template",
+      "details": "Open src/templates/site/index.html in a browser. Verify it renders without errors (placeholder tokens visible). Verify CSS variables are declared.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-16"],
+  "estimatedComplexity": "high",
+  "technicalNotes": [
+    "The template will be processed by the export engine (TASK-86) which replaces tokens with real content.",
+    "Keep it framework-free — the exported site must work with no server."
+  ]
+}

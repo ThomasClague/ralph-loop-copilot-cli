@@ -1,0 +1,42 @@
+{
+  "id": "TASK-57",
+  "title": "Implement batch list page (/batches)",
+  "category": "ui-ux",
+  "description": "Implement the batch list page showing all batches with their stats. Gateway to creating new batches or viewing existing ones.",
+  "acceptanceCriteria": [
+    "Batch list page renders at /batches",
+    "Shows all batches in a table: name, industry, created date, total prospects, ready count",
+    "Each row links to /batches/[id]",
+    "'New Batch' button at top",
+    "Empty state shown when no batches exist",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/app/batches/page.tsx",
+      "details": "Server component. Load all batches via `listBatches()`. For each batch, count prospects by status using repository. Render table with shadcn/ui Table component.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement batch table",
+      "details": "Columns: Name (link to /batches/[id]), Industry (badge), Created (formatted date), Prospects (total), Ready (count with green badge). Add 'View' action button per row.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Add empty state",
+      "details": "When no batches: show centered illustration/icon, message 'No batches yet. Create your first batch to get started.', 'New Batch' button.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Verify table renders correctly with batch data.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-55", "TASK-5"],
+  "estimatedComplexity": "low"
+}

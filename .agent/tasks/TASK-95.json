@@ -1,0 +1,28 @@
+{
+  "id": "TASK-95",
+  "title": "Write Vitest unit tests for the interpolation utility",
+  "category": "testing",
+  "description": "Write Vitest unit tests for the interpolate() utility function (TASK-92). Pure function tests — no mocks needed.",
+  "acceptanceCriteria": [
+    "Test file exists at src/lib/utils/__tests__/interpolate.test.ts",
+    "Tests cover: simple replacement, dot notation, each blocks, missing keys (keepUnknown=true and false), empty string handling, special characters in values",
+    "Tests pass with `npm test`",
+    "100% code coverage for interpolate.ts"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/lib/utils/__tests__/interpolate.test.ts",
+      "details": "Write tests for each case: `interpolate('Hello {{name}}', { name: 'World' })` === 'Hello World'. Dot notation: `interpolate('{{a.b}}', { a: { b: 'x' } })` === 'x'. Unknown key with keepUnknown=false: replaced with ''. Each block iterates correctly.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Run tests and verify",
+      "details": "Run `npm test src/lib/utils/__tests__/interpolate.test.ts`. All tests pass.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-92"],
+  "estimatedComplexity": "low"
+}

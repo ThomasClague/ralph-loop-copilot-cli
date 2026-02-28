@@ -1,0 +1,59 @@
+{
+  "id": "TASK-3",
+  "title": "Define database schema for all tables",
+  "category": "data-model",
+  "description": "Create src/db/schema.ts with Drizzle ORM table definitions for all five tables: batches, prospects, media, sent_emails, and settings. Use sqliteTable from drizzle-orm/sqlite-core. Only use types that map cleanly to both SQLite and Postgres (text, integer, real) for future Supabase migration.",
+  "acceptanceCriteria": [
+    "`src/db/schema.ts` exports all five table definitions: batches, prospects, media, sentEmails, settings",
+    "All required fields, types, and constraints are present as specified in the PRD data model",
+    "`prospects.status` field accepts all pipeline status values",
+    "`prospects.slug` has a unique constraint",
+    "JSON blob fields (scraped_raw, site_content, etc.) are defined as `text` columns",
+    "TypeScript compiles without errors"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/db/schema.ts with the batches table",
+      "details": "```ts\nimport { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';\nexport const batches = sqliteTable('batches', {\n  id: text('id').primaryKey(),\n  name: text('name').notNull(),\n  industry: text('industry').notNull(),\n  createdAt: integer('created_at').notNull(),\n});\n```",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Add the prospects table definition",
+      "details": "Add to schema.ts. Include all fields: id, batch_id (FK reference), slug (unique), business_name, industry, location, phone, email, existing_url, notes, status, scraped_raw, scraped_branding, extracted_data, condensed_profile, structure, site_content, site_config, custom_palette (nullable), outreach_sent_at (nullable), outreach_responded_at (nullable), exported_at (nullable), created_at, updated_at. Use `.references(() => batches.id)` for batch_id. Use `.unique()` for slug. Status default: 'pending'.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Add the media table definition",
+      "details": "```ts\nexport const media = sqliteTable('media', {\n  id: text('id').primaryKey(),\n  batchId: text('batch_id').notNull().references(() => batches.id),\n  filename: text('filename').notNull(),\n  slot: text('slot').notNull(),\n  industry: text('industry').notNull(),\n  path: text('path').notNull(),\n  createdAt: integer('created_at').notNull(),\n});\n```",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Add the sent_emails table definition",
+      "details": "Include: id, prospect_id (FK), template_id, to_email, from_email, subject, body_html, body_text, status (sent|failed|mock), provider_id (nullable), sent_at.",
+      "pass": false
+    },
+    {
+      "step": 5,
+      "description": "Add the settings table definition",
+      "details": "```ts\nexport const settings = sqliteTable('settings', {\n  key: text('key').primaryKey(),\n  value: text('value').notNull(),\n});\n```",
+      "pass": false
+    },
+    {
+      "step": 6,
+      "description": "Verify schema compiles and run drizzle-kit generate",
+      "details": "Run `npx drizzle-kit generate` to produce migration SQL in the `./drizzle/` folder. Confirm the generated SQL contains CREATE TABLE statements for all five tables with the correct columns.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-2"],
+  "estimatedComplexity": "medium",
+  "technicalNotes": [
+    "Use only `text`, `integer`, `real` column types — no SQLite-specific BLOB or JSON types. JSON data is stored as `text` and parsed in application code.",
+    "Use camelCase for TypeScript property names (e.g., `batchId`) but snake_case for SQL column names (e.g., `'batch_id'`) — Drizzle handles the mapping.",
+    "Status enum for prospects: 'pending' | 'scraping' | 'analyzing' | 'generating' | 'sourcing_images' | 'assembling' | 'ready' | 'failed'"
+  ]
+}

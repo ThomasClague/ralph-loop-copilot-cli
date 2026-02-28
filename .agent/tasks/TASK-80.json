@@ -1,0 +1,47 @@
+{
+  "id": "TASK-80",
+  "title": "Implement section list panel component",
+  "category": "ui-ux",
+  "description": "Implement the SectionListPanel component used in the editor. Shows all sections in the current landing page with options to reorder, show/hide, regenerate, or remove each section.",
+  "acceptanceCriteria": [
+    "SectionListPanel renders a list of all sections in page order",
+    "Each row shows section type icon and label",
+    "Each row has: Toggle visibility (eye icon), Regenerate (refresh icon), Remove (trash icon) actions",
+    "Sections can be reordered by drag-and-drop",
+    "Toggling visibility hides/shows the section in the preview",
+    "Regenerate triggers POST /api/generate/prospect/[slug]/section",
+    "Remove removes the section from page_data",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/components/editor/SectionListPanel.tsx",
+      "details": "Client component. Props: `sections: Section[], onReorder, onToggle, onRegenerate, onRemove`. Render a list of section rows with type label and action buttons.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement drag-and-drop reordering",
+      "details": "Use `@dnd-kit/sortable` for drag-and-drop. Each section row is a sortable item. On drag end, call `onReorder(newOrder)` with the updated section array.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement action handlers",
+      "details": "Toggle: set section.hidden = true/false, call onToggle. Regenerate: call POST /api/generate/prospect/[slug]/section, then call onRegenerate with new data. Remove: confirm dialog, call onRemove.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Verify sections list shows all sections. Drag one to reorder. Verify preview updates.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-79", "TASK-72"],
+  "estimatedComplexity": "high",
+  "technicalNotes": [
+    "Install @dnd-kit/core and @dnd-kit/sortable: `npm install @dnd-kit/core @dnd-kit/sortable`"
+  ]
+}

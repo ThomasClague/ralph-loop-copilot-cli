@@ -1,0 +1,45 @@
+{
+  "id": "TASK-61",
+  "title": "Implement batch detail page with prospect table",
+  "category": "ui-ux",
+  "description": "Implement the batch detail page at /batches/[id]. Shows all prospects for the batch in a table with status indicators. Entry point for triggering generation.",
+  "acceptanceCriteria": [
+    "Batch detail page renders at /batches/[id]",
+    "Shows batch name, industry, created date",
+    "Table shows all prospects: name, industry, location, status (badge), actions",
+    "Status badge uses color coding: pending=gray, processing=blue, ready=green, failed=red",
+    "'Preview' link per row navigates to /preview/[slug] when status=ready",
+    "'Edit' link per row navigates to /edit/[slug] when status=ready",
+    "'Regenerate' button per row triggers single-prospect generation",
+    "Generation trigger section visible at top of page (see TASK-62)",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/app/batches/[id]/page.tsx",
+      "details": "Server component. Load batch by id via `getBatch(id)`. Load all prospects via `getProspectsByBatch(id)`. Render batch header and prospect table.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement prospect table",
+      "details": "shadcn/ui Table with columns: Business Name, Industry, Location, Status (badge), Actions (Preview/Edit/Regenerate). Link Preview and Edit only when status is 'ready'. All status values get colored badges.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Handle not-found case",
+      "details": "If batch not found, render a 'Batch not found' message with a link back to /batches.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Verify batch info header and prospect table are visible with status badges.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-55", "TASK-5"],
+  "estimatedComplexity": "medium"
+}

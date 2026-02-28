@@ -1,0 +1,42 @@
+{
+  "id": "TASK-78",
+  "title": "Implement preview page (/preview/[slug])",
+  "category": "ui-ux",
+  "description": "Implement the preview page that renders the generated landing page inside an iframe-like full-page preview. Shows the prospect's site exactly as it will be exported.",
+  "acceptanceCriteria": [
+    "Preview page renders at /preview/[slug]",
+    "Shows the full landing page generated for the prospect",
+    "Uses the section renderer (TASK-38) to render all sections",
+    "Top bar shows prospect name, 'Edit' and 'Export' buttons",
+    "Returns 404 if prospect not found or not ready",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/app/preview/[slug]/page.tsx",
+      "details": "Server component. Load prospect by slug. If not found or status != 'ready', show 404-style error. Parse page_data. Render with a thin admin top bar and the full landing page content below.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement preview top bar",
+      "details": "Fixed top bar: prospect business name, 'Back to Batch' link, 'Edit' button (/edit/[slug]), 'Export' button (triggers POST /api/export/[slug]). Use a semi-transparent overlay bar that doesn't affect layout.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Render landing page content",
+      "details": "Import and render the SectionRenderer (TASK-38) with the page_data sections. Apply the assigned palette's CSS variables. Full-width, no admin sidebar.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot of /preview/[slug] for a generated prospect. Verify all sections render with content and images.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-38", "TASK-48", "TASK-68"],
+  "estimatedComplexity": "medium"
+}

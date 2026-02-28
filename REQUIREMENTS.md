@@ -3,7 +3,7 @@
 ## AI-Driven Outreach CRM & Site Generator
 
 **Architecture:** Hybrid — Next.js Admin App + Sidecar Express Scraping API + Exportable Standalone Next.js Sites
-**Stack:** Next.js 16.1.6 · Tailwind CSS 4.2.1 · shadcn/ui · Vercel AI SDK (`ai` + `@ai-sdk/anthropic`) · Crawlee (free/local scraping) · Pexels API · Resend (with test harness) · Drizzle ORM · SQLite (Supabase-ready) · Vitest + Playwright · pnpm
+**Stack:** Next.js 16.1.6 · Tailwind CSS 4.2.1 · shadcn/ui · Vercel AI SDK (`ai` + `@ai-sdk/anthropic`) · Crawlee (free/local scraping) · Pexels API · Resend (with test harness) · Drizzle ORM · SQLite (Supabase-ready) · Vitest + Playwright · npm
 **Runtime:** Local machine — zero cost for scraping
 
 ---
@@ -18,7 +18,7 @@
 
 **Playwright**: End-to-end testing. Officially recommended by Next.js. We use Playwright for: full pipeline flow (import → generate → preview → export), preview rendering (does the generated site actually render correctly), edit flow (swap variant, edit content, regenerate), export validation (does the exported project build successfully).
 
-**pnpm**: Package manager. Faster installs, strict dependency resolution, disk-efficient.
+**npm**: Package manager. Faster installs, strict dependency resolution, disk-efficient.
 
 **Database — SQLite now, Supabase later**: Drizzle ORM supports both SQLite and PostgreSQL with the same query API. The migration path:
 
@@ -27,7 +27,7 @@
 
 To make this swap painless, we use a **repository pattern**: all database access goes through repository functions (e.g., `getProspect(id)`, `updateProspectStatus(id, status)`, `createBatch(data)`). The rest of the app never imports Drizzle directly — only the repository. When we swap SQLite for Postgres, only the repository + schema + drizzle config change. Everything else stays identical.
 
-**Scaffolded project assumption**: The project will already be scaffolded with Next.js 16.1.6, Tailwind 4.2.1, Playwright, Vitest, and pnpm configured. The spec describes what to build on top of that scaffold.
+**Scaffolded project assumption**: The project will already be scaffolded with Next.js 16.1.6, Tailwind 4.2.1, Playwright, Vitest, and npm configured. The spec describes what to build on top of that scaffold.
 
 ---
 
@@ -43,7 +43,7 @@ ProspectForge is a local-first application that automates web development outrea
 | **Express Scraping API** | Crawlee-powered site crawling + data extraction | `3001` |
 | **Worker** | AI pipeline orchestration (can be merged into Express process) | (internal) |
 
-All three start with a single `pnpm dev` command via `concurrently`.
+All three start with a single `npm dev` command via `concurrently`.
 
 **Why a sidecar Express app for scraping:**
 
@@ -239,7 +239,7 @@ Always exports as a standalone Next.js project:
 1. Copy site template scaffold → `/exports/[slug]/`
 2. Write `site.config.json` with all data
 3. Download external images to `/public/images/`
-4. Result: runnable with `pnpm dev`, deployable anywhere
+4. Result: runnable with `npm run dev`, deployable anywhere
 
 ---
 
@@ -352,8 +352,8 @@ The scraper server lives in `src/scraper/` within the same repo — no separate 
 
 ```
 prospectforge/
-├── package.json                    ← pnpm
-├── pnpm-lock.yaml
+├── package.json                    ← npm
+├── npm-lock.yaml
 ├── next.config.ts
 ├── vitest.config.ts
 ├── playwright.config.ts
@@ -483,10 +483,10 @@ prospectforge/
 | **shadcn/ui for admin** | Copy-paste components, not a dependency. Professional data tables, forms, dialogs out of the box. Fully customisable. Tailwind-native. |
 | **Vitest for unit/integration** | Officially recommended by Next.js. Fast, native ESM, works with React Testing Library. Covers: utilities, API routes, email service, component rendering. |
 | **Playwright for E2E** | Officially recommended by Next.js. Covers: full pipeline flow, preview rendering, edit flow, export validation. |
-| **pnpm** | Faster installs, strict deps, disk-efficient. |
+| **npm** | Faster installs, strict deps, disk-efficient. |
 | **Repository pattern for DB** | All DB access through `repository.ts`. When swapping SQLite → Supabase Postgres, only `schema.ts`, `index.ts`, `repository.ts`, and `drizzle.config.ts` change. Rest of app untouched. |
 | **Crawlee for scraping** | Free, local, no recurring cost. CheerioCrawler handles plain HTML sites perfectly — which is what our target market uses. Old WordPress, Wix, Squarespace, hand-coded HTML. If someone has a modern SPA, they don't need us. |
-| **Sidecar Express API** | Crawlee needs full Node.js. Next.js routes may be Edge/Serverless. Express gives Crawlee a proper runtime while keeping the architecture simple — same repo, one `pnpm dev` command. |
+| **Sidecar Express API** | Crawlee needs full Node.js. Next.js routes may be Edge/Serverless. Express gives Crawlee a proper runtime while keeping the architecture simple — same repo, one `npm dev` command. |
 | **Branding extraction in Express** | Parse raw HTML for CSS colors/fonts before Cheerio strips style tags. Simple regex approach — free and sufficient for extracting the dominant palette from old sites. |
 | **Full palette token set** | A real site needs hover states, surfaces, borders, etc. AI generates the complete set based on a primary color, ensuring harmony. Each token has a clear purpose — this is what makes the exported sites look professional, not like a template. |
 | **Palettes as JSON files** | Drop-in extensible. No code changes to add palettes. |
@@ -501,7 +501,7 @@ prospectforge/
 
 ### Vitest — Unit & Integration
 
-Tests live in `__tests__/` at project root. Run with `pnpm test`.
+Tests live in `__tests__/` at project root. Run with `npm test`.
 
 **What we test:**
 - **Utility functions:** branding regex extraction, template variable interpolation, slug generation, palette token generation, industry query mapping
@@ -514,7 +514,7 @@ Tests live in `__tests__/` at project root. Run with `pnpm test`.
 
 ### Playwright — End-to-End
 
-Tests live in `e2e/`. Run with `pnpm test:e2e`.
+Tests live in `e2e/`. Run with `npm test:e2e`.
 
 **What we test:**
 - **Batch import flow:** upload CSV → prospects appear in table with "pending" status

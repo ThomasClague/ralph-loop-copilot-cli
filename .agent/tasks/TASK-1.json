@@ -1,0 +1,69 @@
+{
+  "id": "TASK-1",
+  "title": "Install and configure infrastructure dependencies",
+  "category": "functional",
+  "description": "Install all required npm packages for the infrastructure layer: Drizzle ORM, better-sqlite3, Express, Crawlee, concurrently, tsx, and their TypeScript types. This sets up the foundation that all other tasks depend on.",
+  "acceptanceCriteria": [
+    "All packages listed in steps install without errors",
+    "`npm install` completes successfully",
+    "TypeScript does not report missing type errors for installed packages",
+    "Package.json devDependencies and dependencies are updated correctly"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Install Drizzle ORM and SQLite driver",
+      "details": "Run: `npm install drizzle-orm better-sqlite3` and `npm install -D drizzle-kit @types/better-sqlite3`",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Install Express and its types",
+      "details": "Run: `npm install express` and `npm install -D @types/express`",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Install Crawlee",
+      "details": "Run: `npm install crawlee`. This installs CheerioCrawler and all Crawlee dependencies.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Install concurrently and tsx for running multiple processes",
+      "details": "Run: `npm install -D concurrently tsx`. concurrently runs Next.js + Express in parallel. tsx enables running TypeScript files directly with `tsx src/scraper/server.ts`.",
+      "pass": false
+    },
+    {
+      "step": 5,
+      "description": "Install Vercel AI SDK and Anthropic provider",
+      "details": "Run: `npm install ai @ai-sdk/anthropic`. This installs the unified AI SDK with `generateObject`, `generateText`, `streamText` and the Anthropic Claude provider.",
+      "pass": false
+    },
+    {
+      "step": 6,
+      "description": "Install Resend email SDK",
+      "details": "Run: `npm install resend`",
+      "pass": false
+    },
+    {
+      "step": 7,
+      "description": "Install Zod (if not already present)",
+      "details": "Run: `npm install zod`. Zod is used for all AI SDK schema validation via generateObject.",
+      "pass": false
+    },
+    {
+      "step": 8,
+      "description": "Verify installation",
+      "details": "Run `npm install` to ensure clean install. Check that node_modules contains drizzle-orm, better-sqlite3, express, crawlee, concurrently, tsx, ai, @ai-sdk/anthropic, resend, and zod folders.",
+      "pass": false
+    }
+  ],
+  "dependencies": [],
+  "estimatedComplexity": "low",
+  "technicalNotes": [
+    "The project is already scaffolded with Next.js 16.1.6, Tailwind 4.2.1, Vitest, and Playwright — do not reinstall or reconfigure those.",
+    "better-sqlite3 requires native bindings — it compiles on install. Node.js >= 22 is required.",
+    "crawlee may take a while to install due to its dependencies (got-scraping, fingerprint-injector, etc.)"
+  ]
+}

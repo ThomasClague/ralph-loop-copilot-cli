@@ -1,0 +1,41 @@
+{
+  "id": "TASK-51",
+  "title": "Implement Pexels API client",
+  "category": "integration",
+  "description": "Implement src/lib/images/pexels.ts — a typed client for the Pexels REST API. Used for fetching industry-relevant images when no manual uploads or scraped images are available.",
+  "acceptanceCriteria": [
+    "`searchPhotos(query, perPage)` function exists in `src/lib/images/pexels.ts`",
+    "Returns an array of photo objects with src URL and alt text",
+    "Uses PEXELS_API_KEY from environment variables",
+    "Returns photos with appropriate sizes (landscape for hero, square for gallery)",
+    "Handles API errors gracefully (returns empty array, does not throw)",
+    "Respects 200 req/hr rate limit (no parallel flooding)"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/lib/images/pexels.ts",
+      "details": "Use the Pexels REST API directly via fetch (no SDK needed). Base URL: `https://api.pexels.com/v1/search`. Auth header: `Authorization: ${PEXELS_API_KEY}`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement searchPhotos function",
+      "details": "```ts\nexport async function searchPhotos(query: string, perPage = 5): Promise<PexelsPhoto[]> {\n  try {\n    const res = await fetch(`https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=${perPage}&orientation=landscape`, {\n      headers: { Authorization: process.env.PEXELS_API_KEY! }\n    });\n    if (!res.ok) return [];\n    const data = await res.json();\n    return data.photos.map((p: any) => ({ url: p.src.large, alt: p.alt || query, photographer: p.photographer }));\n  } catch { return []; }\n}\n```",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Define PexelsPhoto type and test",
+      "details": "Define interface `PexelsPhoto { url: string; alt: string; photographer: string }`. Test: call `searchPhotos('roofing contractor')` and verify it returns photo objects with valid URLs.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-8"],
+  "estimatedComplexity": "low",
+  "technicalNotes": [
+    "Pexels requires attribution: store photographer name for display in exported sites.",
+    "Use `orientation=landscape` for hero images and `orientation=square` for gallery images.",
+    "The Pexels free tier allows 200 requests per hour — sufficient for batch processing with sequential calls."
+  ]
+}

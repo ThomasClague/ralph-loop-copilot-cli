@@ -1,0 +1,48 @@
+{
+  "id": "TASK-6",
+  "title": "Set up Express sidecar server entry point",
+  "category": "functional",
+  "description": "Create the Express sidecar server that runs separately from Next.js on port 3001. This gives Crawlee a proper Node.js runtime environment incompatible with Next.js Edge/Serverless. The server lives in src/scraper/ within the same repo.",
+  "acceptanceCriteria": [
+    "`src/scraper/server.ts` starts an Express server on port 3001",
+    "Server logs 'Scraping API running on port 3001' on startup",
+    "GET /api/health returns 200 with `{ status: 'ok' }`",
+    "Server handles errors gracefully without crashing",
+    "TypeScript compiles without errors",
+    "Running `tsx src/scraper/server.ts` starts the server successfully"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/scraper/ directory structure",
+      "details": "Create the following files (can be empty stubs for now): `src/scraper/server.ts`, `src/scraper/crawlee-service.ts`, `src/scraper/extract.ts`, `src/scraper/branding.ts`, `src/scraper/types.ts`",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Create src/scraper/types.ts with crawl request/response types",
+      "details": "Define TypeScript interfaces:\n```ts\nexport interface CrawlRequest { url: string; maxPages?: number; }\nexport interface PageData { url: string; title: string; metaDescription: string; headings: Record<string, string[]>; bodyText: string; links: string[]; images: Array<{src: string; alt: string}>; phones: string[]; emails: string[]; }\nexport interface BrandingData { colors: string[]; fonts: string[]; logoUrl: string | null; }\nexport interface CrawlResult { success: boolean; pages: PageData[]; branding: BrandingData; error?: string; }\n```",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Create src/scraper/server.ts — Express app",
+      "details": "Create Express server with JSON middleware, CORS enabled for localhost:3000. Register route handlers (stubs for now): POST /api/crawl and GET /api/health. Listen on port 3001. Add error handling middleware that returns `{ success: false, error: message }` with 500 status.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify server starts correctly",
+      "details": "Run `npx tsx src/scraper/server.ts` in a terminal. Confirm 'Scraping API running on port 3001' is logged. In another terminal, run `curl http://localhost:3001/api/health` and confirm `{\"status\":\"ok\"}` is returned.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-1"],
+  "estimatedComplexity": "low",
+  "technicalNotes": [
+    "The scraper server is not a separate package — it lives in src/scraper/ and uses the same node_modules as the Next.js app.",
+    "tsx is used to run TypeScript directly without a compile step: `tsx src/scraper/server.ts`",
+    "Port 3001 is hardcoded — if there's a conflict, it should be configurable via SCRAPER_PORT env var.",
+    "Do NOT import any Next.js or React dependencies in the scraper — it must be a pure Node.js/Express server."
+  ]
+}

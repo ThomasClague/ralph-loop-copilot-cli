@@ -1,0 +1,56 @@
+{
+  "id": "TASK-63",
+  "title": "Implement settings page (/settings)",
+  "category": "ui-ux",
+  "description": "Implement the settings page where the user can configure API keys, email settings, and default generation preferences. Settings are saved to the settings table in the DB.",
+  "acceptanceCriteria": [
+    "Settings page renders at /settings",
+    "Sections: API Keys, Email Configuration, Generation Defaults",
+    "API Keys: fields for ANTHROPIC_API_KEY, PEXELS_API_KEY, RESEND_API_KEY with masked display",
+    "Email: EMAIL_MODE toggle (mock/live), from_email, reply_to fields",
+    "Generation Defaults: default industry, default section count (7-10)",
+    "Save button sends PUT /api/settings and shows a success toast",
+    "Page loads current saved settings on mount",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/app/settings/page.tsx",
+      "details": "Client component. On mount, fetch GET /api/settings. Render the form sections with shadcn/ui Input, Select, Switch, Button.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement API keys section",
+      "details": "Three password inputs for ANTHROPIC_API_KEY, PEXELS_API_KEY, RESEND_API_KEY. Each shows a masked value. Include show/hide toggle per field. Note: keys are stored in the DB settings table, not .env.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement email configuration section",
+      "details": "EMAIL_MODE: Switch toggling mock/live with a clear 'Mock (no emails sent)' vs 'Live (sends real emails)' label. Inputs for from_email and reply_to.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Implement generation defaults section",
+      "details": "Select dropdown for default industry. Slider or number input for section count (min: 7, max: 10). These are stored in settings and used as defaults when starting generation.",
+      "pass": false
+    },
+    {
+      "step": 5,
+      "description": "Implement save handler",
+      "details": "On save: PUT /api/settings with the form data. Show shadcn/ui toast 'Settings saved successfully' on success. Show error toast on failure.",
+      "pass": false
+    },
+    {
+      "step": 6,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Verify all settings sections render. Change a value, save, and reload to verify persistence.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-55", "TASK-77"],
+  "estimatedComplexity": "medium"
+}

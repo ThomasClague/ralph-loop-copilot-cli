@@ -1,0 +1,36 @@
+{
+  "id": "TASK-73",
+  "title": "Implement POST /api/email/send and GET /api/email/sent routes",
+  "category": "api-endpoint",
+  "description": "Create the API routes for sending outreach emails and listing sent email records. Uses the email factory to route to mock or live Resend based on EMAIL_MODE.",
+  "acceptanceCriteria": [
+    "POST /api/email/send accepts { prospectSlug, templateId, subject, previewText } body",
+    "Sends email via the email factory (respects EMAIL_MODE)",
+    "Creates a sent_emails record on success",
+    "Returns 200 with { sent: true, mode: 'mock'|'live' }",
+    "GET /api/email/sent returns array of sent email records with prospect info",
+    "Verify by sending a test email and checking the DB"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/app/api/email/send/route.ts",
+      "details": "Export POST handler. Load prospect by slug. Load template by id. Call `emailFactory.send({ to, subject, body })`. Insert record into sent_emails table. Return { sent: true, mode }.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Create src/app/api/email/sent/route.ts",
+      "details": "Export GET handler. Query sent_emails joined with prospects. Return array with id, prospectSlug, businessName, sentAt, subject, mode.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Verify endpoints",
+      "details": "POST /api/email/send with a valid prospectSlug and templateId. Verify 200 response and DB record. GET /api/email/sent and verify the record appears.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-91", "TASK-68"],
+  "estimatedComplexity": "medium"
+}

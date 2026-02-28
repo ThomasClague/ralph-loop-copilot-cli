@@ -1,0 +1,35 @@
+{
+  "id": "TASK-77",
+  "title": "Implement GET and PUT /api/settings routes",
+  "category": "api-endpoint",
+  "description": "Create the API routes for reading and updating application settings. Settings are stored as key-value pairs in the settings table.",
+  "acceptanceCriteria": [
+    "GET /api/settings returns all settings as a flat object",
+    "PUT /api/settings accepts a flat object and updates all provided keys",
+    "API keys in responses are partially masked (show last 4 chars only)",
+    "Returns 200 on success",
+    "Verify with curl"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/app/api/settings/route.ts",
+      "details": "Export GET and PUT handlers. GET: load all settings from repository and return as `{ key: value }` object. Mask sensitive keys (anthropic_api_key, pexels_api_key, resend_api_key): show `****{last4}`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement PUT handler",
+      "details": "Parse body as `{ [key: string]: string }`. For each key, call `upsertSetting(key, value)` from repository. Return 200 with the updated (masked) settings.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Verify endpoints",
+      "details": "GET /api/settings. PUT /api/settings with a new email_mode. GET again and verify the change persisted.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-5"],
+  "estimatedComplexity": "low"
+}

@@ -1,0 +1,41 @@
+{
+  "id": "TASK-44",
+  "title": "Implement AI condensation via generateObject (Stage 1b Part B)",
+  "category": "functional",
+  "description": "Implement src/lib/ai/condense.ts which optionally compresses large scraped content into a ~500-token structured business profile using generateObject. Only runs when combined text exceeds ~4,000 tokens.",
+  "acceptanceCriteria": [
+    "`condenseBusinessData(extractedData, crawlResult)` exists in `src/lib/ai/condense.ts`",
+    "Returns the input extractedData unchanged if token estimate is under 4000",
+    "Calls `generateObject` with `condensationSchema` when token estimate >= 4000",
+    "Returns a `CondensedProfile` object",
+    "The AI prompt instructs the model to extract key business info from the scraped content",
+    "Uses `model` from `src/lib/ai/client.ts`"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/lib/ai/condense.ts",
+      "details": "Import `generateObject` from `ai`, `model` from `./client`, `condensationSchema` from `./schemas`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement the token check and early return",
+      "details": "If `extractedData.totalTokenEstimate < 4000`, convert the extractedData directly to a CondensedProfile format (no API call) and return. This avoids unnecessary API costs for small sites.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement the AI condensation call",
+      "details": "Build a prompt including all scraped text (all page body texts concatenated). Call:\n```ts\nconst { object } = await generateObject({\n  model,\n  schema: condensationSchema,\n  prompt: `Extract structured business information from this website content: ${scrapedText}`,\n});\nreturn object;\n```",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-41", "TASK-42", "TASK-43"],
+  "estimatedComplexity": "low",
+  "technicalNotes": [
+    "The condensation step costs ~$0.005 per call (cheap Sonnet call on ~4000 tokens).",
+    "The prompt should instruct the AI to: extract business name, services offered, contact info, testimonials, USPs, and years in business.",
+    "Pass the industry from the prospect record to help the AI understand context."
+  ]
+}

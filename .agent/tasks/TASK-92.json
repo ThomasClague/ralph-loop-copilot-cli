@@ -1,0 +1,36 @@
+{
+  "id": "TASK-92",
+  "title": "Implement template interpolation utility",
+  "category": "functional",
+  "description": "Implement the template interpolation utility used by email templates and the export engine. Replaces {{variable}} tokens with values from a data object.",
+  "acceptanceCriteria": [
+    "interpolate(template: string, data: Record<string, string>): string function exists",
+    "Replaces all {{key}} tokens with corresponding values from data",
+    "Handles nested keys with dot notation: {{business.name}}",
+    "Leaves unknown tokens unchanged (or replaces with empty string — configurable)",
+    "Handles array iteration: {{#each items}}...{{/each}} for repeating blocks",
+    "Verify with unit tests"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/lib/utils/interpolate.ts",
+      "details": "Export `interpolate(template: string, data: Record<string, unknown>, options?: { keepUnknown?: boolean }): string`. Use regex replace for `{{key}}` tokens. Support dot notation by splitting on '.' and traversing the data object.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement {{#each}} block helper",
+      "details": "Use regex to find `{{#each arrayKey}}...{{/each}}` blocks. For each item in the array, repeat the inner template with array item data. Replace the entire block with the repeated output.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Write unit tests",
+      "details": "In src/lib/utils/__tests__/interpolate.test.ts: test simple replacement, dot notation, each blocks, missing keys. Run with `npm test`.",
+      "pass": false
+    }
+  ],
+  "dependencies": [],
+  "estimatedComplexity": "medium"
+}

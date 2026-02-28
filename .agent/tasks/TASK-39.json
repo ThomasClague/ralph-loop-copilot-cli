@@ -1,0 +1,48 @@
+{
+  "id": "TASK-39",
+  "title": "Implement palette system (JSON files, loader, CSS custom properties)",
+  "category": "functional",
+  "description": "Implement the palette system: a palette loader (src/lib/palettes.ts) that reads palette JSON files from config/palettes/, and a React component/hook that applies the active palette's CSS custom properties to a root element. This enables instant palette switching.",
+  "acceptanceCriteria": [
+    "`src/lib/palettes.ts` exports `loadPalette(id)`, `listPalettes()`, and `applyPalette(paletteId, element)` functions",
+    "Palette JSON files in `config/palettes/` are loaded correctly",
+    "All 22 CSS custom property tokens are applied when a palette is activated",
+    "A React component `PaletteProvider` applies the palette via inline CSS variables on the site root",
+    "Switching palette in the edit UI updates CSS vars and re-renders the preview without page refresh",
+    "TypeScript compiles without errors"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Define the palette JSON schema",
+      "details": "A palette JSON file has this structure:\n```json\n{\n  \"id\": \"ocean-blue\",\n  \"name\": \"Ocean Blue\",\n  \"tokens\": {\n    \"--color-primary\": \"#2563eb\",\n    \"--color-primary-hover\": \"#1d4ed8\",\n    \"--color-primary-light\": \"#dbeafe\",\n    \"--color-primary-dark\": \"#1e40af\",\n    \"--color-secondary\": \"#0f172a\",\n    \"--color-secondary-hover\": \"#1e293b\",\n    \"--color-accent\": \"#f59e0b\",\n    \"--color-background\": \"#ffffff\",\n    \"--color-surface\": \"#f8fafc\",\n    \"--color-surface-alt\": \"#f1f5f9\",\n    \"--color-text-primary\": \"#0f172a\",\n    \"--color-text-secondary\": \"#475569\",\n    \"--color-text-inverted\": \"#ffffff\",\n    \"--color-border\": \"#e2e8f0\",\n    \"--color-border-light\": \"#f1f5f9\",\n    \"--color-heading\": \"#0f172a\",\n    \"--color-link\": \"#2563eb\",\n    \"--color-success\": \"#16a34a\",\n    \"--color-warning\": \"#d97706\",\n    \"--color-error\": \"#dc2626\",\n    \"--color-overlay\": \"rgba(0,0,0,0.5)\"\n  }\n}\n```",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Create src/lib/palettes.ts with loader functions",
+      "details": "Use `fs.readdirSync` (server-side) or dynamic import to load palette files from `config/palettes/`. Export:\n- `listPalettes(): Palette[]` — returns all palette metadata (id, name)\n- `loadPalette(id: string): Palette` — loads a specific palette by id\n- `getPaletteStyles(palette: Palette): Record<string, string>` — returns the tokens object for use as React inline styles",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Create PaletteProvider React component",
+      "details": "Create `src/components/shared/PaletteProvider.tsx` — a client component that wraps the site and applies palette CSS vars:\n```tsx\n'use client';\nexport function PaletteProvider({ palette, children }: { palette: Palette, children: React.ReactNode }) {\n  return (\n    <div style={palette.tokens as React.CSSProperties}>\n      {children}\n    </div>\n  );\n}\n```",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify palette switching works",
+      "details": "In the preview page, wrap SiteRenderer with PaletteProvider. Change the paletteId prop and verify CSS custom properties update instantly. Open browser DevTools and inspect the root div to confirm CSS vars are applied.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-16"],
+  "estimatedComplexity": "medium",
+  "technicalNotes": [
+    "On the server side (Next.js API routes), use fs to read palette JSON files. On the client side, palettes should be passed as props — never read files from the client.",
+    "The palette tokens object can be spread directly into a React `style` prop since CSS custom properties are valid inline styles.",
+    "The edit UI palette picker (TASK-81) uses `listPalettes()` to populate its dropdown.",
+    "Custom palettes (derived from branding) are stored as a `customPalette` field on the prospect and override the selected paletteId."
+  ]
+}

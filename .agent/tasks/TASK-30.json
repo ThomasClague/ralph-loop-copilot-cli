@@ -1,0 +1,35 @@
+{
+  "id": "TASK-30",
+  "title": "Implement Certifications section variant (certifications-logos)",
+  "category": "ui-ux",
+  "description": "Implement a Certifications section displaying industry certifications, accreditations, and licenses. Shows logo images or text badges.",
+  "acceptanceCriteria": [
+    "`CertificationsLogos` component exists in `src/components/shared/certifications/`",
+    "Accepts `{ content: CertificationsContent, business: BusinessInfo }` props",
+    "Renders all certifications with name, optional logo image, optional year",
+    "Logo images are displayed if present, otherwise text badge fallback",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create component files",
+      "details": "Create `src/components/shared/certifications/CertificationsLogos.tsx`, `index.ts`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement CertificationsLogos",
+      "details": "Headline + flex-wrap row of certification items. Each item: logo image (if present) or styled text badge with certification name. Year shown below name if present. Clean, professional look with subtle border.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Confirm certifications are displayed correctly.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-16", "TASK-39"],
+  "estimatedComplexity": "low"
+}

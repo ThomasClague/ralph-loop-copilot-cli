@@ -1,0 +1,35 @@
+{
+  "id": "TASK-29",
+  "title": "Implement Team section variant (team-cards)",
+  "category": "ui-ux",
+  "description": "Implement a Team section showing team member cards with photo, name, role, and optional bio.",
+  "acceptanceCriteria": [
+    "`TeamCards` component exists in `src/components/shared/team/`",
+    "Accepts `{ content: TeamContent, business: BusinessInfo }` props",
+    "Renders all team members with name, role, optional bio, optional photo",
+    "Fallback avatar shown when no photo is provided",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create component files",
+      "details": "Create `src/components/shared/team/TeamCards.tsx`, `index.ts`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement TeamCards",
+      "details": "Headline + grid `grid-cols-1 md:grid-cols-2 lg:grid-cols-4`. Each card: circular avatar (imageUrl or initials fallback), name (h3), role (muted), bio (if present, truncated to 3 lines). Card background `--color-surface`.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Confirm circular avatars, names, roles are visible.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-16", "TASK-39"],
+  "estimatedComplexity": "low"
+}

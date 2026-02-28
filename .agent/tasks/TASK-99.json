@@ -1,0 +1,47 @@
+{
+  "id": "TASK-99",
+  "title": "Write Playwright E2E test: landing page generation",
+  "category": "testing",
+  "description": "Write Playwright E2E test for the landing page generation flow. Tests that clicking 'Generate All Pending' runs generation and updates statuses.",
+  "acceptanceCriteria": [
+    "E2E test file exists at tests/e2e/generation.spec.ts",
+    "Test creates a batch with at least 1 prospect programmatically via API",
+    "Navigates to batch detail page",
+    "Clicks 'Generate All Pending'",
+    "Waits for status to change to 'ready' (with timeout of 120 seconds)",
+    "Verifies Preview link appears for the prospect",
+    "Tests pass with `npm run test:e2e`"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Set up test fixture",
+      "details": "In `tests/e2e/generation.spec.ts`: use Playwright's request fixture to POST /api/batches (create batch) and POST /api/prospects (create 1 prospect with a real business URL). Store batch id and slug.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Write generation test",
+      "details": "Navigate to /batches/[id]. Verify 1 prospect with status='pending'. Click 'Generate All Pending'. Wait for status badge to show 'ready' (poll up to 120s). Verify Preview link is visible.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Add teardown",
+      "details": "After each test, DELETE /api/batches/[id] to clean up test data.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Run E2E tests and verify",
+      "details": "Run `npm run test:e2e tests/e2e/generation.spec.ts`. Test passes (requires valid ANTHROPIC_API_KEY in .env.local).",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-62", "TASK-70", "TASK-98"],
+  "estimatedComplexity": "high",
+  "technicalNotes": [
+    "This test requires a real ANTHROPIC_API_KEY to run against the live AI service.",
+    "Mark this test with `test.slow()` to extend its timeout."
+  ]
+}

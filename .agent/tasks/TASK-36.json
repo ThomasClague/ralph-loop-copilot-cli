@@ -1,0 +1,30 @@
+{
+  "id": "TASK-36",
+  "title": "Implement Video section variant (video-embed)",
+  "category": "ui-ux",
+  "description": "Implement a Video section that embeds a YouTube or Vimeo video with a headline and optional description.",
+  "acceptanceCriteria": [
+    "`VideoEmbed` component exists in `src/components/shared/video/`",
+    "Accepts `{ content: VideoContent, business: BusinessInfo }` props",
+    "Renders headline, iframe embed with correct aspect ratio (16:9)",
+    "videoUrl is converted to embed URL (youtube.com/watch?v=ID → youtube.com/embed/ID)",
+    "Optional poster image shown as thumbnail placeholder if videoUrl is not embeddable",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create component files and implement",
+      "details": "Create `src/components/shared/video/VideoEmbed.tsx`, `index.ts`. Headline + iframe wrapper with `aspect-video` class (16:9). Convert YouTube watch URL to embed URL using string replace: `youtube.com/watch?v=ID` → `youtube.com/embed/ID`. Same for Vimeo: `vimeo.com/ID` → `player.vimeo.com/video/ID`. Allow `allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Verify video iframe renders at correct aspect ratio.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-16", "TASK-39"],
+  "estimatedComplexity": "low"
+}

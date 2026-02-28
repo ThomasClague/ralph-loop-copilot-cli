@@ -1,0 +1,40 @@
+{
+  "id": "TASK-50",
+  "title": "Implement single section regeneration (regenerate-section.ts)",
+  "category": "functional",
+  "description": "Implement src/lib/ai/regenerate-section.ts which regenerates the copy for a single section without re-running the full pipeline. Uses the existing condensed profile and prospect data.",
+  "acceptanceCriteria": [
+    "`regenerateSection(prospectId, sectionId)` exists in `src/lib/ai/regenerate-section.ts`",
+    "Loads existing prospect data from DB (condensed profile, current sections)",
+    "Generates new content only for the specified section",
+    "Replaces the section's content in the site_config and saves to DB",
+    "Returns the updated SiteSection",
+    "Does not affect other sections"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/lib/ai/regenerate-section.ts",
+      "details": "Load the prospect by ID. Get the condensed_profile and site_config. Find the section by sectionId in site_config.sections.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Generate new content for the section",
+      "details": "Build a section-specific prompt: `Generate new content for the ${section.type} section of ${businessName}'s website. Be specific to ${industry} in ${location}. Profile: ${condensedProfile.summary}`. Call `generateObject` with the section-specific content schema. Return the new content.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Update the section in site_config and save",
+      "details": "Replace the section's content in the config: `updatedConfig.sections = config.sections.map(s => s.id === sectionId ? { ...s, content: newContent } : s)`. Save updated site_config to DB via repository.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-46", "TASK-49"],
+  "estimatedComplexity": "low",
+  "technicalNotes": [
+    "This is called from both the API route (TASK-71) and can be triggered from the edit UI.",
+    "Cost: ~$0.002-0.005 per regeneration (single section, small output)."
+  ]
+}

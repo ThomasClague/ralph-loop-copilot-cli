@@ -1,0 +1,35 @@
+{
+  "id": "TASK-76",
+  "title": "Implement DELETE /api/prospects/[slug] and DELETE /api/batches/[id] routes",
+  "category": "api-endpoint",
+  "description": "Create delete routes for removing individual prospects and entire batches (with cascade delete of all associated prospects and media).",
+  "acceptanceCriteria": [
+    "DELETE /api/prospects/[slug] removes prospect and its media records",
+    "DELETE /api/batches/[id] removes batch, all its prospects, and all its media",
+    "Both return 204 No Content on success",
+    "Both return 404 if not found",
+    "Verify with curl"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Add DELETE handler to src/app/api/prospects/[slug]/route.ts",
+      "details": "Export DELETE handler. Find prospect by slug. Delete media records for prospect. Delete prospect record. Return 204.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Add DELETE handler to src/app/api/batches/[id]/route.ts",
+      "details": "Export DELETE handler. Find batch by id. Delete all media for batch. Delete all prospects for batch. Delete batch. Return 204.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Verify endpoints",
+      "details": "Create a batch with prospects. DELETE /api/batches/[id]. Verify 204 and that all prospects are gone from the DB.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-65", "TASK-68"],
+  "estimatedComplexity": "low"
+}

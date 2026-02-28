@@ -1,0 +1,36 @@
+{
+  "id": "TASK-72",
+  "title": "Implement POST /api/generate/prospect/[slug]/section route",
+  "category": "api-endpoint",
+  "description": "Create the route that regenerates a single section for a prospect. Used by the editor's 'Regenerate Section' button. Runs stage 3 (content generation) for just one section and patches page_data.",
+  "acceptanceCriteria": [
+    "POST /api/generate/prospect/[slug]/section accepts { sectionType: string } body",
+    "Regenerates content for just that section using the AI",
+    "Updates the page_data for that section in the DB",
+    "Returns the updated section content",
+    "Returns 404 if prospect not found",
+    "Verify by calling the endpoint and checking the DB"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/app/api/generate/prospect/[slug]/section/route.ts",
+      "details": "Export POST handler. Load prospect by slug. Parse sectionType from body. Call `regenerateSection(prospect, sectionType)` from TASK-50. Patch the prospect's page_data at that section key. Return the updated section.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Patch page_data in DB",
+      "details": "Load existing page_data. Replace the section entry matching the sectionType. Stringify and save via `updateProspect(slug, { page_data })`. Return the new section content.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Verify endpoint",
+      "details": "Call POST /api/generate/prospect/[slug]/section with { sectionType: 'hero' }. Verify 200 response with updated hero content. Check DB that page_data hero section changed.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-50", "TASK-68"],
+  "estimatedComplexity": "medium"
+}

@@ -1,0 +1,42 @@
+{
+  "id": "TASK-23",
+  "title": "Implement Service Area section variants (service-area-list, service-area-map)",
+  "category": "ui-ux",
+  "description": "Implement two Service Area variants. service-area-list shows a headline with a list/grid of area names. service-area-map shows a Google Maps embed alongside the area list.",
+  "acceptanceCriteria": [
+    "`ServiceAreaList` and `ServiceAreaMap` components exist in `src/components/shared/service_area/`",
+    "Both accept `{ content: ServiceAreaContent, business: BusinessInfo }` props",
+    "Both render the headline and list of areas",
+    "service-area-map shows an iframe embed if mapEmbedUrl is provided, fallback to list-only if not",
+    "Areas are displayed as pill badges or bullet points",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create component files",
+      "details": "Create `src/components/shared/service_area/ServiceAreaList.tsx`, `ServiceAreaMap.tsx`, `index.ts`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement ServiceAreaList",
+      "details": "Headline + description text. Areas as flex-wrap of pill badges (rounded, `--color-primary-light` background, `--color-primary` text). If more than 8 areas, show first 8 with a '+ X more' badge.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement ServiceAreaMap",
+      "details": "Two-column layout: map iframe on one side, area list on the other. If `content.mapEmbedUrl` is not provided, render `ServiceAreaList` layout instead. Map iframe: `sandbox='allow-scripts allow-same-origin'`, aspect ratio 4:3.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Confirm areas display as pills, map renders if URL provided.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-16", "TASK-39"],
+  "estimatedComplexity": "low"
+}

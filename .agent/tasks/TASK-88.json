@@ -1,0 +1,30 @@
+{
+  "id": "TASK-88",
+  "title": "Implement mock email service",
+  "category": "functional",
+  "description": "Implement the mock email service that logs emails to the console and a local file instead of sending them. Used when EMAIL_MODE=mock (default).",
+  "acceptanceCriteria": [
+    "MockEmailService implements EmailService interface",
+    "send() logs the email to console with full payload",
+    "send() appends the email to public/mock-emails/{timestamp}.html",
+    "Returns EmailResult with mode='mock' and a generated messageId",
+    "Never throws an error",
+    "Verify by calling send() and checking the log file"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/lib/email/mock.ts",
+      "details": "Export class `MockEmailService implements EmailService`. Implement `send(payload)`: console.log the full payload. Create `public/mock-emails/` directory. Write payload.html to a file named `{timestamp}-{to}.html`. Return `{ success: true, messageId: 'mock-' + Date.now(), mode: 'mock' }`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Verify mock service",
+      "details": "Call `new MockEmailService().send({ to: 'test@example.com', subject: 'Test', html: '<p>Hello</p>' })`. Verify console output and file in public/mock-emails/.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-87"],
+  "estimatedComplexity": "low"
+}

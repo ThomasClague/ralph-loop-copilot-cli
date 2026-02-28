@@ -1,0 +1,41 @@
+{
+  "id": "TASK-66",
+  "title": "Implement POST /api/prospects and GET /api/batches/[id]/prospects routes",
+  "category": "api-endpoint",
+  "description": "Create API routes for bulk-creating prospects and fetching all prospects for a batch.",
+  "acceptanceCriteria": [
+    "POST /api/prospects accepts array of prospect objects",
+    "All prospects are inserted with batch_id, slug generated from business_name",
+    "Returns 201 with array of created prospects",
+    "GET /api/batches/[id]/prospects returns all prospects for the batch",
+    "Verify with curl"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/app/api/prospects/route.ts",
+      "details": "Export POST handler. Accepts `{ batchId: string, prospects: ProspectInput[] }`. Generate slug for each: `slugify(business_name + '-' + nanoid(6))`. Bulk insert via `createProspects([])`in repository. Return 201 with created records.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Create src/app/api/batches/[id]/prospects/route.ts",
+      "details": "Export GET handler. Call `getProspectsByBatch(id)`. Return JSON array. Include prospect status and slug.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement slug generation utility",
+      "details": "Create `src/lib/utils/slugify.ts`. Function: `slugify(name: string): string` — lowercases, replaces spaces with hyphens, strips non-alphanumeric characters, appends 6-char nanoid for uniqueness.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify endpoints",
+      "details": "POST a batch of 3 prospects. GET /api/batches/[id]/prospects and verify all 3 are returned with correct slugs.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-64", "TASK-5"],
+  "estimatedComplexity": "medium"
+}

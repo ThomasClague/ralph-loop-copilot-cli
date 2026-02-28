@@ -1,0 +1,34 @@
+{
+  "id": "TASK-41",
+  "title": "Configure Vercel AI SDK client with Anthropic provider",
+  "category": "integration",
+  "description": "Set up the Vercel AI SDK client in src/lib/ai/client.ts with the Anthropic provider. This is the single place where the AI model is configured and where the Anthropic API key is accessed.",
+  "acceptanceCriteria": [
+    "`src/lib/ai/client.ts` exports an `anthropic` provider instance and a `model` constant",
+    "Model is set to `anthropic('claude-sonnet-4-20250514')`",
+    "ANTHROPIC_API_KEY is read from environment variables",
+    "TypeScript compiles without errors",
+    "A simple `generateText` call with the model works end-to-end"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/lib/ai/client.ts",
+      "details": "```ts\nimport { createAnthropic } from '@ai-sdk/anthropic';\n\nexport const anthropic = createAnthropic({\n  apiKey: process.env.ANTHROPIC_API_KEY,\n});\n\nexport const model = anthropic('claude-sonnet-4-20250514');\n```",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Verify the client works",
+      "details": "Create a quick test: import `model` and call `generateText({ model, prompt: 'Say hello' })`. Confirm it returns a text response. Delete the test file after verification.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-1", "TASK-8"],
+  "estimatedComplexity": "low",
+  "technicalNotes": [
+    "All AI pipeline functions (generate-structure.ts, generate-content.ts, condense.ts) import `model` from this file.",
+    "If switching to a different Anthropic model in future, only this file changes.",
+    "The Vercel AI SDK handles retries automatically for transient failures."
+  ]
+}

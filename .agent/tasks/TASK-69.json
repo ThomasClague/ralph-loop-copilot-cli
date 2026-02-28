@@ -1,0 +1,35 @@
+{
+  "id": "TASK-69",
+  "title": "Implement POST /api/crawl route (proxies to Express sidecar)",
+  "category": "api-endpoint",
+  "description": "Create the Next.js API route that proxies crawl requests to the Express sidecar at http://localhost:3001/api/crawl. Needed because Crawlee can't run inside Next.js.",
+  "acceptanceCriteria": [
+    "POST /api/crawl accepts { url: string } body",
+    "Proxies the request to http://localhost:3001/api/crawl",
+    "Returns the Express sidecar response",
+    "Returns 503 if the Express sidecar is not reachable",
+    "Verify with curl when dev server is running"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/app/api/crawl/route.ts",
+      "details": "Export POST handler. Validate url field. Forward body to `http://localhost:3001/api/crawl` using native fetch. Return the response data or error.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Handle sidecar unreachable",
+      "details": "If fetch throws (sidecar not running), catch the error and return 503 `{ error: 'Crawl service unavailable. Make sure the sidecar is running.' }`.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Verify proxy",
+      "details": "Start both Next.js and Express sidecar. POST /api/crawl with a test URL. Verify the crawl response comes back through.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-13", "TASK-14"],
+  "estimatedComplexity": "low"
+}

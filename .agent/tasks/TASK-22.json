@@ -1,0 +1,42 @@
+{
+  "id": "TASK-22",
+  "title": "Implement Process section variants (process-steps, process-timeline)",
+  "category": "ui-ux",
+  "description": "Implement two Process section variants showing how the business works. process-steps shows numbered cards in a horizontal row. process-timeline shows a vertical timeline with alternating left/right content.",
+  "acceptanceCriteria": [
+    "`ProcessSteps` and `ProcessTimeline` components exist in `src/components/shared/process/`",
+    "Both accept `{ content: ProcessContent, business: BusinessInfo }` props",
+    "Each step renders step number, title, and description",
+    "process-steps has connecting arrows between steps on desktop",
+    "process-timeline has a vertical line with alternating left/right items on desktop",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create component files",
+      "details": "Create `src/components/shared/process/ProcessSteps.tsx`, `ProcessTimeline.tsx`, `index.ts`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement ProcessSteps",
+      "details": "Headline + horizontal flex row (wrap on mobile). Each step: circle with step number (--color-primary background), title, description below. Arrow connector between steps using CSS (::after pseudo-element or a simple chevron icon).",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement ProcessTimeline",
+      "details": "Vertical layout. Center line using CSS border. Steps alternate left/right on desktop, all left on mobile. Each step: numbered circle on the line, content card beside it. Date/step number inside the circle.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Verify step numbers are correct, content is legible, connecting line/arrows are visible.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-16", "TASK-39"],
+  "estimatedComplexity": "medium"
+}

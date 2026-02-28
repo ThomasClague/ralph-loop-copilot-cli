@@ -1,0 +1,43 @@
+{
+  "id": "TASK-59",
+  "title": "Implement new batch page — Tab B (single entry form)",
+  "category": "ui-ux",
+  "description": "Implement the single entry form tab on the new batch page. Allows adding one prospect at a time with a form. Includes a toggle for 'Has existing website?' that reveals the URL field.",
+  "acceptanceCriteria": [
+    "Tab B renders a form with all prospect fields",
+    "'Has existing website?' toggle shows/hides the URL field",
+    "Form validates required fields (business_name) before submission",
+    "Adding a prospect adds it to a list below the form (can add multiple before submitting)",
+    "List shows all added prospects with a remove button per row",
+    "'Create Batch & Prospects' button submits all",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Implement Tab B form in the new batch page",
+      "details": "Form fields: business_name (required), industry (dropdown, inherits from batch), location, phone, email, 'Has website?' toggle, existing_url (shown only when toggle is on), notes. Use shadcn/ui Form, Input, Select, Switch components.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement add-to-list behavior",
+      "details": "'Add Prospect' button validates form, appends the prospect to a list (useState array). Clears form for next entry. Shows running list below with remove (×) button per row.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Wire up submission",
+      "details": "Same submission logic as Tab A: POST batch + prospects. Redirect to batch detail.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Toggle the website switch and verify URL field appears/disappears. Add 2 prospects and verify they appear in the list.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-58"],
+  "estimatedComplexity": "medium"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "TASK-65",
+  "title": "Implement GET /api/batches and GET /api/batches/[id] routes",
+  "category": "api-endpoint",
+  "description": "Create the API routes for listing all batches and fetching a single batch by ID.",
+  "acceptanceCriteria": [
+    "GET /api/batches returns array of all batches",
+    "GET /api/batches/[id] returns single batch object",
+    "GET /api/batches/[id] returns 404 if not found",
+    "Both routes return properly structured JSON",
+    "Verify with curl"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Add GET handler to src/app/api/batches/route.ts",
+      "details": "Export async GET handler. Call `listBatches()` from repository. Return NextResponse.json(batches).",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Create src/app/api/batches/[id]/route.ts",
+      "details": "Export async GET handler. Extract id from params. Call `getBatch(id)`. If null, return 404. Otherwise return the batch.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Verify endpoints",
+      "details": "Run GET /api/batches (expect array). Run GET /api/batches/nonexistent (expect 404). Run GET /api/batches/[valid-id] (expect single batch).",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-64"],
+  "estimatedComplexity": "low"
+}

@@ -1,0 +1,42 @@
+{
+  "id": "TASK-24",
+  "title": "Implement Gallery section variants (gallery-grid, gallery-masonry)",
+  "category": "ui-ux",
+  "description": "Implement two Gallery section variants. gallery-grid shows images in a uniform grid. gallery-masonry uses a CSS masonry-like layout for varied image heights.",
+  "acceptanceCriteria": [
+    "`GalleryGrid` and `GalleryMasonry` components exist in `src/components/shared/gallery/`",
+    "Both accept `{ content: GalleryContent, business: BusinessInfo }` props",
+    "Both render all images with alt text",
+    "Images use next/image for optimization (or standard img with explicit dimensions)",
+    "Caption shown on image hover if present",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create component files",
+      "details": "Create `src/components/shared/gallery/GalleryGrid.tsx`, `GalleryMasonry.tsx`, `index.ts`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement GalleryGrid",
+      "details": "Uniform grid `grid-cols-2 md:grid-cols-3 lg:grid-cols-4`. Each image: aspect-square, object-cover. Hover overlay showing caption (if present). Max 12 images displayed.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement GalleryMasonry",
+      "details": "Use CSS columns: `columns-2 md:columns-3`. Images: `break-inside-avoid mb-4 w-full`. This creates a Pinterest-style masonry layout without JavaScript. Alt text on each image.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Verify images load, layout is correct, captions appear on hover.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-16", "TASK-39"],
+  "estimatedComplexity": "low"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "TASK-68",
+  "title": "Implement GET /api/prospects/[slug] and PATCH /api/prospects/[slug] routes",
+  "category": "api-endpoint",
+  "description": "Create the routes for reading and updating a single prospect by slug. PATCH supports partial updates for the page_data and business fields (for the editor).",
+  "acceptanceCriteria": [
+    "GET /api/prospects/[slug] returns full prospect with page_data parsed from JSON",
+    "Returns 404 if not found",
+    "PATCH /api/prospects/[slug] accepts partial updates { page_data?, business_name?, industry?, ... }",
+    "PATCH returns updated prospect",
+    "Verify with curl"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/app/api/prospects/[slug]/route.ts",
+      "details": "Export GET and PATCH handlers. GET: call `getProspectBySlug(slug)`. If null, 404. Otherwise return with page_data JSON parsed.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement PATCH handler",
+      "details": "Parse request JSON body. Fields allowed: business_name, industry, location, phone, email, notes, page_data (object, will be JSON.stringify'd). Call `updateProspect(slug, fields)` from repository. Return updated prospect.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Verify endpoints",
+      "details": "GET a known slug. PATCH its notes field. GET again and verify notes updated. Test GET with invalid slug returns 404.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-66", "TASK-5"],
+  "estimatedComplexity": "low"
+}

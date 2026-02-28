@@ -1,0 +1,42 @@
+{
+  "id": "TASK-25",
+  "title": "Implement FAQ section variants (faq-accordion, faq-two-col)",
+  "category": "ui-ux",
+  "description": "Implement two FAQ section variants. faq-accordion shows questions that expand/collapse one at a time. faq-two-col shows all Q&As in a two-column static layout.",
+  "acceptanceCriteria": [
+    "`FaqAccordion` and `FaqTwoCol` components exist in `src/components/shared/faq/`",
+    "Both accept `{ content: FaqContent, business: BusinessInfo }` props",
+    "Both render all FAQ items with question and answer",
+    "faq-accordion uses shadcn/ui Accordion or custom accordion with smooth expand/collapse",
+    "faq-two-col splits items into two equal columns on desktop",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create component files",
+      "details": "Create `src/components/shared/faq/FaqAccordion.tsx`, `FaqTwoCol.tsx`, `index.ts`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement FaqAccordion",
+      "details": "Client component. Headline + accordion list. Use shadcn/ui Accordion component: `<Accordion type='single' collapsible>`. Each item: `<AccordionItem>` with `<AccordionTrigger>` (question) and `<AccordionContent>` (answer).",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement FaqTwoCol",
+      "details": "Static server component. Headline + `grid grid-cols-1 md:grid-cols-2 gap-8`. Each item: question as h3 (bold, `--color-heading`), answer as p below. First half of items in column 1, second half in column 2.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Click an accordion item and verify it expands. Verify two-col layout is correct on desktop.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-16", "TASK-39"],
+  "estimatedComplexity": "low"
+}

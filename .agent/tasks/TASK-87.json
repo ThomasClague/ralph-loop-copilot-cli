@@ -1,0 +1,24 @@
+{
+  "id": "TASK-87",
+  "title": "Define email service interface",
+  "category": "functional",
+  "description": "Define the TypeScript interface for the email service. All email implementations (mock and Resend) must implement this interface.",
+  "acceptanceCriteria": [
+    "EmailService interface is defined in src/lib/email/types.ts",
+    "Interface has send(payload: EmailPayload): Promise<EmailResult> method",
+    "EmailPayload type includes: to, subject, html, text, from, replyTo",
+    "EmailResult type includes: success, messageId, mode",
+    "No implementation code — only types",
+    "Verify by importing the types in another file without errors"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/lib/email/types.ts",
+      "details": "Define and export: `EmailPayload { to: string; subject: string; html: string; text?: string; from?: string; replyTo?: string; }`, `EmailResult { success: boolean; messageId?: string; mode: 'mock' | 'live'; error?: string; }`, `interface EmailService { send(payload: EmailPayload): Promise<EmailResult>; }`",
+      "pass": false
+    }
+  ],
+  "dependencies": [],
+  "estimatedComplexity": "low"
+}

@@ -1,0 +1,42 @@
+{
+  "id": "TASK-20",
+  "title": "Implement Trust Indicators section variants (trust-bar, trust-grid)",
+  "category": "ui-ux",
+  "description": "Implement two Trust Indicators variants. trust-bar shows items in a horizontal scrolling bar (e.g. '500+ customers', 'Licensed & Insured', '24/7 Service'). trust-grid shows them in a 2x3 or 3x2 grid with larger icons.",
+  "acceptanceCriteria": [
+    "`TrustBar` and `TrustGrid` components exist in `src/components/shared/trust_indicators/`",
+    "Both accept `{ content: TrustIndicatorsContent, business: BusinessInfo }` props",
+    "Each item renders icon/emoji (if present), value, and label",
+    "trust-bar is horizontal with dividers between items",
+    "trust-grid uses responsive grid layout",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create component files",
+      "details": "Create `src/components/shared/trust_indicators/TrustBar.tsx`, `TrustGrid.tsx`, `index.ts`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement TrustBar",
+      "details": "Horizontal flex container with `overflow-x-auto`. Each item: centered, icon above value, label below. Vertical dividers between items on desktop. Background: `--color-surface-alt`. Compact height (~100-120px).",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Implement TrustGrid",
+      "details": "Grid `grid-cols-2 md:grid-cols-3`. Each cell: large icon/number, label below. More spacious than TrustBar. Background: `--color-background`.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Verify items are visible and layout is correct for both variants.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-16", "TASK-39"],
+  "estimatedComplexity": "low"
+}

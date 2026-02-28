@@ -1,0 +1,46 @@
+{
+  "id": "TASK-100",
+  "title": "Write Playwright E2E test: preview and editor",
+  "category": "testing",
+  "description": "Write Playwright E2E tests for the preview page and editor. Tests the visual editor — section reordering, palette changing, and content editing.",
+  "acceptanceCriteria": [
+    "E2E test file exists at tests/e2e/editor.spec.ts",
+    "Test prerequisite: a 'ready' prospect (created by generation test or fixture)",
+    "Tests cover: preview page renders all sections, editor loads with section list, palette change updates preview colors, headline edit updates preview text, auto-save triggers",
+    "Tests pass with `npm run test:e2e`"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create editor Page Object",
+      "details": "Create `tests/e2e/pages/EditorPage.ts`. Methods: `goto(slug)`, `getSectionCount()`, `selectPalette(name)`, `getPreviewHeadline()`, `editSectionContent(type, field, value)`, `waitForAutoSave()`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Write preview test",
+      "details": "Navigate to /preview/[slug] of a ready prospect. Assert at least 3 section containers are visible. Take screenshot.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Write palette change test",
+      "details": "Navigate to /edit/[slug]. Note current primary color CSS variable. Click a different palette swatch. Assert the primary color CSS variable changed in the preview pane.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Write content edit test",
+      "details": "In editor, open section content drawer for hero. Change the headline. Close drawer. Assert new headline is visible in the preview pane. Wait for auto-save indicator.",
+      "pass": false
+    },
+    {
+      "step": 5,
+      "description": "Run E2E tests and verify",
+      "details": "Run `npm run test:e2e tests/e2e/editor.spec.ts`. Tests pass.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-78", "TASK-79", "TASK-81", "TASK-82"],
+  "estimatedComplexity": "high"
+}

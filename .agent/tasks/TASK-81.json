@@ -1,0 +1,42 @@
+{
+  "id": "TASK-81",
+  "title": "Implement palette picker component",
+  "category": "ui-ux",
+  "description": "Implement the PalettePicker component for the editor. Shows swatches for all available palettes. Clicking a swatch instantly changes the landing page color theme in the preview.",
+  "acceptanceCriteria": [
+    "PalettePicker renders a grid of color swatches",
+    "Each swatch shows the palette name and 3-5 preview colors",
+    "Current palette is highlighted with a ring/border",
+    "Clicking a swatch calls onPaletteChange and the preview updates immediately",
+    "Swatches are loaded from the palette JSON files (TASK-40)",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create src/components/editor/PalettePicker.tsx",
+      "details": "Client component. Props: `currentPaletteId: string, onPaletteChange: (paletteId: string) => void`. Import all palette JSON files from `src/lib/palettes/`. Render a grid of swatches.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement swatch design",
+      "details": "Each swatch: 80x60px card with 5 color blocks from the palette (primary, secondary, accent, background, text). Palette name below. Active swatch has a 2px ring in primary color.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Wire up selection",
+      "details": "On swatch click: call `onPaletteChange(palette.id)`. Parent updates page_data.paletteId. Preview re-renders with new CSS variables applied by applyPalette() (TASK-48).",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Verify swatches grid renders. Click a different palette and verify the preview colors change.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-40", "TASK-48"],
+  "estimatedComplexity": "medium"
+}

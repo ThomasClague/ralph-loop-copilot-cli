@@ -1,0 +1,46 @@
+{
+  "id": "TASK-4",
+  "title": "Create and apply Drizzle migration",
+  "category": "data-model",
+  "description": "Generate the initial Drizzle migration from the schema definitions and apply it to create the SQLite database file with all tables. Also ensure the database is initialized on app startup.",
+  "acceptanceCriteria": [
+    "`./drizzle/` directory contains at least one migration SQL file",
+    "Running `npm run db:migrate` creates `./data/prospectforge.db` with all five tables",
+    "Database file contains: batches, prospects, media, sent_emails, settings tables",
+    "All table columns match the schema definitions",
+    "Migration runs without errors on a fresh machine (data directory is created if missing)"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Generate migration SQL files",
+      "details": "Run `npx drizzle-kit generate`. This reads `src/db/schema.ts` and produces SQL migration files in `./drizzle/`. Inspect the generated SQL to confirm all CREATE TABLE statements are present.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Update src/db/migrate.ts to create data directory if missing",
+      "details": "Update `src/db/migrate.ts` to include `fs.mkdirSync('./data', { recursive: true })` before instantiating the database. This ensures the migration works on a fresh clone.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Run the migration and verify the database",
+      "details": "Run `npm run db:migrate`. Then open the SQLite file with `sqlite3 ./data/prospectforge.db` or a GUI tool. Run `.tables` to verify all five tables exist. Run `.schema prospects` to verify all columns are present.",
+      "pass": false
+    },
+    {
+      "step": 4,
+      "description": "Add auto-migration to app startup",
+      "details": "In `src/db/index.ts`, after creating the db instance, call migrate synchronously so the database is always up-to-date when the Next.js app starts. Import `migrate` from `drizzle-orm/better-sqlite3/migrator` and call `migrate(db, { migrationsFolder: './drizzle' })` before exporting `db`.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-3"],
+  "estimatedComplexity": "low",
+  "technicalNotes": [
+    "Drizzle migrations are additive — running them on an already-migrated database is safe (it tracks applied migrations in a `__drizzle_migrations` table).",
+    "Add `drizzle/` to version control so migrations are tracked.",
+    "Add `./data/` to .gitignore so the database file itself is not committed."
+  ]
+}

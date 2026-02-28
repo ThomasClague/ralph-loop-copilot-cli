@@ -1,0 +1,35 @@
+{
+  "id": "TASK-33",
+  "title": "Implement Comparison section variant (comparison-table)",
+  "category": "ui-ux",
+  "description": "Implement a Comparison section showing a side-by-side comparison table (e.g., 'Us vs Competitors', or tiered service comparison).",
+  "acceptanceCriteria": [
+    "`ComparisonTable` component exists in `src/components/shared/comparison/`",
+    "Accepts `{ content: ComparisonContent, business: BusinessInfo }` props",
+    "Renders comparison columns with labels and feature checkmarks/crosses",
+    "First column (business name) is visually highlighted",
+    "Verify in browser with Playwright screenshot"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "description": "Create component files",
+      "details": "Create `src/components/shared/comparison/ComparisonTable.tsx`, `index.ts`.",
+      "pass": false
+    },
+    {
+      "step": 2,
+      "description": "Implement ComparisonTable",
+      "details": "Headline + responsive table. Column headers (from content.columns[].label). Feature rows (features from the first column drive the rows). Checkmark (✓) or cross (✗) per cell. First column highlighted with `--color-primary-light` background.",
+      "pass": false
+    },
+    {
+      "step": 3,
+      "description": "Verify in browser",
+      "details": "Take Playwright screenshot. Verify table is readable and highlighted column is visible.",
+      "pass": false
+    }
+  ],
+  "dependencies": ["TASK-16", "TASK-39"],
+  "estimatedComplexity": "low"
+}
