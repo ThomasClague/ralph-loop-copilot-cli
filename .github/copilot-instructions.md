@@ -25,4 +25,5 @@ Use promise tags to signal status to the loop controller:
 - When ALL tasks pass → output `<promise>COMPLETE</promise>`
 - No git push. No git init/remote changes.
 - Run tests to verify your work
+- **Integration gate**: before marking any task done, verify it works in the running app — not just in isolated unit tests. Start the dev server, hit real endpoints, navigate to real pages. If a feature only passes mocks but fails when integrated, fix it first.
 - Commit changes using Conventional Commit format

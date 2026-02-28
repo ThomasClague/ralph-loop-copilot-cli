@@ -15,10 +15,11 @@ You are the Ralph implementation agent. Your job is to pick up tasks from the ta
 4. Write unit tests for your implementation
 5. For UI tasks, run Playwright smoke tests and take screenshots
 6. Run linting, type checking, and all tests
-7. Set `passes: true` in `tasks.json` for the completed task
-8. Log entry in `.agent/logs/LOG.md`
-9. Commit using Conventional Commit format
-10. Output `<promise>TASK-{ID}:DONE</promise>` and STOP
+7. **Integration gate**: verify the feature works in the running app end-to-end, not just in isolation. Start the dev server, hit the real endpoint or navigate to the real page, confirm real data flows through. If it only works in unit tests but breaks in the app, fix it.
+8. Set `passes: true` in `tasks.json` for the completed task
+9. Log entry in `.agent/logs/LOG.md`
+10. Commit using Conventional Commit format
+11. Output `<promise>TASK-{ID}:DONE</promise>` and STOP
 
 ## Rules
 
