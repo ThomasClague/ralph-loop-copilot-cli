@@ -3,8 +3,21 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 42
-**Current Task:** TASK-53 Complete
+**Tasks Completed:** 43
+**Current Task:** TASK-54 Complete
+
+---
+
+## 2026-02-28 — TASK-54: Implement media upload handling for batch media library
+
+- Created `next-app/app/api/batches/[id]/media/route.ts` — POST handler for multipart file uploads
+- Validates filename convention: `{slot}-{industry}-{descriptor}.{ext}` via regex
+- Rejects invalid extensions (non-jpg/jpeg/png/webp) with 400, oversized files (>10MB) with 413
+- Saves files to `uploads/{batchId}/{filename}` using `fs.mkdirSync + writeFileSync`
+- Creates media record via `createMedia()` with relative path for portability
+- `uploads/` already listed in `.gitignore`
+- 9 unit tests, 117 total tests pass; TypeScript compiles clean
+- Integration verified: endpoint returns 201 with media record; file saved to disk
 
 ---
 
