@@ -3,14 +3,27 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 15
-**Current Task:** TASK-15 Complete
+**Tasks Completed:** 16
+**Current Task:** TASK-25 Complete
 
 ----------------------------------------------
 
 ## Session Log
 
-## 2026-02-28 — TASK-24: Implement Gallery section variants (gallery-grid, gallery-masonry)
+## 2026-02-28 — TASK-25: Implement FAQ section variants (faq-accordion, faq-two-col)
+
+- Added shadcn/ui Accordion component via `npx shadcn@latest add accordion`
+- Created `src/components/shared/faq/FaqAccordion.tsx` — client component with `<Accordion type="single" collapsible>` from shadcn/ui; each item has question as trigger and answer as content; "call us" footer with phone link
+- Created `src/components/shared/faq/FaqTwoCol.tsx` — static server component; splits items in half across two columns using `grid grid-cols-1 md:grid-cols-2 gap-8`; questions as bold h3, answers as paragraphs
+- Both accept `{ content: FaqContent, business: BusinessInfo }` props; fall back to placeholder items when `content.items` is empty
+- All colors use CSS custom properties (`--color-bg`, `--color-surface`, `--color-heading`, `--color-text`, `--color-primary`, `--color-border`)
+- Exported from `src/components/shared/faq/index.ts`
+- Added `app/test-faq/page.tsx` for visual verification
+- Playwright smoke test: both variants render correctly; accordion shows 6 collapsed items with chevrons; two-col shows 3 items per column; screenshot saved to `.agent/screenshots/TASK-25-1.png`
+- TypeScript: no errors; all 23 unit tests pass; all 12 Playwright tests pass
+
+---
+
 
 - Created `src/components/shared/gallery/GalleryGrid.tsx` — uniform `grid-cols-2 md:grid-cols-3 lg:grid-cols-4` grid; each image is `aspect-square object-cover`; hover overlay shows caption if present; max 12 images
 - Created `src/components/shared/gallery/GalleryMasonry.tsx` — CSS columns (`columns-2 md:columns-3`) masonry layout; `break-inside-avoid mb-4 w-full` per image; hover overlay shows caption
