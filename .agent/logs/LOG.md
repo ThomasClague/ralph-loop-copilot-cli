@@ -10,7 +10,19 @@
 
 ## Session Log
 
-## 2026-02-28 — TASK-11: Implement page data extraction
+## 2026-02-28 — TASK-12: Implement branding extraction
+
+- Implemented `extractBranding(rawHtml, pageUrl): BrandingData` in `next-app/src/scraper/branding.ts`
+- Extracts hex and RGB colors from CSS, converts RGB→hex, normalises 3-char hex, filters near-white/near-black, returns up to 5 brand colors
+- Extracts font-family names from CSS declarations and Google Fonts link tags; strips generic families
+- Extracts logo URL using Cheerio: header imgs first, then imgs with 'logo' in src/alt/class/id; resolves relative URLs to absolute
+- Wired into `crawlee-service.ts`: `crawlSite` now returns `{ pages, branding }` instead of just pages array
+- Added 14 unit tests in `__unit-tests/scraper/branding.test.ts` — all pass
+- TypeScript compiles without errors; all 23 unit tests pass
+
+---
+
+
 
 - Implemented `extractPageData($, url, rawHtml)` in `next-app/src/scraper/extract.ts`
 - Extracts title, meta description, h1-h6 headings, clean body text (stripped nav/header/footer/scripts/styles, capped at 10k chars), links, images (filtered data URIs), phones (UK/US regex), emails (regex)

@@ -1,4 +1,6 @@
 import { CheerioCrawler, Configuration, LogLevel } from "crawlee";
+import { extractBranding } from "./branding";
+import type { BrandingData } from "./types";
 
 // Suppress verbose crawlee logs
 Configuration.getGlobalConfig().set("logLevel", LogLevel.WARNING);
@@ -12,6 +14,11 @@ export interface RawPage {
   title: string;
 }
 
+export interface CrawlSiteResult {
+  pages: RawPage[];
+  branding: BrandingData;
+}
+
 /**
  * Crawls a site starting at `url`, following only same-domain internal links.
  * Returns raw page data for up to `maxPages` pages or until the 30s timeout fires.
@@ -19,7 +26,7 @@ export interface RawPage {
 export async function crawlSite(
   url: string,
   maxPages = 10,
-): Promise<RawPage[]> {
+): Promise<CrawlSiteResult> {
   const baseDomain = new URL(url).hostname;
   const pages: RawPage[] = [];
 
@@ -64,5 +71,10 @@ export async function crawlSite(
   // Ensure the crawler is torn down (no-op if already done)
   await crawler.teardown();
 
-  return pages;
+  const homepagePage = pages.find((p) => p.url === url) ?? pages[0];
+  const branding = homepagePage
+    ? extractBranding(homepagePage.html, url)
+    : { colors: [], fonts: [], logoUrl: null };
+
+  return { pages, branding };
 }
