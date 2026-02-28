@@ -10,7 +10,16 @@
 
 ## Session Log
 
-## 2026-02-28 — TASK-13: Implement POST /api/crawl endpoint on Express
+## 2026-02-28 — TASK-14: Implement GET /api/health endpoint on Express
+
+- Updated `GET /api/health` in `next-app/src/scraper/server.ts` to include `timestamp: Date.now()` in response
+- Endpoint returns `{ status: 'ok', timestamp: number }` with HTTP 200
+- Verified: `curl http://localhost:3001/api/health` returns `{"status":"ok","timestamp":...}`
+- TypeScript compiles without errors
+
+---
+
+
 
 - Implemented `POST /api/crawl` route in `next-app/src/scraper/server.ts`
 - Validates `url` field: returns 400 if missing or not a valid http/https URL

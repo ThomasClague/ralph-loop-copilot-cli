@@ -19,7 +19,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 app.get("/api/health", (req: Request, res: Response) => {
-  res.json({ status: "ok" });
+  res.json({ status: "ok", timestamp: Date.now() });
 });
 
 /** POST /api/crawl — accepts { url, maxPages? }, returns { success, pages, branding } */
