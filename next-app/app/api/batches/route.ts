@@ -1,5 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createBatch } from "@/src/db/repository";
+import { createBatch, listBatches } from "@/src/db/repository";
+
+export async function GET() {
+  try {
+    const allBatches = await listBatches();
+    return NextResponse.json(allBatches);
+  } catch (err) {
+    console.error("[GET /api/batches]", err);
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+  }
+}
 
 export async function POST(req: NextRequest) {
   try {
