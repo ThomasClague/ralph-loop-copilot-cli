@@ -10,6 +10,18 @@
 
 ## Session Log
 
+## 2026-02-28 — TASK-6: Set up Express sidecar server entry point
+
+- Created `src/scraper/` directory with stub files: `crawlee-service.ts`, `extract.ts`, `branding.ts`
+- Created `src/scraper/types.ts` with `CrawlRequest`, `PageData`, `BrandingData`, `CrawlResult` interfaces
+- Created `src/scraper/server.ts` — Express app on port 3001 with JSON middleware, CORS for localhost:3000
+- GET `/api/health` returns `{ status: 'ok' }`; POST `/api/crawl` stub returns 501
+- Global error handler returns `{ success: false, error: message }` with 500
+- Verified: `tsx src/scraper/server.ts` starts server, health endpoint returns `{"status":"ok"}`
+- TypeScript compiles without errors; unit tests pass
+
+---
+
 ## 2026-02-28 — TASK-5: Implement repository pattern with all CRUD functions
 
 - Created `next-app/src/db/repository.ts` as the single point of database access
