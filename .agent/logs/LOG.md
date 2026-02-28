@@ -3,8 +3,19 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 23
-**Current Task:** TASK-34 Complete
+**Tasks Completed:** 24
+**Current Task:** TASK-35 Complete
+
+---
+
+## 2026-02-28 — TASK-35: Implement Blog Preview section variant (blog-preview-cards)
+
+- Created `src/components/shared/blog_preview/BlogPreviewCards.tsx` — 3-column responsive grid of blog post cards; each card shows optional image, muted date, h3 title, line-clamp-3 excerpt, and "Read More →" link; hover shadow on card border; falls back to 3 placeholder posts when `content.posts` is empty
+- All colors use CSS custom properties (`--color-bg`, `--color-surface`, `--color-border`, `--color-heading`, `--color-text`, `--color-primary`)
+- Exported from `src/components/shared/blog_preview/index.ts`
+- Added `app/test-blog-preview/page.tsx` for visual verification
+- Playwright screenshot: "From Our Blog" headline + 3 cards with dates, titles, excerpts, "Read More" links + 3 fallback placeholder cards; screenshot saved to `.agent/screenshots/TASK-35-1.png`
+- TypeScript: no errors; all 23 unit tests pass
 
 ---
 
