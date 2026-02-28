@@ -1,4 +1,13 @@
 
+## 2026-02-28 — TASK-88: Implement MockEmailService
+
+- `next-app/src/lib/email/mock.ts` implements `MockEmailService implements EmailService`
+- `send()` logs full payload to console, writes HTML to `public/mock-emails/{timestamp}-{to}.html`
+- Returns `{ success: true, messageId: 'mock-{ts}', mode: 'mock' }`
+- Wrapped fs operations in try/catch so it never throws
+- All 135 unit tests pass; TypeScript compiles clean
+- Dev server running; POST /api/email/send returns validation (not 500), confirming integration
+
 ## 2026-02-28 — TASK-87: Define EmailService interface
 
 - `next-app/src/lib/email/types.ts` already existed with correct types: `EmailPayload`, `EmailResult`, `EmailService`
