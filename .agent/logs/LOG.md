@@ -3,10 +3,23 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 17
-**Current Task:** TASK-27 Complete
+**Tasks Completed:** 18
+**Current Task:** TASK-28 Complete
 
 ----------------------------------------------
+
+## 2026-02-28 — TASK-28: Implement Pricing section variant (pricing-cards)
+
+- Created `src/components/shared/pricing/PricingCards.tsx` — three-column grid of pricing tier cards; highlighted tier has `border-2 border-[--color-primary]`, scale-105, and "Most Popular" badge; non-highlighted tiers have outlined CTA button; highlighted tier has filled CTA button
+- Each card renders: tier name (h3), price in primary color, feature list with SVG checkmarks, and CTA button linking to `#contact`
+- Falls back to three placeholder tiers when `content.tiers` is empty
+- All colors use CSS custom properties (`--color-bg`, `--color-surface`, `--color-heading`, `--color-text`, `--color-border`, `--color-primary`, `--color-text-inverted`)
+- Exported from `src/components/shared/pricing/index.ts`
+- Added `app/test-pricing/page.tsx` for visual verification
+- Playwright smoke test: all three tiers visible, "Most Popular" badge on Pro tier, checkmarks visible; screenshot saved to `.agent/screenshots/TASK-28-1.png`
+- TypeScript: no errors; all 23 unit tests pass
+
+---
 
 ## 2026-02-28 — TASK-27: Implement Contact section variants (contact-form, contact-details)
 
