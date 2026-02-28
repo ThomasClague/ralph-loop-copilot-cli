@@ -769,3 +769,11 @@
 - Polling every 3s via setInterval with cleanup; progress bar shows X/Y generated; completion notification on finish
 - All 117 unit tests pass; Playwright E2E test passes (3 browsers)
 - Screenshot: .agent/screenshots/TASK-62-1.png
+
+## 2026-02-28  TASK-66: POST /api/prospects and GET /api/batches/[id]/prospects
+
+- Verified existing implementation of POST /api/prospects (bulk create with slugs, 201)
+- Verified GET /api/batches/[id]/prospects (list all prospects for batch, 200)  
+- slugify.ts utility confirmed working (lowercase, hyphenate, 6-char nanoid suffix)
+- Integration test: created 3 prospects, retrieved all 3 successfully
+- All 117 unit tests pass, tsc clean
