@@ -4,6 +4,17 @@
 =================
 **Last Updated:** 2026-02-28
 
+## 2026-02-28 — TASK-78: Implement preview page (/preview/[slug])
+
+- Created `app/preview/[slug]/page.tsx` — server component, loads prospect by slug, calls `notFound()` if missing/not-ready/no siteConfig
+- Created `components/preview/PreviewTopBar.tsx` — fixed overlay top bar with "Back to Batch", business name, "Edit", and "Export" buttons (client component)
+- Preview renders full landing page via `SiteRenderer` with palette CSS vars applied, outside admin layout (no sidebar)
+- Integration verified: 404 for unknown slug; screenshot confirmed hero + contact sections render with top bar
+- Screenshot: `.agent/screenshots/TASK-78-1.png`
+- All 135 unit tests pass; TypeScript compiles clean; 2 Playwright tests pass
+
+---
+
 ## 2026-02-28 — TASK-77: GET and PUT /api/settings
 
 - Updated `app/api/settings/route.ts` to add sensitive key masking (anthropic_api_key, pexels_api_key, resend_api_key → `****{last4}`)

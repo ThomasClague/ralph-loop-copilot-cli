@@ -76,7 +76,7 @@
   { "id": "TASK-75", "title": "GET /api/email/preview — render email preview with interpolated variables", "category": "api-endpoint", "specFilePath": ".agent/tasks/TASK-75.json", "passes": true },
   { "id": "TASK-76", "title": "GET /api/settings — read all settings", "category": "api-endpoint", "specFilePath": ".agent/tasks/TASK-76.json", "passes": true },
   { "id": "TASK-77", "title": "PUT /api/settings — write settings key/value", "category": "api-endpoint", "specFilePath": ".agent/tasks/TASK-77.json", "passes": true },
-  { "id": "TASK-78", "title": "Implement preview page (/preview/[slug]) — full-width site render", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-78.json", "passes": false },
+  { "id": "TASK-78", "title": "Implement preview page (/preview/[slug]) — full-width site render", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-78.json", "passes": true },
   { "id": "TASK-79", "title": "Implement edit page layout (/edit/[slug]) with preview + edit sidebar", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-79.json", "passes": false },
   { "id": "TASK-80", "title": "Implement section list panel (variant swap, reorder, remove toggle)", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-80.json", "passes": false },
   { "id": "TASK-81", "title": "Implement palette picker control (instant palette switch)", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-81.json", "passes": false },
