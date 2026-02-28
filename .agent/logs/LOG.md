@@ -3,10 +3,20 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 72
-**Current Task:** TASK-73 Complete
+**Tasks Completed:** 73
+**Current Task:** TASK-74 Complete
 
 ---
+
+## 2026-02-28 — TASK-74: GET /api/batches/[id]/prospects (status polling)
+
+- Updated `app/api/batches/[id]/prospects/route.ts` to add 404 check when batch not found
+- Slimmed response to only include `id`, `slug`, `businessName`, `status`, `errorMessage` (no heavy page_data)
+- Integration test: GET /api/batches/nonexistent-id/prospects returns 404 `{"error":"Batch not found"}`
+- All 135 unit tests pass; tsc clean
+
+---
+
 
 ## 2026-02-28 — TASK-73: POST /api/email/send and GET /api/email/sent
 
