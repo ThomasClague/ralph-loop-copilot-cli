@@ -20,3 +20,159 @@
 [0] [?25h
 [0] next dev exited with code 1
 [1] Scraping API running on port 3001
+[1] Crawling https://example.com
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m All requests from the queue have been processed, the crawler will shut down.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Final request statistics:[90m {"requestsFinished":1,"requestsFailed":0,"retryHistogram":[1],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":659,"requestsFinishedPerMinute":33,"requestsFailedPerMinute":0,"requestTotalDurationMillis":659,"requestsTotal":1,"crawlerRuntimeMillis":1830}[39m
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Finished! Total 1 requests: 1 succeeded, 0 failed.[90m {"terminal":true}[39m
+[1] Crawling https://example.com - completed in 1858 ms
+[1] Crawling https://example.com
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m All requests from the queue have been processed, the crawler will shut down.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Final request statistics:[90m {"requestsFinished":0,"requestsFailed":0,"retryHistogram":[],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":null,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":0,"requestsTotal":0,"crawlerRuntimeMillis":1287}[39m
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Finished! Total 0 requests: 0 succeeded, 0 failed.[90m {"terminal":true}[39m
+[1] Crawling https://example.com - completed in 1303 ms
+[1] Crawling https://example.com
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m All requests from the queue have been processed, the crawler will shut down.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Final request statistics:[90m {"requestsFinished":0,"requestsFailed":0,"retryHistogram":[],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":null,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":0,"requestsTotal":0,"crawlerRuntimeMillis":871}[39m
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Finished! Total 0 requests: 0 succeeded, 0 failed.[90m {"terminal":true}[39m
+[1] Crawling https://example.com - completed in 875 ms
+[1] Crawling https://example.com
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m All requests from the queue have been processed, the crawler will shut down.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Final request statistics:[90m {"requestsFinished":0,"requestsFailed":0,"retryHistogram":[],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":null,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":0,"requestsTotal":0,"crawlerRuntimeMillis":854}[39m
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Finished! Total 0 requests: 0 succeeded, 0 failed.[90m {"terminal":true}[39m
+[1] Crawling https://example.com - completed in 857 ms
+[1] Crawling https://example.com
+[1] Crawling https://example.com
+[1] Crawling https://example.com
+[1] Crawling https://example.com
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m All requests from the queue have been processed, the crawler will shut down.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m All requests from the queue have been processed, the crawler will shut down.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m All requests from the queue have been processed, the crawler will shut down.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m All requests from the queue have been processed, the crawler will shut down.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Final request statistics:[90m {"requestsFinished":0,"requestsFailed":0,"retryHistogram":[],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":null,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":0,"requestsTotal":0,"crawlerRuntimeMillis":1155}[39m
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Finished! Total 0 requests: 0 succeeded, 0 failed.[90m {"terminal":true}[39m
+[1] Crawling https://example.com - completed in 1163 ms
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Final request statistics:[90m {"requestsFinished":0,"requestsFailed":0,"retryHistogram":[],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":null,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":0,"requestsTotal":0,"crawlerRuntimeMillis":1810}[39m
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Finished! Total 0 requests: 0 succeeded, 0 failed.[90m {"terminal":true}[39m
+[1] Crawling https://example.com - completed in 1815 ms
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Final request statistics:[90m {"requestsFinished":0,"requestsFailed":0,"retryHistogram":[],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":null,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":0,"requestsTotal":0,"crawlerRuntimeMillis":2422}[39m
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Finished! Total 0 requests: 0 succeeded, 0 failed.[90m {"terminal":true}[39m
+[1] Crawling https://example.com - completed in 2425 ms
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Final request statistics:[90m {"requestsFinished":0,"requestsFailed":0,"retryHistogram":[],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":null,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":0,"requestsTotal":0,"crawlerRuntimeMillis":3721}[39m
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Finished! Total 0 requests: 0 succeeded, 0 failed.[90m {"terminal":true}[39m
+[1] Crawling https://example.com - completed in 3726 ms
+[1] Crawling https://example.com
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[1] Crawling https://example.com
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m All requests from the queue have been processed, the crawler will shut down.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m All requests from the queue have been processed, the crawler will shut down.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Final request statistics:[90m {"requestsFinished":0,"requestsFailed":0,"retryHistogram":[],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":null,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":0,"requestsTotal":0,"crawlerRuntimeMillis":927}[39m
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Finished! Total 0 requests: 0 succeeded, 0 failed.[90m {"terminal":true}[39m
+[1] Crawling https://example.com - completed in 958 ms
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Final request statistics:[90m {"requestsFinished":0,"requestsFailed":0,"retryHistogram":[],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":null,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":0,"requestsTotal":0,"crawlerRuntimeMillis":1034}[39m
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Finished! Total 0 requests: 0 succeeded, 0 failed.[90m {"terminal":true}[39m
+[1] Crawling https://example.com - completed in 1039 ms
+[1] Crawling https://example.com
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[1] Crawling https://example.com
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m All requests from the queue have been processed, the crawler will shut down.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m All requests from the queue have been processed, the crawler will shut down.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Final request statistics:[90m {"requestsFinished":0,"requestsFailed":0,"retryHistogram":[],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":null,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":0,"requestsTotal":0,"crawlerRuntimeMillis":955}[39m
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Finished! Total 0 requests: 0 succeeded, 0 failed.[90m {"terminal":true}[39m
+[1] Crawling https://example.com - completed in 960 ms
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Final request statistics:[90m {"requestsFinished":0,"requestsFailed":0,"retryHistogram":[],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":null,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":0,"requestsTotal":0,"crawlerRuntimeMillis":1038}[39m
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Finished! Total 0 requests: 0 succeeded, 0 failed.[90m {"terminal":true}[39m
+[1] Crawling https://example.com - completed in 1042 ms
+[1] Crawling https://example.com
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m All requests from the queue have been processed, the crawler will shut down.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Final request statistics:[90m {"requestsFinished":0,"requestsFailed":0,"retryHistogram":[],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":null,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":0,"requestsTotal":0,"crawlerRuntimeMillis":951}[39m
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Finished! Total 0 requests: 0 succeeded, 0 failed.[90m {"terminal":true}[39m
+[1] Crawling https://example.com - completed in 955 ms
+[1] Crawling https://example.com
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m All requests from the queue have been processed, the crawler will shut down.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Final request statistics:[90m {"requestsFinished":0,"requestsFailed":0,"retryHistogram":[],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":null,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":0,"requestsTotal":0,"crawlerRuntimeMillis":869}[39m
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Finished! Total 0 requests: 0 succeeded, 0 failed.[90m {"terminal":true}[39m
+[1] Crawling https://example.com - completed in 872 ms
+[1] Crawling https://example.com
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m All requests from the queue have been processed, the crawler will shut down.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Final request statistics:[90m {"requestsFinished":0,"requestsFailed":0,"retryHistogram":[],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":null,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":0,"requestsTotal":0,"crawlerRuntimeMillis":888}[39m
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Finished! Total 0 requests: 0 succeeded, 0 failed.[90m {"terminal":true}[39m
+[1] Crawling https://example.com - completed in 892 ms
+[1] Crawling https://example.com
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m All requests from the queue have been processed, the crawler will shut down.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Final request statistics:[90m {"requestsFinished":0,"requestsFailed":0,"retryHistogram":[],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":null,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":0,"requestsTotal":0,"crawlerRuntimeMillis":989}[39m
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Finished! Total 0 requests: 0 succeeded, 0 failed.[90m {"terminal":true}[39m
+[1] Crawling https://example.com - completed in 996 ms
+[1] Crawling https://example.com
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m All requests from the queue have been processed, the crawler will shut down.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Final request statistics:[90m {"requestsFinished":0,"requestsFailed":0,"retryHistogram":[],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":null,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":0,"requestsTotal":0,"crawlerRuntimeMillis":917}[39m
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Finished! Total 0 requests: 0 succeeded, 0 failed.[90m {"terminal":true}[39m
+[1] Crawling https://example.com - completed in 921 ms
+[1] Crawling https://example.com
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m All requests from the queue have been processed, the crawler will shut down.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Final request statistics:[90m {"requestsFinished":0,"requestsFailed":0,"retryHistogram":[],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":null,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":0,"requestsTotal":0,"crawlerRuntimeMillis":1073}[39m
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Finished! Total 0 requests: 0 succeeded, 0 failed.[90m {"terminal":true}[39m
+[1] Crawling https://example.com - completed in 1077 ms
+[1] Crawling https://example.com
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m All requests from the queue have been processed, the crawler will shut down.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Final request statistics:[90m {"requestsFinished":0,"requestsFailed":0,"retryHistogram":[],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":null,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":0,"requestsTotal":0,"crawlerRuntimeMillis":868}[39m
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Finished! Total 0 requests: 0 succeeded, 0 failed.[90m {"terminal":true}[39m
+[1] Crawling https://example.com - completed in 871 ms
+[1] Crawling https://example.com
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m All requests from the queue have been processed, the crawler will shut down.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Final request statistics:[90m {"requestsFinished":0,"requestsFailed":0,"retryHistogram":[],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":null,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":0,"requestsTotal":0,"crawlerRuntimeMillis":836}[39m
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Finished! Total 0 requests: 0 succeeded, 0 failed.[90m {"terminal":true}[39m
+[1] Crawling https://example.com - completed in 840 ms
+[1] Crawling https://example.com
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[1] Crawling https://example.com
+[1] Crawling https://example.com
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[1] Crawling https://example.com
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m All requests from the queue have been processed, the crawler will shut down.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m All requests from the queue have been processed, the crawler will shut down.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m All requests from the queue have been processed, the crawler will shut down.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Final request statistics:[90m {"requestsFinished":0,"requestsFailed":0,"retryHistogram":[],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":null,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":0,"requestsTotal":0,"crawlerRuntimeMillis":1515}[39m
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Finished! Total 0 requests: 0 succeeded, 0 failed.[90m {"terminal":true}[39m
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Final request statistics:[90m {"requestsFinished":0,"requestsFailed":0,"retryHistogram":[],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":null,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":0,"requestsTotal":0,"crawlerRuntimeMillis":1593}[39m
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Finished! Total 0 requests: 0 succeeded, 0 failed.[90m {"terminal":true}[39m
+[1] Crawling https://example.com - completed in 1613 ms
+[1] Crawling https://example.com - completed in 1638 ms
+[1] [32mINFO[39m [33m CheerioCrawler:[39m All requests from the queue have been processed, the crawler will shut down.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Final request statistics:[90m {"requestsFinished":0,"requestsFailed":0,"retryHistogram":[],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":null,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":0,"requestsTotal":0,"crawlerRuntimeMillis":1202}[39m
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Finished! Total 0 requests: 0 succeeded, 0 failed.[90m {"terminal":true}[39m
+[1] Crawling https://example.com - completed in 1207 ms
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Final request statistics:[90m {"requestsFinished":0,"requestsFailed":0,"retryHistogram":[],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":null,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":0,"requestsTotal":0,"crawlerRuntimeMillis":1790}[39m
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Finished! Total 0 requests: 0 succeeded, 0 failed.[90m {"terminal":true}[39m
+[1] Crawling https://example.com - completed in 1795 ms
+[1] Crawling https://example.com
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m All requests from the queue have been processed, the crawler will shut down.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Final request statistics:[90m {"requestsFinished":0,"requestsFailed":0,"retryHistogram":[],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":null,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":0,"requestsTotal":0,"crawlerRuntimeMillis":842}[39m
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Finished! Total 0 requests: 0 succeeded, 0 failed.[90m {"terminal":true}[39m
+[1] Crawling https://example.com - completed in 846 ms
+[1] Crawling https://example.com
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m All requests from the queue have been processed, the crawler will shut down.
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Final request statistics:[90m {"requestsFinished":0,"requestsFailed":0,"retryHistogram":[],"requestAvgFailedDurationMillis":null,"requestAvgFinishedDurationMillis":null,"requestsFinishedPerMinute":0,"requestsFailedPerMinute":0,"requestTotalDurationMillis":0,"requestsTotal":0,"crawlerRuntimeMillis":881}[39m
+[1] [32mINFO[39m [33m CheerioCrawler:[39m Finished! Total 0 requests: 0 succeeded, 0 failed.[90m {"terminal":true}[39m
+[1] Crawling https://example.com - completed in 884 ms
