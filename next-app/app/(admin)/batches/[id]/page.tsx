@@ -1,30 +1,10 @@
 import Link from "next/link";
 import { getBatch, listProspects } from "@/src/db/repository";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { ArrowLeft } from "lucide-react";
+import { GenerateTrigger } from "@/components/admin/GenerateTrigger";
 
 export const dynamic = "force-dynamic";
-
-const STATUS_STYLES: Record<string, string> = {
-  pending: "bg-gray-100 text-gray-700 hover:bg-gray-100",
-  processing: "bg-blue-100 text-blue-700 hover:bg-blue-100",
-  ready: "bg-green-100 text-green-700 hover:bg-green-100",
-  failed: "bg-red-100 text-red-700 hover:bg-red-100",
-};
-
-function StatusBadge({ status }: { status: string }) {
-  const classes = STATUS_STYLES[status] ?? STATUS_STYLES.pending;
-  return <Badge className={`capitalize ${classes}`}>{status}</Badge>;
-}
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -74,65 +54,8 @@ export default async function BatchDetailPage({ params }: Props) {
         </Button>
       </div>
 
-      {/* Prospect table */}
-      {prospects.length === 0 ? (
-        <p className="text-sm text-muted-foreground">
-          No prospects in this batch yet.
-        </p>
-      ) : (
-        <div className="rounded-lg border overflow-hidden">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Business Name</TableHead>
-                <TableHead>Industry</TableHead>
-                <TableHead>Location</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {prospects.map((prospect) => (
-                <TableRow key={prospect.id}>
-                  <TableCell className="font-medium">
-                    {prospect.businessName}
-                  </TableCell>
-                  <TableCell className="capitalize text-muted-foreground">
-                    {prospect.industry}
-                  </TableCell>
-                  <TableCell className="text-muted-foreground">
-                    {prospect.location}
-                  </TableCell>
-                  <TableCell>
-                    <StatusBadge status={prospect.status} />
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center justify-end gap-2">
-                      {prospect.status === "ready" && (
-                        <>
-                          <Button variant="outline" size="sm" asChild>
-                            <Link href={`/preview/${prospect.slug}`}>
-                              Preview
-                            </Link>
-                          </Button>
-                          <Button variant="outline" size="sm" asChild>
-                            <Link href={`/edit/${prospect.slug}`}>Edit</Link>
-                          </Button>
-                        </>
-                      )}
-                      <Button variant="secondary" size="sm" asChild>
-                        <Link href={`/api/prospects/${prospect.id}/generate`}>
-                          Regenerate
-                        </Link>
-                      </Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-      )}
+      {/* Prospect table with generation trigger */}
+      <GenerateTrigger batchId={id} initialProspects={prospects} />
     </div>
   );
 }

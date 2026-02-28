@@ -728,3 +728,15 @@
 - Not-found case renders a 'Batch not found' message with a back link
 - All 117 unit tests pass; TypeScript compiles clean
 - Screenshots: .agent/screenshots/TASK-61-1.png (not-found), .agent/screenshots/TASK-61-2.png (with data)
+
+---
+
+## 2026-02-28  TASK-62: Implement generation trigger UI with real-time status updates
+
+- Created components/admin/GenerateTrigger.tsx  client component with "Generate All Pending" button, polling, progress bar, and prospect table
+- Created pp/api/batches/[id]/prospects/route.ts  GET endpoint for polling prospect statuses
+- Created pp/api/generate/batch/[id]/route.ts  POST endpoint that triggers runPipeline for all pending/failed prospects (fire-and-forget, returns 202)
+- Updated pp/(admin)/batches/[id]/page.tsx  replaced static table with GenerateTrigger client component
+- Polling every 3s via setInterval with cleanup; progress bar shows X/Y generated; completion notification on finish
+- All 117 unit tests pass; Playwright E2E test passes (3 browsers)
+- Screenshot: .agent/screenshots/TASK-62-1.png
