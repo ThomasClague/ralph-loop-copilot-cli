@@ -3,12 +3,21 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 38
-**Current Task:** TASK-49 Complete
+**Tasks Completed:** 39
+**Current Task:** TASK-50 Complete
 
 ---
 
-## 2026-02-28 — TASK-49: Implement main pipeline orchestrator (pipeline.ts)
+## 2026-02-28 — TASK-50: Implement single section regeneration (regenerate-section.ts)
+
+- Created `next-app/src/lib/ai/regenerate-section.ts` — exports `regenerateSection(prospectId, sectionId): Promise<SiteSection>`
+- Loads prospect from DB, finds target section in site_config.sections, builds section-specific prompt
+- Calls generateObject with contentSchema, replaces only the target section, saves via updateProspect
+- 6 unit tests all pass; full suite (100 tests) passes; TypeScript compiles clean
+
+---
+
+
 
 - Created `next-app/src/lib/pipeline.ts` — exports `runPipeline(prospectId): Promise<SiteConfig>`
 - Orchestrates all 6 pipeline stages: scraping → extraction → condensation → structure → content → images → variants → theming
