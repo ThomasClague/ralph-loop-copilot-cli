@@ -3,10 +3,21 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 40
-**Current Task:** TASK-51 Complete
+**Tasks Completed:** 41
+**Current Task:** TASK-52 Complete
 
 ---
+
+## 2026-02-28 — TASK-52: Create industry query map
+
+- Created `next-app/src/lib/images/industry-queries.ts` — exports `INDUSTRY_IMAGE_QUERIES` and `getImageQuery(industry, slot)`
+- Queries defined for 10 industries: roofing, plumbing, electrical, landscaping, cleaning, painting, hvac, construction, locksmith, pest_control
+- Each industry has 5 slots: hero, gallery, about, services, team
+- `getImageQuery` falls back to construction queries, then `${industry} professional service`
+- 108 unit tests pass; TypeScript compiles clean
+
+---
+
 
 ## 2026-02-28 — TASK-51: Implement Pexels API client
 

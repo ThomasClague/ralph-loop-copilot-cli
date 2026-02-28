@@ -50,7 +50,7 @@
   { "id": "TASK-49", "title": "Implement main pipeline orchestrator (pipeline.ts)", "category": "functional", "specFilePath": ".agent/tasks/TASK-49.json", "passes": true },
   { "id": "TASK-50", "title": "Implement single section regeneration (regenerate-section.ts)", "category": "functional", "specFilePath": ".agent/tasks/TASK-50.json", "passes": true },
   { "id": "TASK-51", "title": "Implement Pexels API client", "category": "integration", "specFilePath": ".agent/tasks/TASK-51.json", "passes": true },
-  { "id": "TASK-52", "title": "Create industry query map (Pexels search queries per slot per industry)", "category": "functional", "specFilePath": ".agent/tasks/TASK-52.json", "passes": false },
+  { "id": "TASK-52", "title": "Create industry query map (Pexels search queries per slot per industry)", "category": "functional", "specFilePath": ".agent/tasks/TASK-52.json", "passes": true },
   { "id": "TASK-53", "title": "Implement image assignment logic (3-tier priority: uploads > scraped > Pexels)", "category": "functional", "specFilePath": ".agent/tasks/TASK-53.json", "passes": false },
   { "id": "TASK-54", "title": "Implement media upload handling for batch media library", "category": "functional", "specFilePath": ".agent/tasks/TASK-54.json", "passes": false },
   { "id": "TASK-55", "title": "Implement root layout with sidebar navigation", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-55.json", "passes": false },
