@@ -3,8 +3,19 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 22
-**Current Task:** TASK-33 Complete
+**Tasks Completed:** 23
+**Current Task:** TASK-34 Complete
+
+---
+
+## 2026-02-28 — TASK-34: Implement Brands section variant (brands-logos)
+
+- Created `src/components/shared/brands/BrandsLogos.tsx` — flex-wrap row of brand items; logo img with grayscale filter (hover restores color) or styled text badge fallback; optional headline; falls back to 5 placeholder brand names when content.brands is empty
+- All colors use CSS custom properties (`--color-bg`, `--color-surface`, `--color-heading`, `--color-text`, `--color-border`)
+- Exported from `src/components/shared/brands/index.ts`
+- Added `app/test-brands/page.tsx` for visual verification
+- Playwright screenshot: headline + 5 brand name badges (Kohler, Moen, Delta, American Standard, Grohe) in horizontal row; screenshot saved to `.agent/screenshots/TASK-34-1.png`
+- TypeScript: no errors; all 23 unit tests pass
 
 ---
 
