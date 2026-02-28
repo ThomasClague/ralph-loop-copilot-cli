@@ -10,7 +10,20 @@
 
 ## Session Log
 
-## 2026-02-28 — TASK-20: Implement Trust Indicators section variants (trust-bar, trust-grid)
+## 2026-02-28 — TASK-21: Implement Testimonials section variants (testimonials-cards, testimonials-carousel)
+
+- Created `src/components/shared/testimonials/TestimonialsCards.tsx` — responsive 3-column card grid with large quote mark, quote text, star rating (1-5), author name (bold), optional role (muted)
+- Created `src/components/shared/testimonials/TestimonialsCarousel.tsx` — client component with `useState`, single testimonial at a time, prev/next buttons, dot indicators, current index display ("1/3")
+- Both accept `{ content: TestimonialsContent, business: BusinessInfo }` props and fall back to placeholder testimonials when `content.items` is empty
+- All colors use CSS custom properties (`--color-surface`, `--color-border`, `--color-primary`, `--color-heading`, `--color-body`)
+- Exported from `src/components/shared/testimonials/index.ts`
+- Added `app/test-testimonials/page.tsx` for visual verification
+- Playwright smoke test: cards grid renders correctly, carousel prev/next advances testimonial and updates dot/counter; screenshots saved to `.agent/screenshots/TASK-21-1.png` and `TASK-21-2.png`
+- TypeScript: no errors; all 23 unit tests pass
+
+---
+
+
 
 - Created `src/components/shared/trust_indicators/TrustBar.tsx` — horizontal flex bar with overflow-x-auto, icon/value/label per item, vertical dividers on desktop, compact height
 - Created `src/components/shared/trust_indicators/TrustGrid.tsx` — responsive 2x3/3x2 grid with large icons, spacious cards, border/shadow styling
