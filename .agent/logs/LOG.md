@@ -10,7 +10,20 @@
 
 ## Session Log
 
-## 2026-02-28 — TASK-21: Implement Testimonials section variants (testimonials-cards, testimonials-carousel)
+## 2026-02-28 — TASK-22: Implement Process section variants (process-steps, process-timeline)
+
+- Created `src/components/shared/process/ProcessSteps.tsx` — horizontal flex row of numbered cards with blue circle step numbers and arrow (→) connectors between steps on desktop
+- Created `src/components/shared/process/ProcessTimeline.tsx` — vertical center-line layout with alternating left/right content cards on desktop, all left-aligned on mobile; numbered circles on the line
+- Both accept `{ content: ProcessContent, business: BusinessInfo }` props and fall back to placeholder steps when `content.steps` is empty
+- All colors use CSS custom properties (`--color-bg`, `--color-surface`, `--color-border`, `--color-primary`, etc.)
+- Exported from `src/components/shared/process/index.ts`
+- Added `app/test-process/page.tsx` for visual verification
+- Playwright smoke test: both variants render correctly with visible step numbers, titles, descriptions, and connectors; screenshots saved to `.agent/screenshots/TASK-22-1.png` and `TASK-22-2.png`
+- TypeScript: no errors; all 23 unit tests pass
+
+---
+
+
 
 - Created `src/components/shared/testimonials/TestimonialsCards.tsx` — responsive 3-column card grid with large quote mark, quote text, star rating (1-5), author name (bold), optional role (muted)
 - Created `src/components/shared/testimonials/TestimonialsCarousel.tsx` — client component with `useState`, single testimonial at a time, prev/next buttons, dot indicators, current index display ("1/3")
