@@ -1,4 +1,11 @@
 
+## 2026-02-28 — TASK-92: Implement template interpolation utility
+
+- Created `next-app/src/lib/utils/interpolate.ts` exporting `interpolate(template, data, options?)`
+- Supports `{{key}}` simple replacement, dot-notation nested keys (`{{business.name}}`), and `{{#each array}}...{{/each}}` repeating blocks
+- Unknown tokens replaced with `""` by default; `keepUnknown: true` option leaves them as-is
+- 11 unit tests in `next-app/__unit-tests/utils/interpolate.test.ts`; all 149 tests pass; tsc clean
+
 ## 2026-02-28 — TASK-91: Create outreach email templates
 
 - `coldOutreach.ts` and `followUp.ts` templates already implemented in `src/lib/email/templates/`
