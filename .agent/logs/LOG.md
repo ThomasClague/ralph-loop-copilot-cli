@@ -3,8 +3,21 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 18
-**Current Task:** TASK-28 Complete
+**Tasks Completed:** 19
+**Current Task:** TASK-30 Complete
+
+---
+
+## 2026-02-28 — TASK-30: Implement Certifications section variant (certifications-logos)
+
+- Created `src/components/shared/certifications/CertificationsLogos.tsx` — flex-wrap row of certification items; shows logo image if present, otherwise a styled blue text badge with first 6 chars of name; year shown below name if present
+- All colors use CSS custom properties (`--color-bg`, `--color-surface`, `--color-heading`, `--color-text`, `--color-border`, `--color-primary`, `--color-text-inverted`)
+- Exported from `src/components/shared/certifications/index.ts`
+- Added `app/test-certifications/page.tsx` for visual verification
+- Playwright smoke test: all 5 certification cards visible with badges and years; screenshot saved to `.agent/screenshots/TASK-30-1.png`
+- TypeScript: no errors; all 23 unit tests pass
+
+---
 
 ----------------------------------------------
 
