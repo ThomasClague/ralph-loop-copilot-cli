@@ -1,4 +1,13 @@
 
+## 2026-02-28 — TASK-91: Create outreach email templates
+
+- `coldOutreach.ts` and `followUp.ts` templates already implemented in `src/lib/email/templates/`
+- Each exports a function accepting `TemplateData` and returns `{ subject, html, text }`
+- HTML uses inline CSS; text is plain-text equivalent
+- `TEMPLATES` registry in `index.ts` exports both templates
+- Templates integrated and used by `POST /api/email/send` route
+- All 138 unit tests pass; TypeScript compiles clean
+
 ## 2026-02-28 — TASK-90: Implement EmailService factory
 
 - `next-app/src/lib/email/factory.ts` already existed with correct implementation
