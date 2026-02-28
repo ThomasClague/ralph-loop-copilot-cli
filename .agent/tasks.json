@@ -98,7 +98,7 @@
   { "id": "TASK-97", "title": "Write Vitest component tests for section renderer and component variants", "category": "functional", "specFilePath": ".agent/tasks/TASK-97.json", "passes": true },
   { "id": "TASK-98", "title": "Write Playwright E2E test for batch import flow", "category": "functional", "specFilePath": ".agent/tasks/TASK-98.json", "passes": true },
   { "id": "TASK-99", "title": "Write Playwright E2E test for generation flow", "category": "functional", "specFilePath": ".agent/tasks/TASK-99.json", "passes": true },
-  { "id": "TASK-100", "title": "Write Playwright E2E test for preview rendering", "category": "functional", "specFilePath": ".agent/tasks/TASK-100.json", "passes": false },
+  { "id": "TASK-100", "title": "Write Playwright E2E test for preview rendering", "category": "functional", "specFilePath": ".agent/tasks/TASK-100.json", "passes": true },
   { "id": "TASK-101", "title": "Write Playwright E2E test for edit flow", "category": "functional", "specFilePath": ".agent/tasks/TASK-101.json", "passes": false },
   { "id": "TASK-102", "title": "Write Playwright E2E test for export flow", "category": "functional", "specFilePath": ".agent/tasks/TASK-102.json", "passes": false }
 ]

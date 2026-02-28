@@ -1,4 +1,12 @@
 
+## 2026-02-28 — TASK-100: Playwright E2E test for preview and editor
+
+- Created `next-app/tests/e2e/pages/EditorPage.ts` — POM with goto, getSectionCount, selectPalette, getPreviewHeadline, editSectionContent, waitForAutoSave
+- Created `next-app/tests/e2e/editor.spec.ts` — 4 E2E tests: preview renders ≥3 sections, editor loads section list, palette change, headline edit + auto-save
+- beforeAll creates batch + prospect, triggers generation via `/api/generate/prospect/[slug]`, polls until ready; afterAll cleans up
+- All 4 tests pass (chromium); generation pipeline runs end-to-end
+- Screenshots: `next-app/.agent/screenshots/TASK-100-{1-4}.png`
+
 ## 2026-02-28 — TASK-99: Playwright E2E test for generation flow
 
 - Created `next-app/tests/e2e/generation.spec.ts` — E2E test for landing page generation
