@@ -713,3 +713,18 @@
 - Moved root page to `app/(admin)/page.tsx`; preview/edit routes will use root layout (no sidebar)
 - All 117 unit tests pass
 - Screenshot: .agent/screenshots/TASK-55-1.png
+
+---
+
+## 2026-02-28  TASK-61: Implement batch detail page with prospect table
+
+- Created pp/(admin)/batches/[id]/page.tsx as a server component
+- Loads batch via getBatch(id) and prospects via listProspects(id)
+- Shows batch header: name, industry (capitalized), created date, prospect count
+- Prospect table with columns: Business Name, Industry, Location, Status, Actions
+- Status badges with color coding: pending=gray, processing=blue, ready=green, failed=red
+- Preview and Edit action links only appear when status === 'ready'
+- Regenerate button present for all prospects (links to generate API)
+- Not-found case renders a 'Batch not found' message with a back link
+- All 117 unit tests pass; TypeScript compiles clean
+- Screenshots: .agent/screenshots/TASK-61-1.png (not-found), .agent/screenshots/TASK-61-2.png (with data)
