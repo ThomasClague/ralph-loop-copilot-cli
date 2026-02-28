@@ -2,13 +2,22 @@
 
 `Current Status`
 =================
-**Last Updated:** YYYY-MM-DD HH:MM
-**Tasks Completed:** TOTAL_NUMBER_OF_TASKS
-**Current Task:** TASK-CURRENT_TASK_NUMBER Complete
+**Last Updated:** 2026-02-28
+**Tasks Completed:** 15
+**Current Task:** TASK-15 Complete
 
 ----------------------------------------------
 
 ## Session Log
+
+## 2026-02-28 — TASK-15: Implement scraping client in Next.js
+
+- Created `next-app/src/lib/scraping/types.ts` — re-exports types from `src/scraper/types.ts`
+- Created `next-app/src/lib/scraping/client.ts` — exports `checkScraperHealth()` and `crawlUrl()`
+- `crawlUrl` checks health first, throws descriptive error if scraper not running
+- TypeScript compiles without errors
+
+---
 
 ## 2026-02-28 — TASK-14: Implement GET /api/health endpoint on Express
 
