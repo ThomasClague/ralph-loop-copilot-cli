@@ -1,14 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getProspectBySlug } from "@/src/db/repository";
+import { getProspectBySlug, updateProspect } from "@/src/db/repository";
+import { generateExport } from "@/src/lib/export/exportEngine";
 
 type Params = { params: Promise<{ slug: string }> };
 
 /**
  * POST /api/export/[slug]
  * Triggers the export pipeline for a prospect.
- * Body: { format: 'zip' }
  * Returns: { url: string } — download URL for the generated ZIP.
- * NOTE: Full export engine implemented in TASK-86. This stub returns 501 until then.
  */
 export async function POST(_req: NextRequest, { params }: Params) {
   const { slug } = await params;
@@ -23,9 +22,15 @@ export async function POST(_req: NextRequest, { params }: Params) {
     );
   }
 
-  // Export engine will be implemented in TASK-86.
-  return NextResponse.json(
-    { error: "Export engine not yet implemented" },
-    { status: 501 },
-  );
+  try {
+    const exportUrl = await generateExport(prospect);
+    await updateProspect(prospect.id, {
+      exportedAt: Date.now(),
+      status: "exported",
+    });
+    return NextResponse.json({ url: exportUrl });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Export failed";
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
 }

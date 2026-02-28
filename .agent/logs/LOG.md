@@ -1,5 +1,17 @@
 
-## 2026-02-28 — TASK-85: Create site-template scaffold
+## 2026-02-28 — TASK-86: Implement export engine
+
+- Installed `jszip` npm package
+- Created `next-app/src/lib/export/exportEngine.ts`:
+  - `generateExport(prospect)` — main export function returning public URL path
+  - Handlebars-style template renderer supporting `{{token}}`, `{{#if}}`, `{{#each}}`
+  - Palette injection into `:root {}` CSS block (maps palette tokens to template CSS variable names)
+  - Image embedding: downloads all `https://` `src` attributes, embeds under `images/`, replaces with relative paths; fallback placeholder PNG on failure
+  - ZIP creation via JSZip; written to `public/exports/{slug}.zip`
+- Updated `app/api/export/[slug]/route.ts` to use `generateExport` (was 501 stub); sets `exportedAt` and status `exported` on success
+- Verified: POST /api/export/apex-plumbing-9797a0 → 200 `{"url":"/exports/apex-plumbing-9797a0.zip"}` (42 KB ZIP with index.html, styles.css, scripts.js, images/)
+- All 135 unit tests pass; tsc clean; eslint clean
+
 
 - Created `next-app/src/templates/site/` directory with:
   - `index.html` — base shell with `{{businessName}}`, `{{phone}}`, `{{email}}`, `{{location}}`, `{{sections}}`, `{{year}}` tokens
