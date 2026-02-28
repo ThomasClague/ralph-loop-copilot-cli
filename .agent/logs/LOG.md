@@ -3,8 +3,16 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 50
-**Current Task:** TASK-64 Complete
+**Tasks Completed:** 51
+**Current Task:** TASK-65 Complete
+
+---
+
+## 2026-02-28 — TASK-65: GET /api/batches and GET /api/batches/[id]
+
+- Added GET handler to `app/api/batches/route.ts` — calls `listBatches()`, returns JSON array
+- Created `app/api/batches/[id]/route.ts` — calls `getBatch(id)`, returns 404 if not found
+- Verified: `GET /api/batches` → 200 array of batches; `GET /api/batches/test-batch-54` → 200 single batch; `GET /api/batches/nonexistent` → 404 `{"error":"Batch not found"}`
 
 ---
 
