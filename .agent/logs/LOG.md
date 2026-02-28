@@ -3,10 +3,23 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 16
-**Current Task:** TASK-25 Complete
+**Tasks Completed:** 17
+**Current Task:** TASK-27 Complete
 
 ----------------------------------------------
+
+## 2026-02-28 — TASK-27: Implement Contact section variants (contact-form, contact-details)
+
+- Created `src/components/shared/contact/ContactForm.tsx` — two-column layout: left side has form (name, email, message, submit button), right side has contact details with Lucide icons (Phone, Mail, MapPin)
+- Created `src/components/shared/contact/ContactDetails.tsx` — centered card grid with icon, label, and clickable link per contact method (phone, email, address)
+- Both have `id='contact'` for anchor navigation; phone renders as `<a href="tel:...">`, email as `<a href="mailto:...">`
+- All colors use CSS custom properties (`--color-bg`, `--color-surface`, `--color-heading`, `--color-text`, `--color-border`, `--color-primary`, `--color-text-inverted`)
+- Exported from `src/components/shared/contact/index.ts`
+- Added `app/test-contact/page.tsx` for visual verification
+- Playwright smoke test: both variants render correctly; form fields, submit button, and contact detail cards all visible; screenshot saved to `.agent/screenshots/TASK-27-1.png`
+- TypeScript: no errors; all 23 unit tests pass
+
+---
 
 ## 2026-02-28 — TASK-26: Implement CTA Banner section variants (cta-centered, cta-split)
 
