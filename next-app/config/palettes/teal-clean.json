@@ -1,0 +1,27 @@
+{
+  "id": "teal-clean",
+  "name": "Teal Clean",
+  "tokens": {
+    "--color-primary": "#0d9488",
+    "--color-primary-hover": "#0f766e",
+    "--color-primary-light": "#ccfbf1",
+    "--color-primary-dark": "#115e59",
+    "--color-secondary": "#134e4a",
+    "--color-secondary-hover": "#0f766e",
+    "--color-accent": "#f59e0b",
+    "--color-background": "#ffffff",
+    "--color-surface": "#f0fdfa",
+    "--color-surface-alt": "#ccfbf1",
+    "--color-text-primary": "#0f172a",
+    "--color-text-secondary": "#475569",
+    "--color-text-inverted": "#ffffff",
+    "--color-border": "#e2e8f0",
+    "--color-border-light": "#f0fdfa",
+    "--color-heading": "#0f172a",
+    "--color-link": "#0d9488",
+    "--color-success": "#16a34a",
+    "--color-warning": "#d97706",
+    "--color-error": "#dc2626",
+    "--color-overlay": "rgba(0,0,0,0.5)"
+  }
+}

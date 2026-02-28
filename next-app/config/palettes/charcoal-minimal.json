@@ -1,0 +1,27 @@
+{
+  "id": "charcoal-minimal",
+  "name": "Charcoal Minimal",
+  "tokens": {
+    "--color-primary": "#1f2937",
+    "--color-primary-hover": "#111827",
+    "--color-primary-light": "#f3f4f6",
+    "--color-primary-dark": "#030712",
+    "--color-secondary": "#6b7280",
+    "--color-secondary-hover": "#4b5563",
+    "--color-accent": "#f59e0b",
+    "--color-background": "#ffffff",
+    "--color-surface": "#f9fafb",
+    "--color-surface-alt": "#f3f4f6",
+    "--color-text-primary": "#111827",
+    "--color-text-secondary": "#6b7280",
+    "--color-text-inverted": "#ffffff",
+    "--color-border": "#e5e7eb",
+    "--color-border-light": "#f3f4f6",
+    "--color-heading": "#111827",
+    "--color-link": "#1f2937",
+    "--color-success": "#16a34a",
+    "--color-warning": "#d97706",
+    "--color-error": "#dc2626",
+    "--color-overlay": "rgba(0,0,0,0.5)"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "amber-trade",
+  "name": "Amber Trade",
+  "tokens": {
+    "--color-primary": "#d97706",
+    "--color-primary-hover": "#b45309",
+    "--color-primary-light": "#fef3c7",
+    "--color-primary-dark": "#92400e",
+    "--color-secondary": "#1c1917",
+    "--color-secondary-hover": "#292524",
+    "--color-accent": "#2563eb",
+    "--color-background": "#ffffff",
+    "--color-surface": "#fffbeb",
+    "--color-surface-alt": "#fef3c7",
+    "--color-text-primary": "#1c1917",
+    "--color-text-secondary": "#57534e",
+    "--color-text-inverted": "#ffffff",
+    "--color-border": "#e7e5e4",
+    "--color-border-light": "#f5f5f4",
+    "--color-heading": "#1c1917",
+    "--color-link": "#d97706",
+    "--color-success": "#16a34a",
+    "--color-warning": "#d97706",
+    "--color-error": "#dc2626",
+    "--color-overlay": "rgba(0,0,0,0.5)"
+  }
+}

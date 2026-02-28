@@ -1,0 +1,27 @@
+{
+  "id": "crimson-bold",
+  "name": "Crimson Bold",
+  "tokens": {
+    "--color-primary": "#dc2626",
+    "--color-primary-hover": "#b91c1c",
+    "--color-primary-light": "#fee2e2",
+    "--color-primary-dark": "#991b1b",
+    "--color-secondary": "#1e293b",
+    "--color-secondary-hover": "#334155",
+    "--color-accent": "#f59e0b",
+    "--color-background": "#ffffff",
+    "--color-surface": "#f8fafc",
+    "--color-surface-alt": "#f1f5f9",
+    "--color-text-primary": "#0f172a",
+    "--color-text-secondary": "#475569",
+    "--color-text-inverted": "#ffffff",
+    "--color-border": "#e2e8f0",
+    "--color-border-light": "#f1f5f9",
+    "--color-heading": "#0f172a",
+    "--color-link": "#dc2626",
+    "--color-success": "#16a34a",
+    "--color-warning": "#d97706",
+    "--color-error": "#dc2626",
+    "--color-overlay": "rgba(0,0,0,0.5)"
+  }
+}

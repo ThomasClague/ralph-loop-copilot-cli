@@ -1,0 +1,27 @@
+{
+  "id": "indigo-modern",
+  "name": "Indigo Modern",
+  "tokens": {
+    "--color-primary": "#4f46e5",
+    "--color-primary-hover": "#4338ca",
+    "--color-primary-light": "#e0e7ff",
+    "--color-primary-dark": "#3730a3",
+    "--color-secondary": "#0f172a",
+    "--color-secondary-hover": "#1e293b",
+    "--color-accent": "#f59e0b",
+    "--color-background": "#ffffff",
+    "--color-surface": "#f8fafc",
+    "--color-surface-alt": "#f1f5f9",
+    "--color-text-primary": "#0f172a",
+    "--color-text-secondary": "#475569",
+    "--color-text-inverted": "#ffffff",
+    "--color-border": "#e2e8f0",
+    "--color-border-light": "#f1f5f9",
+    "--color-heading": "#0f172a",
+    "--color-link": "#4f46e5",
+    "--color-success": "#16a34a",
+    "--color-warning": "#d97706",
+    "--color-error": "#dc2626",
+    "--color-overlay": "rgba(0,0,0,0.5)"
+  }
+}
