@@ -3,8 +3,19 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 19
-**Current Task:** TASK-30 Complete
+**Tasks Completed:** 20
+**Current Task:** TASK-31 Complete
+
+---
+
+## 2026-02-28 — TASK-31: Implement Emergency section variant (emergency-callout)
+
+- Created `src/components/shared/emergency/EmergencyCallout.tsx` — high-contrast section using `--color-primary` background; centered urgency badge (availability text), bold headline, extra-large phone as `<a href="tel:...">` with Lucide Phone icon, optional service badges as outlined pills
+- All colors use CSS custom properties (`--color-primary`, `--color-text-inverted`)
+- Exported from `src/components/shared/emergency/index.ts`
+- Added `app/test-emergency/page.tsx` for visual verification
+- Playwright smoke test: red background with large phone number, icon, badge, and 4 service pills all visible; screenshot saved to `.agent/screenshots/TASK-31-1.png`
+- TypeScript: no errors; all 23 unit tests pass
 
 ---
 
