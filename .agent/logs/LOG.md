@@ -1,4 +1,9 @@
 
+## 2026-02-28 — TASK-87: Define EmailService interface
+
+- `next-app/src/lib/email/types.ts` already existed with correct types: `EmailPayload`, `EmailResult`, `EmailService`
+- All acceptance criteria met; TypeScript compiles clean
+
 ## 2026-02-28 — TASK-86: Implement export engine
 
 - Installed `jszip` npm package
