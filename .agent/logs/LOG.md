@@ -3,8 +3,18 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 32
-**Current Task:** TASK-43 Complete
+**Tasks Completed:** 33
+**Current Task:** TASK-44 Complete
+
+---
+
+## 2026-02-28 — TASK-44: Implement AI condensation via generateObject (Stage 1b Part B)
+
+- Created `next-app/src/lib/ai/condense.ts` — exports `condenseBusinessData(extractedData, crawlResult, industry?): Promise<CondensedProfile>`
+- Token threshold: if `extractedData.totalTokenEstimate < 4000`, maps ExtractedData directly to CondensedProfile without any API call
+- For large sites (>=4000 tokens), calls `generateObject` with `condensationSchema` and a prompt instructing the model to extract business name, services, contacts, testimonials, USPs, years in business, and a summary; passes optional industry context
+- Uses `model` from `src/lib/ai/client.ts`
+- 5 unit tests, all pass; full suite (41 tests) passes; TypeScript compiles clean
 
 ---
 
