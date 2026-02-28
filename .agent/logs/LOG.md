@@ -1,4 +1,10 @@
 
+## 2026-02-28 — TASK-96: Vitest unit tests for scraping client
+
+- Created `next-app/src/lib/scraping/__tests__/scrapingClient.test.ts`
+- 6 tests covering: health check ok/not-ok, successful crawl, network error (throws), health not-ok (throws), crawl returning error payload
+- All 170 unit tests pass
+
 ## 2026-02-28 — TASK-95: Vitest unit tests for interpolate utility
 
 - Test file already existed at `src/lib/utils/__tests__/interpolate.test.ts` (11 tests)
