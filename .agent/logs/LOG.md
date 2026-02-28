@@ -8,6 +8,14 @@
 
 ---
 
+## 2026-02-28 — TASK-67: POST /api/batches/[id]/media
+
+- Route `app/api/batches/[id]/media/route.ts` already implemented: accepts multipart/form-data, validates filename regex `{slot}-{industry}-{descriptor}.{ext}`, saves to `uploads/{batchId}/`, records in media table
+- Returns 201 with media record on success; 400 for invalid filename/type; 404 for missing batch; 413 for oversized file
+- All 9 unit tests pass; integration verified: valid upload returns 201 with record; invalid filename returns 400 with error message
+
+---
+
 ## 2026-02-28 — TASK-65: GET /api/batches and GET /api/batches/[id]
 
 - Added GET handler to `app/api/batches/route.ts` — calls `listBatches()`, returns JSON array
