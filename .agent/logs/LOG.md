@@ -1,3 +1,13 @@
+
+## 2026-02-28  TASK-83: Implement business info editor component
+
+- Replaced stub BusinessInfoEditor with fully functional collapsible panel
+- Fields: Business Name, Phone, Email, Location/Address  all bound to businessInfo prop
+- Each input calls onChange(updatedInfo) so parent auto-saves via debounce
+- Collapsible section card with chevron toggle, open by default
+- Verified in browser: edit page /edit/apex-plumbing-9797a0 renders editor with live data
+- Screenshot: .agent/screenshots/TASK-83-2.png
+- All 135 unit tests pass; tsc clean
 # Project Build Log
 
 `Current Status`
@@ -958,3 +968,4 @@
 - Returns 202 immediately; pipeline runs asynchronously in background
 - .then() saves siteConfig and sets status='ready'; .catch() sets status='failed' with error message
 - All 117 unit tests pass; tsc clean
+
