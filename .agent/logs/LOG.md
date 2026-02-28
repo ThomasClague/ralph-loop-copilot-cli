@@ -805,3 +805,9 @@
 - slugify.ts utility confirmed working (lowercase, hyphenate, 6-char nanoid suffix)
 - Integration test: created 3 prospects, retrieved all 3 successfully
 - All 117 unit tests pass, tsc clean
+
+## 2026-02-28  TASK-70
+- Implemented POST /api/generate/prospect/[slug] route
+- Returns 202 immediately; pipeline runs asynchronously in background
+- .then() saves siteConfig and sets status='ready'; .catch() sets status='failed' with error message
+- All 117 unit tests pass; tsc clean

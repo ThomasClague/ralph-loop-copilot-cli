@@ -68,7 +68,7 @@
   { "id": "TASK-67", "title": "GET /api/prospects — list prospects filtered by batch_id", "category": "api-endpoint", "specFilePath": ".agent/tasks/TASK-67.json", "passes": true },
   { "id": "TASK-68", "title": "GET /api/prospects/[id] — get single prospect with full data", "category": "api-endpoint", "specFilePath": ".agent/tasks/TASK-68.json", "passes": true },
   { "id": "TASK-69", "title": "PATCH /api/prospects/[id] — update prospect fields", "category": "api-endpoint", "specFilePath": ".agent/tasks/TASK-69.json", "passes": true },
-  { "id": "TASK-70", "title": "POST /api/prospects/[id]/generate — trigger full generation pipeline", "category": "api-endpoint", "specFilePath": ".agent/tasks/TASK-70.json", "passes": false },
+  { "id": "TASK-70", "title": "POST /api/prospects/[id]/generate — trigger full generation pipeline", "category": "api-endpoint", "specFilePath": ".agent/tasks/TASK-70.json", "passes": true },
   { "id": "TASK-71", "title": "POST /api/prospects/[id]/regenerate-section — regenerate single section copy", "category": "api-endpoint", "specFilePath": ".agent/tasks/TASK-71.json", "passes": false },
   { "id": "TASK-72", "title": "POST /api/prospects/[id]/regenerate-all — regenerate all copy", "category": "api-endpoint", "specFilePath": ".agent/tasks/TASK-72.json", "passes": false },
   { "id": "TASK-73", "title": "POST /api/prospects/[id]/export — trigger export pipeline", "category": "api-endpoint", "specFilePath": ".agent/tasks/TASK-73.json", "passes": false },
