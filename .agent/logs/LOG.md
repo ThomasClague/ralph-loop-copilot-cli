@@ -3,10 +3,19 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 34
-**Current Task:** TASK-45 Complete
+**Tasks Completed:** 35
+**Current Task:** TASK-46 Complete
 
 ---
+
+## 2026-02-28 — TASK-46: Implement content generation via generateObject (Stage 3)
+
+- Added `buildContentPrompt(structure, profile, prospect)` to `next-app/src/lib/ai/prompts.ts` — builds a specific, location-aware prompt referencing real services, testimonials and tone
+- Created `next-app/src/lib/ai/generate-content.ts` — exports `generateContent(structure, profile, prospect): Promise<SiteSection[]>`; makes a single `generateObject` call with `contentSchema`, maps results back to SiteSection array with id/type/variant/visible/content; missing sections fall back to empty object
+- 10 unit tests all pass; full suite (60 tests) passes; TypeScript compiles clean
+
+---
+
 
 ## 2026-02-28 — TASK-45: Implement structure decision via generateObject (Stage 2)
 

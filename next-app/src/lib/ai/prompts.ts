@@ -1,4 +1,4 @@
-import type { CondensedProfile } from "./schemas";
+import type { CondensedProfile, StructureDecision } from "./schemas";
 
 interface ProspectInput {
   businessName: string;
@@ -54,4 +54,35 @@ Rules:
 - Minimum 7, maximum 10 sections
 - Be specific to the industry and location
 - Choose sections that showcase what makes this business valuable`;
+}
+
+/**
+ * Builds the prompt for the content generation stage (Stage 3).
+ * Asks Claude to generate specific copy for every selected section.
+ */
+export function buildContentPrompt(
+  structure: StructureDecision,
+  profile: CondensedProfile,
+  prospect: ProspectInput,
+): string {
+  const { businessName, industry, location } = prospect;
+  const services = profile.services.slice(0, 8).join(", ");
+  const testimonialSnippets = profile.testimonials.slice(0, 2).join("; ");
+
+  return `Generate compelling, specific website content for ${businessName}, a ${industry} business in ${location}.
+
+Business profile: ${JSON.stringify(profile)}
+
+Website sections to generate: ${structure.sections.map((s) => s.type).join(", ")}
+
+Instructions:
+- Be specific to ${location} and surrounding areas — mention real local places
+- Reference actual services: ${services}
+- Mention specific materials, techniques, standards for ${industry}
+- Include social proof using: ${testimonialSnippets}
+- Never be generic or salesy
+- Always exceed the content depth of the existing site
+- Tone: ${structure.tone}
+- Generate content only for the sections listed above
+- For each section, fill in all relevant fields with compelling, specific copy`;
 }
