@@ -3,8 +3,19 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 44
-**Current Task:** TASK-56 Complete
+**Tasks Completed:** 45
+**Current Task:** TASK-57 Complete
+
+---
+
+## 2026-02-28 — TASK-57: Implement batch list page (/batches)
+
+- Created `app/(admin)/batches/page.tsx` — server component rendering all batches
+- Table with columns: Name (link), Industry (badge), Created (date), Prospects (total), Ready (green badge), View button
+- Queries prospect counts per batch via drizzle SQL aggregation (total + ready count)
+- Empty state with FolderOpen icon and "New Batch" button when no batches exist
+- 117 unit tests pass; TypeScript compiles clean
+- Screenshot: `.agent/screenshots/TASK-57-1.png` — table renders with "Test Batch 54 / Roofing" row
 
 ---
 
