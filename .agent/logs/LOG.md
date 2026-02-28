@@ -1,4 +1,12 @@
 
+## 2026-02-28 — TASK-93: Write Vitest unit tests for repository layer
+
+- Created `next-app/__unit-tests/db/testDb.ts` — `createTestDb()` utility that builds an in-memory SQLite DB with DDL applied and returns a drizzle instance
+- Created `next-app/__unit-tests/db/repository.test.ts` — 15 tests across 4 suites (batch, prospect, media, settings)
+- Tests use `vi.mock` to inject the in-memory DB and a fresh DB is created in `beforeEach` for isolation
+- Covers: createBatch, getBatch, listBatches, createProspects, listProspects, getProspectBySlug, updateProspect (including JSON serialisation), createMedia, getSetting, setSetting (upsert)
+- All 164 unit tests pass; TypeScript compiles clean
+
 ## 2026-02-28 — TASK-92: Implement template interpolation utility
 
 - Created `next-app/src/lib/utils/interpolate.ts` exporting `interpolate(template, data, options?)`
