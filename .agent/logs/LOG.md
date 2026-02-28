@@ -1,4 +1,12 @@
 
+## 2026-02-28 — TASK-98: Playwright E2E test for batch creation flow
+
+- Updated `playwright.config.ts` to scan both `__playwright-tests/` and `tests/e2e/` directories
+- Created `tests/e2e/pages/NewBatchPage.ts` — POM with goto, setBatchName, setIndustry, pasteCSV, clickParse, getPreviewRowCount, submit, getRedirectUrl
+- Created `tests/e2e/pages/BatchDetailPage.ts` — POM with goto, getProspectCount, getProspectStatus, clickGenerate
+- Created `tests/e2e/batchCreation.spec.ts` — E2E test: navigate to /batches/new, paste 3-row CSV, parse, verify 3 rows, submit, verify redirect to /batches/[id], verify 3 prospects in table
+- Screenshot: `.agent/screenshots/TASK-98-1.png`
+
 ## 2026-02-28 — TASK-97: Vitest unit tests for email services
 
 - Created `next-app/src/lib/email/__tests__/email.test.ts`
