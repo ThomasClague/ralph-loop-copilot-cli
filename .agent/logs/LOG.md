@@ -3,8 +3,18 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 51
-**Current Task:** TASK-65 Complete
+**Tasks Completed:** 68
+**Current Task:** TASK-68 Complete
+
+---
+
+## 2026-02-28 — TASK-68: GET /api/prospects/[slug] and PATCH /api/prospects/[slug]
+
+- Created `app/api/prospects/[slug]/route.ts` with GET and PATCH handlers
+- GET: calls `getProspectBySlug(slug)`, returns 404 if not found, returns full prospect with parsed JSON fields
+- PATCH: accepts partial body (`business_name`, `businessName`, `industry`, `location`, `phone`, `email`, `notes`, `page_data`, `siteContent`, `siteConfig`, `status`), calls `updateProspect(id, fields)`, returns updated prospect
+- Verified: GET known slug returns 200; PATCH notes field updates correctly; GET invalid slug returns 404
+- 117 unit tests pass; TypeScript compiles clean
 
 ---
 
