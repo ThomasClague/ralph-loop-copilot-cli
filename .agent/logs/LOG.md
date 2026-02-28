@@ -10,7 +10,20 @@
 
 ## Session Log
 
-## 2026-02-28 — TASK-22: Implement Process section variants (process-steps, process-timeline)
+## 2026-02-28 — TASK-23: Implement Service Area section variants (service-area-list, service-area-map)
+
+- Created `src/components/shared/service_area/ServiceAreaList.tsx` — headline + description + flex-wrap pill badges; shows first 8 areas with "+ X more" badge when there are more than 8
+- Created `src/components/shared/service_area/ServiceAreaMap.tsx` — two-column layout: Google Maps iframe (4:3 aspect ratio, sandbox attr) on one side, area pill list on the other; falls back to ServiceAreaList if no mapEmbedUrl provided
+- Both accept `{ content: ServiceAreaContent, business: BusinessInfo }` props; fall back to placeholder areas when `content.areas` is empty
+- All colors use CSS custom properties (`--color-bg`, `--color-primary`, `--color-primary-light`, `--color-surface`, etc.)
+- Exported from `src/components/shared/service_area/index.ts`
+- Added `app/test-service-area/page.tsx` for visual verification
+- Playwright smoke test: pills render correctly, "+ 4 more" badge visible; screenshot saved to `.agent/screenshots/TASK-23-1.png`
+- TypeScript: no errors; all 9 Playwright tests pass
+
+---
+
+
 
 - Created `src/components/shared/process/ProcessSteps.tsx` — horizontal flex row of numbered cards with blue circle step numbers and arrow (→) connectors between steps on desktop
 - Created `src/components/shared/process/ProcessTimeline.tsx` — vertical center-line layout with alternating left/right content cards on desktop, all left-aligned on mobile; numbered circles on the line
