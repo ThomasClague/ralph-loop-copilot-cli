@@ -22,7 +22,7 @@ function Invoke-Cleanup {
     $script:AGENT_PROCESS = $null
 
     # Remove temp files
-    foreach ($f in @($script:STEP_FILE, $script:PREVIEW_LINE_FILE, $script:OUTPUT_FILE, $script:FULL_OUTPUT_FILE)) {
+    foreach ($f in @($script:OUTPUT_FILE, $script:FULL_OUTPUT_FILE)) {
         if ($f -and (Test-Path $f -ErrorAction SilentlyContinue)) {
             Remove-Item $f -Force -ErrorAction SilentlyContinue
         }

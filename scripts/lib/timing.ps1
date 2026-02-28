@@ -89,9 +89,9 @@ function Update-SpinnerStep {
     $detected = Find-Step $Line
     if ($detected -and $detected -ne $script:CURRENT_STEP) {
         Save-StepTime $detected
-        # Write step to temp file for spinner to read
-        if ($script:STEP_FILE -and (Test-Path $script:STEP_FILE)) {
-            Set-Content -Path $script:STEP_FILE -Value $detected -NoNewline
+        # Update spinner state directly (thread-safe synchronized hashtable)
+        if ($script:SPINNER_STATE) {
+            $script:SPINNER_STATE.Step = $detected
         }
     }
 }

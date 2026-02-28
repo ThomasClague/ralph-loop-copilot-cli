@@ -10,6 +10,16 @@
 
 ## Session Log
 
+## 2026-02-28 — TASK-9: Initialize shadcn/ui in the project
+
+- Ran `npx shadcn@latest init -d` — detected Next.js + Tailwind CSS v4, created `components.json`, updated `app/globals.css` with CSS variables
+- Installed core components: button, badge, card, dialog, dropdown-menu, form, input, label, select, separator, sheet, sidebar, table, tabs, textarea
+- Installed additional components: progress, avatar, tooltip, popover, command
+- Components installed to `components/ui/` and `lib/utils.ts` created with `cn()` utility
+- TypeScript compiles without errors; unit tests pass; dev server returns 200
+
+---
+
 ## 2026-02-28 — TASK-8: Create .env.local.example with all required environment variables
 
 - Created `next-app/.env.local.example` with all required env vars (ANTHROPIC_API_KEY, PEXELS_API_KEY, RESEND_API_KEY, EMAIL_MODE=mock, EMAIL_FROM)

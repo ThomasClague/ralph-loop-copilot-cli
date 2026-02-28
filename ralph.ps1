@@ -82,10 +82,6 @@ $script:PREV_ITERATION_TIME = 0
 # Session ID for unique history file naming
 $script:SESSION_ID = (Get-Date).ToString("yyyyMMdd-HHmmss")
 
-# Temporary files for spinner communication
-$script:STEP_FILE = [System.IO.Path]::GetTempFileName()
-$script:PREVIEW_LINE_FILE = [System.IO.Path]::GetTempFileName()
-
 # Background process tracking
 $script:AGENT_PROCESS = $null
 $script:OUTPUT_FILE = $null
@@ -142,77 +138,58 @@ try {
         $script:OUTPUT_FILE = [System.IO.Path]::GetTempFileName()
         $script:FULL_OUTPUT_FILE = [System.IO.Path]::GetTempFileName()
 
-        # Run Copilot CLI in background
-        $env:PROMPT_CONTENT = $promptContent
+        # Write prompt to a temp file to avoid command-line length limits
+        $promptFile = [System.IO.Path]::GetTempFileName()
+        Set-Content -Path $promptFile -Value $promptContent -Encoding UTF8 -NoNewline
 
+        # Run Copilot CLI as a background process with stdout piped
         $psi = New-Object System.Diagnostics.ProcessStartInfo
         $psi.FileName = "copilot"
-        $psi.Arguments = "--autopilot --yolo --no-ask-user --max-autopilot-continues $MaxIterations -s -p `"$($promptContent -replace '"','\"')`""
+        $psi.Arguments = "--autopilot --yolo --no-ask-user --max-autopilot-continues $MaxIterations -s -p `"$(Get-Content $promptFile -Raw)`""
         $psi.RedirectStandardOutput = $true
         $psi.RedirectStandardError = $true
         $psi.UseShellExecute = $false
         $psi.CreateNoWindow = $true
         $psi.WorkingDirectory = $script:SCRIPT_DIR
+        $psi.StandardOutputEncoding = [System.Text.Encoding]::UTF8
+        $psi.StandardErrorEncoding  = [System.Text.Encoding]::UTF8
 
         $script:AGENT_PROCESS = [System.Diagnostics.Process]::Start($psi)
-        $agentPid = $script:AGENT_PROCESS.Id
 
-        # Read output asynchronously
-        $outputBuilder = [System.Text.StringBuilder]::new()
-        $fullOutputBuilder = [System.Text.StringBuilder]::new()
-
-        # Async output reading
-        $stdoutTask = $script:AGENT_PROCESS.StandardOutput.ReadToEndAsync()
+        # Collect stderr asynchronously (small volume, safe to ReadToEnd)
         $stderrTask = $script:AGENT_PROCESS.StandardError.ReadToEndAsync()
 
-        # Poll until process exits, reading output incrementally
-        # We use ReadToEnd since copilot output comes as a stream
-        while (-not $script:AGENT_PROCESS.HasExited) {
-            Start-Sleep -Milliseconds 200
+        # Read stdout line-by-line for live spinner/preview updates
+        $fullOutputBuilder = [System.Text.StringBuilder]::new()
+        $rawOutputBuilder  = [System.Text.StringBuilder]::new()
 
-            # Check if output file exists and has new content
-            # (Some copilot versions write to stdout, we capture via redirect)
-        }
+        while ($null -ne ($line = $script:AGENT_PROCESS.StandardOutput.ReadLine())) {
+            $null = $rawOutputBuilder.AppendLine($line)
 
-        # Wait for process to fully exit
-        $script:AGENT_PROCESS.WaitForExit()
-
-        # Get all output
-        $rawOutput = $stdoutTask.Result
-        $rawStderr = $stderrTask.Result
-
-        # Save raw output to file for processing
-        if ($rawOutput) {
-            Set-Content -Path $script:OUTPUT_FILE -Value $rawOutput -Encoding UTF8
-        }
-        if ($rawStderr) {
-            Add-Content -Path $script:OUTPUT_FILE -Value $rawStderr -Encoding UTF8
-        }
-
-        # Parse output lines
-        $outputLines = ($rawOutput + "`n" + $rawStderr) -split "`n"
-        $parsedLines = @()
-
-        foreach ($line in $outputLines) {
-            if (-not $line.Trim()) { continue }
             $parsed = ConvertFrom-JsonContent $line
             if ($parsed) {
-                $parsedLines += $parsed
                 $null = $fullOutputBuilder.AppendLine($parsed)
-
-                # Update spinner step
+                # Update spinner step detection + preview (live)
                 Update-SpinnerStep $parsed
-                # Update preview
                 Update-PreviewLine $parsed
             }
         }
 
-        # Write parsed output
+        $script:AGENT_PROCESS.WaitForExit()
+        $rawOutput = $rawOutputBuilder.ToString()
+        $rawStderr = $stderrTask.Result
+
+        # Save raw output to file for history/processing
+        Set-Content -Path $script:OUTPUT_FILE -Value ($rawOutput + $rawStderr) -Encoding UTF8
+
         $fullOutput = $fullOutputBuilder.ToString()
         Set-Content -Path $script:FULL_OUTPUT_FILE -Value $fullOutput -Encoding UTF8
 
         $OUTPUT = $fullOutput
         $script:AGENT_PROCESS = $null
+
+        # Clean up prompt temp file
+        Remove-Item $promptFile -Force -ErrorAction SilentlyContinue
 
         # Check for Copilot CLI not found error
         if ($rawOutput -match 'copilot: command not found|copilot: not found' -or

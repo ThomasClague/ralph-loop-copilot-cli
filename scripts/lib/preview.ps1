@@ -32,10 +32,10 @@ function Update-PreviewLine {
         $script:PREVIEW_BUFFER.RemoveAt(0)
     }
 
-    # Write last line to preview file for spinner to read
-    if ($script:PREVIEW_LINE_FILE -and (Test-Path $script:PREVIEW_LINE_FILE)) {
-        $truncated = Get-TruncatedLine $Line 20
-        Set-Content -Path $script:PREVIEW_LINE_FILE -Value $truncated -NoNewline
+    # Update spinner preview directly (thread-safe synchronized hashtable)
+    $truncated = Get-TruncatedLine $Line 20
+    if ($script:SPINNER_STATE) {
+        $script:SPINNER_STATE.Preview = $truncated
     }
 }
 
