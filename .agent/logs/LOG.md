@@ -1,5 +1,11 @@
 
-## 2026-02-28 — TASK-96: Vitest unit tests for scraping client
+## 2026-02-28 — TASK-97: Vitest unit tests for email services
+
+- Created `next-app/src/lib/email/__tests__/email.test.ts`
+- 10 tests covering: MockEmailService (success, no-throw, messageId format), ResendEmailService (success, error, payload passthrough), getEmailService factory (mock mode, default mode, live with key, live without key throws)
+- All 180 unit tests pass
+
+
 
 - Created `next-app/src/lib/scraping/__tests__/scrapingClient.test.ts`
 - 6 tests covering: health check ok/not-ok, successful crawl, network error (throws), health not-ok (throws), crawl returning error payload
