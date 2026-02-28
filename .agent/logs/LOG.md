@@ -1016,3 +1016,13 @@
 - .then() saves siteConfig and sets status='ready'; .catch() sets status='failed' with error message
 - All 117 unit tests pass; tsc clean
 
+
+---
+
+## 2026-02-28  TASK-89: Implement ResendEmailService
+
+- Updated src/lib/email/resend.ts to use @resend/node SDK (Resend class) instead of raw fetch
+- Uses replyTo field (camelCase) per SDK v6 types
+- Created __unit-tests/email/resend.test.ts with 3 tests (success, error, custom from)
+- All 138 unit tests pass; TypeScript compiles clean
+

@@ -1,3 +1,4 @@
+import { Resend } from "resend";
 import type { EmailService, EmailPayload, EmailResult } from "./types";
 
 export class ResendEmailService implements EmailService {
@@ -7,30 +8,24 @@ export class ResendEmailService implements EmailService {
     this.apiKey = apiKey;
   }
 
+  /** Send an email via the Resend API using the official SDK. */
   async send(payload: EmailPayload): Promise<EmailResult> {
+    const resend = new Resend(this.apiKey);
     const from = payload.from ?? "onboarding@resend.dev";
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${this.apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from,
-        to: payload.to,
-        subject: payload.subject,
-        html: payload.html,
-        text: payload.text,
-        reply_to: payload.replyTo,
-      }),
+
+    const { data, error } = await resend.emails.send({
+      from,
+      to: payload.to,
+      subject: payload.subject,
+      html: payload.html,
+      text: payload.text,
+      replyTo: payload.replyTo,
     });
 
-    if (!res.ok) {
-      const err = await res.text();
-      return { success: false, mode: "live", error: err };
+    if (error) {
+      return { success: false, mode: "live", error: error.message };
     }
 
-    const data = (await res.json()) as { id?: string };
-    return { success: true, messageId: data.id, mode: "live" };
+    return { success: true, messageId: data?.id, mode: "live" };
   }
 }
