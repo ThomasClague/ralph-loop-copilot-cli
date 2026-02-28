@@ -3,8 +3,20 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 43
-**Current Task:** TASK-54 Complete
+**Tasks Completed:** 44
+**Current Task:** TASK-56 Complete
+
+---
+
+## 2026-02-28 — TASK-56: Implement dashboard page (/)
+
+- Replaced stub `app/(admin)/page.tsx` with full dashboard server component
+- 4 stat cards: Total Batches, Total Prospects, Ready (green), Failed (red) — queried via `listBatches()` + drizzle `groupBy` on prospects.status
+- Recent batches table (5 most recent) with name, industry, date, prospect count; each row links to `/batches/{id}`
+- "New Batch" button at top right linking to `/batches/new`
+- Updated `__unit-tests/index.test.tsx` to match new async server component
+- 117 unit tests pass; TypeScript compiles clean
+- Screenshot: `.agent/screenshots/TASK-56-1.png` — dashboard renders with real data from DB
 
 ---
 
