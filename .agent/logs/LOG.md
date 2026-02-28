@@ -3,8 +3,19 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 24
-**Current Task:** TASK-35 Complete
+**Tasks Completed:** 25
+**Current Task:** TASK-36 Complete
+
+---
+
+## 2026-02-28 — TASK-36: Implement Video section variant (video-embed)
+
+- Created `src/components/shared/video/VideoEmbed.tsx` — headline + 16:9 iframe embed via `aspect-video` class; converts YouTube `watch?v=ID` and `youtu.be/ID` URLs to `youtube.com/embed/ID`; converts `vimeo.com/ID` to `player.vimeo.com/video/ID`; shows poster image with play button overlay if URL is not embeddable; placeholder div when neither is available
+- All colors use CSS custom properties (`--color-bg`, `--color-heading`, `--color-surface`, `--color-border`, `--color-text`, `--color-primary`)
+- Exported from `src/components/shared/video/index.ts`
+- Added `app/test-video/page.tsx` for visual verification
+- Playwright screenshot: "Watch How We Work" headline + YouTube embed at 16:9 aspect ratio; screenshot saved to `.agent/screenshots/TASK-36-1.png`
+- TypeScript: no errors; all 23 unit tests pass
 
 ---
 
