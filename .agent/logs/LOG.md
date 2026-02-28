@@ -3,8 +3,20 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 30
-**Current Task:** TASK-41 Complete
+**Tasks Completed:** 31
+**Current Task:** TASK-42 Complete
+
+---
+
+## 2026-02-28 — TASK-42: Define Zod schemas for all AI pipeline outputs
+
+- Created `next-app/src/lib/ai/schemas.ts` with three exported schemas:
+  - `condensationSchema` — validates condensed business profile (businessName, phones, emails, address, services, testimonials, uniquePoints, yearsInBusiness, summary)
+  - `structureSchema` — validates structure decision (sections array with type enum + variant + reasoning, tone enum, paletteHint); sections constrained to 7–10 items
+  - `contentSchema` — validates all 21 section content types as optional keys on a single object (mirrors TypeScript interfaces from TASK-16)
+- Exported inferred TypeScript types: `CondensedProfile`, `StructureDecision`, `ContentGeneration`
+- All fields in contentSchema are `.optional()` for AI leniency
+- TypeScript compiles without errors; all unit tests and 15 E2E tests pass
 
 ---
 
