@@ -4,6 +4,20 @@
 =================
 **Last Updated:** 2026-02-28
 
+## 2026-02-28 — TASK-79: Implement edit page layout (/edit/[slug])
+
+- Created `app/edit/[slug]/page.tsx` — client component, split-pane layout (340px left + flex-1 right)
+- Created `app/api/palettes/route.ts` — GET endpoint returning all palette metadata + tokens
+- Created stub components in `components/edit/`: `SectionListPanel`, `PalettePicker`, `ContentEditorDrawer`, `BusinessInfoEditor`, `ExportButton` (stubs for TASK-80–84)
+- Left panel: business info, palette picker (instant switch), section list, content editor placeholder, export button
+- Right panel: `SiteRenderer` wrapped in `PaletteProvider` — re-renders on palette/config change
+- Auto-save: 1500ms debounce → PATCH /api/prospects/[slug] with siteConfig; "Saved" indicator in top bar
+- Integration verified: edit page at /edit/test-plumber-task79-ac87a5 shows split layout, hero section, amber palette applied
+- Screenshot: `.agent/screenshots/TASK-79-1.png`
+- All 135 unit tests pass; TypeScript compiles clean; 6 Playwright tests pass
+
+---
+
 ## 2026-02-28 — TASK-78: Implement preview page (/preview/[slug])
 
 - Created `app/preview/[slug]/page.tsx` — server component, loads prospect by slug, calls `notFound()` if missing/not-ready/no siteConfig
