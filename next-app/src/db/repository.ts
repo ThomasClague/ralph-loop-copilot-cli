@@ -151,6 +151,33 @@ export async function listSentEmailsByProspect(prospectId: string): Promise<Sent
   return db.select().from(sentEmails).where(eq(sentEmails.prospectId, prospectId));
 }
 
+export interface SentEmailWithProspect extends SentEmail {
+  prospectSlug: string;
+  businessName: string;
+}
+
+export async function listAllSentEmails(): Promise<SentEmailWithProspect[]> {
+  const rows = await db
+    .select({
+      id: sentEmails.id,
+      prospectId: sentEmails.prospectId,
+      templateId: sentEmails.templateId,
+      toEmail: sentEmails.toEmail,
+      fromEmail: sentEmails.fromEmail,
+      subject: sentEmails.subject,
+      bodyHtml: sentEmails.bodyHtml,
+      bodyText: sentEmails.bodyText,
+      status: sentEmails.status,
+      providerId: sentEmails.providerId,
+      sentAt: sentEmails.sentAt,
+      prospectSlug: prospects.slug,
+      businessName: prospects.businessName,
+    })
+    .from(sentEmails)
+    .innerJoin(prospects, eq(sentEmails.prospectId, prospects.id));
+  return rows;
+}
+
 // ---------------------------------------------------------------------------
 // Settings CRUD
 // ---------------------------------------------------------------------------

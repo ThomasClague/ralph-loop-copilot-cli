@@ -3,8 +3,24 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 71
-**Current Task:** TASK-72 Complete
+**Tasks Completed:** 72
+**Current Task:** TASK-73 Complete
+
+---
+
+## 2026-02-28 — TASK-73: POST /api/email/send and GET /api/email/sent
+
+- Created `src/lib/email/types.ts` — EmailService interface with EmailPayload, EmailResult
+- Created `src/lib/email/mock.ts` — MockEmailService (logs to console, writes to public/mock-emails/)
+- Created `src/lib/email/resend.ts` — ResendEmailService (Resend API integration)
+- Created `src/lib/email/factory.ts` — getEmailService() reads email_mode setting, returns mock or live
+- Created `src/lib/email/templates/coldOutreach.ts` and `followUp.ts` — HTML/text email templates
+- Created `src/lib/email/templates/index.ts` — TEMPLATES registry
+- Added `listAllSentEmails()` to repository with prospect join
+- Created `app/api/email/send/route.ts` — POST handler validates prospect, renders template, sends email, stores sent_emails record
+- Created `app/api/email/sent/route.ts` — GET handler returns all sent emails with prospect info
+- Integration verified: GET /api/email/sent returns 200 []; POST validation returns 400/404 correctly
+- 135 unit tests pass; TypeScript compiles clean
 
 ---
 

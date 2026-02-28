@@ -1,0 +1,23 @@
+import * as fs from "fs";
+import * as path from "path";
+import type { EmailService, EmailPayload, EmailResult } from "./types";
+
+export class MockEmailService implements EmailService {
+  async send(payload: EmailPayload): Promise<EmailResult> {
+    console.log("[MockEmailService] Sending email:", payload);
+
+    const mockEmailsDir = path.resolve("./public/mock-emails");
+    if (!fs.existsSync(mockEmailsDir)) {
+      fs.mkdirSync(mockEmailsDir, { recursive: true });
+    }
+
+    const filename = `${Date.now()}-${payload.to.replace(/[^a-z0-9]/gi, "_")}.html`;
+    fs.writeFileSync(path.join(mockEmailsDir, filename), payload.html);
+
+    return {
+      success: true,
+      messageId: `mock-${Date.now()}`,
+      mode: "mock",
+    };
+  }
+}
