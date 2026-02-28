@@ -82,7 +82,7 @@
   { "id": "TASK-81", "title": "Implement palette picker control (instant palette switch)", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-81.json", "passes": true },
   { "id": "TASK-82", "title": "Implement content editor drawer (form for all text fields per section)", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-82.json", "passes": true },
   { "id": "TASK-83", "title": "Implement business info editor panel", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-83.json", "passes": true },
-  { "id": "TASK-84", "title": "Implement export button and status dropdown in edit page", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-84.json", "passes": false },
+  { "id": "TASK-84", "title": "Implement export button and status dropdown in edit page", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-84.json", "passes": true },
   { "id": "TASK-85", "title": "Create site-template scaffold (exportable standalone Next.js project)", "category": "functional", "specFilePath": ".agent/tasks/TASK-85.json", "passes": false },
   { "id": "TASK-86", "title": "Implement export engine (copy scaffold, inject config, download images)", "category": "functional", "specFilePath": ".agent/tasks/TASK-86.json", "passes": false },
   { "id": "TASK-87", "title": "Define EmailService interface", "category": "functional", "specFilePath": ".agent/tasks/TASK-87.json", "passes": false },

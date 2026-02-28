@@ -27,7 +27,6 @@ export default function EditPage() {
   const [activePalette, setActivePalette] = useState<Palette | null>(null);
   const [saveState, setSaveState] = useState<SaveState>("idle");
   const [batchId, setBatchId] = useState<string | null>(null);
-  const [prospectId, setProspectId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -51,7 +50,6 @@ export default function EditPage() {
         const palettesData: Palette[] = await palettesRes.json();
 
         setBatchId(prospect.batchId);
-        setProspectId(prospect.id);
         setPalettes(palettesData);
 
         if (!prospect.siteConfig) {
@@ -200,7 +198,7 @@ export default function EditPage() {
             batchId={batchId ?? undefined}
           />
 
-          {prospectId && <ExportButton prospectId={prospectId} />}
+          <ExportButton slug={slug} exportUrl={null} />
         </div>
       </aside>
 

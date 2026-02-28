@@ -1,5 +1,16 @@
 
-## 2026-02-28  TASK-83: Implement business info editor component
+## 2026-02-28  TASK-84: Implement export button with status dropdown
+
+- Replaced stub `ExportButton` with full implementation using shadcn `DropdownMenu`
+- Props: `slug: string, exportUrl: string | null` (replaces `prospectId`)
+- Dropdown options: "Export as ZIP" (POST /api/export/[slug]) and optional "View Published" (if exportUrl set)
+- Loading spinner on button while export in-flight; success/error toast below button
+- Created stub `app/api/export/[slug]/route.ts` (returns 501 until TASK-86 implements engine)
+- Updated edit page to pass `slug` and `exportUrl={null}` instead of `prospectId`
+- Playwright E2E: `__playwright-tests/task84.spec.ts` — 3/3 tests pass (renders, dropdown opens, error toast on 501)
+- Screenshot: `.agent/screenshots/TASK-84-1.png`, `TASK-84-2.png`, `TASK-84-3.png`
+- All 135 unit tests pass; TypeScript compiles clean
+
 
 - Replaced stub BusinessInfoEditor with fully functional collapsible panel
 - Fields: Business Name, Phone, Email, Location/Address  all bound to businessInfo prop
