@@ -3,8 +3,21 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 47
-**Current Task:** TASK-59 Complete
+**Tasks Completed:** 48
+**Current Task:** TASK-60 Complete
+
+---
+
+## 2026-02-28 — TASK-60: Implement media upload area on new batch page
+
+- Created `src/components/media-upload-area.tsx` — `MediaUploadArea` component with drag-and-drop, filename validation (regex: `{slot}-{industry}-{descriptor}.{ext}`), and per-file status badges (ready/uploading/uploaded/error)
+- Component exposes `MediaUploadAreaRef` with `uploadFiles(batchId)` and `hasFiles()` via `forwardRef + useImperativeHandle`
+- Added collapsible "Media Library (Optional)" section to `app/(admin)/batches/new/page.tsx` below the tabs
+- Both `handleSubmit` and `handleSingleSubmit` upload queued media files after batch creation
+- Installed `shadcn/ui` Collapsible component
+- Playwright E2E test: `__playwright-tests/task60.spec.ts` — validates dropzone visible, valid file shows slot/industry badges, invalid file shows error
+- 117 unit tests pass; TypeScript compiles clean; ESLint clean
+- Screenshots: `.agent/screenshots/TASK-60-1.png` (collapsed), `.agent/screenshots/TASK-60-2.png` (expanded with dropzone)
 
 ---
 

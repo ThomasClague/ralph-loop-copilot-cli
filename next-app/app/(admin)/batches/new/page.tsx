@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -24,8 +24,17 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
-import { AlertTriangle, ArrowLeft, X } from "lucide-react";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { AlertTriangle, ArrowLeft, ChevronDown, X } from "lucide-react";
 import Link from "next/link";
+import {
+  MediaUploadArea,
+  type MediaUploadAreaRef,
+} from "@/src/components/media-upload-area";
 
 const INDUSTRIES = [
   "roofing",
@@ -241,6 +250,10 @@ export default function NewBatchPage() {
   const [singleList, setSingleList] = useState<ParsedRow[]>([]);
   const [singleFormError, setSingleFormError] = useState<string | null>(null);
 
+  // Media upload ref
+  const mediaRef = useRef<MediaUploadAreaRef>(null);
+  const [mediaOpen, setMediaOpen] = useState(false);
+
   function handleParse() {
     const rows = parseInput(pasteInput, batchIndustry);
     setParsedRows(rows);
@@ -310,6 +323,11 @@ export default function NewBatchPage() {
       if (!prospectsRes.ok) {
         const data = await prospectsRes.json();
         throw new Error(data.error ?? "Failed to create prospects");
+      }
+
+      // Upload any queued media files
+      if (mediaRef.current?.hasFiles()) {
+        await mediaRef.current.uploadFiles(batch.id);
       }
 
       router.push(`/batches/${batch.id}`);
@@ -394,6 +412,11 @@ export default function NewBatchPage() {
       if (!prospectsRes.ok) {
         const data = await prospectsRes.json();
         throw new Error(data.error ?? "Failed to create prospects");
+      }
+
+      // Upload any queued media files
+      if (mediaRef.current?.hasFiles()) {
+        await mediaRef.current.uploadFiles(batch.id);
       }
 
       router.push(`/batches/${batch.id}`);
@@ -813,6 +836,28 @@ export default function NewBatchPage() {
           )}
         </TabsContent>
       </Tabs>
+
+      {/* Media Library (Optional) */}
+      <Collapsible open={mediaOpen} onOpenChange={setMediaOpen}>
+        <CollapsibleTrigger asChild>
+          <Button
+            variant="outline"
+            className="flex w-full items-center justify-between"
+            type="button"
+          >
+            <span className="font-medium">Media Library (Optional)</span>
+            <ChevronDown
+              className={[
+                "h-4 w-4 transition-transform",
+                mediaOpen ? "rotate-180" : "",
+              ].join(" ")}
+            />
+          </Button>
+        </CollapsibleTrigger>
+        <CollapsibleContent className="border border-t-0 rounded-b-lg p-4">
+          <MediaUploadArea ref={mediaRef} />
+        </CollapsibleContent>
+      </Collapsible>
 
       {/* Error */}
       {error && <p className="text-sm text-destructive">{error}</p>}
