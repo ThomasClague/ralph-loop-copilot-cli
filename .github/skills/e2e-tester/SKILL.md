@@ -2,11 +2,7 @@
 name: e2e-tester
 description: >
   Playwright E2E testing patterns.
-  Trigger: When writing Playwright E2E tests (Page Object Model, selectors, MCP exploration workflow).
-metadata:
-  scope: [root, ui]
-  auto_invoke: "Writing Playwright E2E tests"
-allowed-tools: Read, Edit, Write, Glob, Grep, Bash, WebFetch, WebSearch, Task
+  Use when writing Playwright E2E tests (Page Object Model, selectors, MCP exploration workflow).
 ---
 
 Before you start:

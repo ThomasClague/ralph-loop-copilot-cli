@@ -2,11 +2,6 @@
 name: prd-creator
 description: Guides creation of comprehensive Product Requirement Documents (PRDs) for software projects through structured questioning and validation, then generates implementation task lists in JSON format. Use when users want to document a software idea, create specifications for development, plan a new application feature/bug, or break down requirements into actionable tasks. Transforms ideas into implementation-ready documents with verifiable pass criteria.
 license: MIT
-metadata:
-  author: pageai
-  version: '1.0.1'
-  tags: prd, product requirements, software development, documentation, task generation
-  website: https://pageai.pro/blog/long-running-ai-coding-agents-ralph-loop#step-2-write-your-requirements
 ---
 
 # PRD Creation Assistant

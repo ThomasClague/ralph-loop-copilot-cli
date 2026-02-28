@@ -263,15 +263,14 @@ Ralph uses semantic tags to communicate status:
 ├── logs/
 │   └── LOG.md          # Progress log (auto-created)
 ├── history/            # Iteration output logs
-├── screenshots/        # Task screenshots
-└── skills/             # Shared skills (source of truth)
+└── screenshots/        # Task screenshots
 
 .github/
 ├── copilot-instructions.md  # Repository-wide Copilot instructions
 ├── agents/                  # Custom agent profiles
 │   ├── ralph-implementer.md
 │   └── ralph-reviewer.md
-└── skills/             # Symlink → .agent/skills/
+└── skills/             # Skills (source of truth)
 
 .copilot/
 ├── mcp-config.json     # MCP server configuration
@@ -280,7 +279,7 @@ Ralph uses semantic tags to communicate status:
 
 ## Skills
 
-Skills are reusable agent capabilities that provide specialized knowledge and workflows. The canonical source is `.agent/skills/`, symlinked to `.github/skills/` for Copilot CLI compatibility.
+Skills are reusable agent capabilities that provide specialized knowledge and workflows. Skills are stored in `.github/skills/` where Copilot CLI automatically discovers them.
 
 Copilot CLI loads skills from these locations (priority order):
 1. `.github/skills/` (project)
@@ -306,18 +305,14 @@ Copilot CLI loads skills from these locations (priority order):
 
 ### Skills Directory Structure
 
-Skills are symlinked from `.agent/skills/` (source of truth) to Copilot CLI's search paths:
+Skills live in `.github/skills/`, which Copilot CLI discovers automatically:
 
 ```
- # Source of truth
-.agent/skills/
+.github/skills/
     ├── component-refactoring/
     ├── e2e-tester/
     ├── postgres/
     ├── ...
-
-# Symlink → .agent/skills/
-.github/skills/
 ```
 
 ## Custom Agents

@@ -2,9 +2,6 @@
 name: postgres
 description: PostgreSQL best practices, query optimization, connection troubleshooting, and performance improvement. Load when working with Postgres databases.
 license: MIT
-metadata:
-  author: planetscale
-  version: "1.0.0"
 ---
 
 # PlanetScale Postgres

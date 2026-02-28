@@ -3,7 +3,7 @@ name: frontend-testing
 description: Generate Vitest + React Testing Library tests for frontend components, hooks, and utilities. Triggers on testing, spec files, coverage, Vitest, RTL, unit tests, integration tests, or write/review test requests.
 ---
 
-This skill enables Claude to generate high-quality, comprehensive frontend tests following established conventions and best practices.
+This skill enables Copilot to generate high-quality, comprehensive frontend tests following established conventions and best practices.
 
 ## When to Apply This Skill
 

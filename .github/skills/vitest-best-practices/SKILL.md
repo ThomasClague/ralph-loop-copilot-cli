@@ -1,7 +1,6 @@
 ---
 name: vitest-best-practices
 description: Comprehensive vitest testing patterns covering test structure, AAA pattern, parameterized tests, assertions, mocking, test doubles, error handling, async testing, and performance optimization. Use when writing, reviewing, or refactoring vitest tests, or when user mentions vitest, testing, TDD, test coverage, mocking, assertions, or test files (*.test.ts, *.spec.ts).
-compatibility: Requires vitest testing framework
 ---
 
 # Vitest Best Practices
