@@ -3,8 +3,19 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 25
-**Current Task:** TASK-36 Complete
+**Tasks Completed:** 26
+**Current Task:** TASK-37 Complete
+
+---
+
+## 2026-02-28 — TASK-37: Implement Guarantee section variant (guarantee-badge)
+
+- Created `src/components/shared/guarantee/GuaranteeBadge.tsx` — two-column layout: left side has large circular badge with dashed `--color-primary` border and bold blue `badgeText`; right side has headline + body copy
+- Badge styled as a physical guarantee stamp/seal using CSS (circle, bold text, dashed border, double ring via box-shadow)
+- Exported from `src/components/shared/guarantee/index.ts`
+- Added `app/test-guarantee/page.tsx` for visual verification
+- Playwright screenshot: circular badge "100% Satisfaction Guaranteed" on left, headline and body on right; screenshot saved to `.agent/screenshots/TASK-37-1.png`
+- TypeScript: no errors; all 23 unit tests pass
 
 ---
 
