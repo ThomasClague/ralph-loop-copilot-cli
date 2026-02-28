@@ -10,7 +10,20 @@
 
 ## Session Log
 
-## 2026-02-28 — TASK-12: Implement branding extraction
+## 2026-02-28 — TASK-13: Implement POST /api/crawl endpoint on Express
+
+- Implemented `POST /api/crawl` route in `next-app/src/scraper/server.ts`
+- Validates `url` field: returns 400 if missing or not a valid http/https URL
+- Calls `crawlSite(url, maxPages)` then maps each raw page through `extractPageData` using `cheerio.load`
+- Returns `{ success: true, pages: PageData[], branding: BrandingData }` on success
+- Returns `{ success: false, error }` with 400 or 500 on failure
+- `maxPages` defaults to 10 if not provided
+- Tested: `https://example.com` returns success=true, 1 page, branding object; error cases return 400
+- TypeScript compiles without errors; all 23 unit tests pass
+
+---
+
+
 
 - Implemented `extractBranding(rawHtml, pageUrl): BrandingData` in `next-app/src/scraper/branding.ts`
 - Extracts hex and RGB colors from CSS, converts RGB→hex, normalises 3-char hex, filters near-white/near-black, returns up to 5 brand colors

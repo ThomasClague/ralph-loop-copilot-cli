@@ -11,7 +11,7 @@
   { "id": "TASK-10", "title": "Implement Crawlee CheerioCrawler service", "category": "integration", "specFilePath": ".agent/tasks/TASK-10.json", "passes": true },
   { "id": "TASK-11", "title": "Implement page data extraction (title, meta, headings, body, links, images, phones, emails)", "category": "functional", "specFilePath": ".agent/tasks/TASK-11.json", "passes": true },
   { "id": "TASK-12", "title": "Implement branding extraction (colors, fonts, logo from homepage HTML)", "category": "functional", "specFilePath": ".agent/tasks/TASK-12.json", "passes": true },
-  { "id": "TASK-13", "title": "Implement POST /api/crawl endpoint on Express", "category": "api-endpoint", "specFilePath": ".agent/tasks/TASK-13.json", "passes": false },
+  { "id": "TASK-13", "title": "Implement POST /api/crawl endpoint on Express", "category": "api-endpoint", "specFilePath": ".agent/tasks/TASK-13.json", "passes": true },
   { "id": "TASK-14", "title": "Implement GET /api/health endpoint on Express", "category": "api-endpoint", "specFilePath": ".agent/tasks/TASK-14.json", "passes": false },
   { "id": "TASK-15", "title": "Implement scraping client in Next.js (lib/scraping/client.ts)", "category": "functional", "specFilePath": ".agent/tasks/TASK-15.json", "passes": false },
   { "id": "TASK-16", "title": "Define shared TypeScript types for all section content and site types", "category": "functional", "specFilePath": ".agent/tasks/TASK-16.json", "passes": false },
