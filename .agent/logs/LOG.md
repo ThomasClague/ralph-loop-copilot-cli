@@ -31,7 +31,14 @@
 
 ---
 
-## 2026-02-28 — TASK-2: Configure Drizzle ORM with SQLite
+## 2026-02-28 — TASK-3: Define database schema for all tables
+
+- Defined all 5 tables in `next-app/src/db/schema.ts`: `batches`, `prospects`, `media`, `sentEmails`, `settings`
+- `prospects.slug` has unique constraint; `status` defaults to `'pending'`
+- All JSON blob fields stored as `text`; FK references properly set
+- Ran `drizzle-kit generate` → produced `drizzle/0000_flat_silver_samurai.sql` with all 5 CREATE TABLE statements
+- TypeScript compiles without errors
+
 
 - Created `next-app/src/db/index.ts` with Drizzle client connected to `./data/prospectforge.db`
 - Created `next-app/src/db/schema.ts` (placeholder, expanded in TASK-3)
