@@ -3,8 +3,18 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 68
-**Current Task:** TASK-68 Complete
+**Tasks Completed:** 69
+**Current Task:** TASK-69 Complete
+
+---
+
+## 2026-02-28 — TASK-69: POST /api/crawl proxy route
+
+- Created `app/api/crawl/route.ts` — proxies POST requests to Express sidecar at `http://localhost:3001/api/crawl`
+- Validates `url` field (returns 400 if missing), forwards to sidecar, returns sidecar response
+- Returns 503 if sidecar is unreachable
+- Verified: POST with valid URL returns crawl data (sidecar running); missing url returns 400
+- 117 unit tests pass; TypeScript compiles clean
 
 ---
 
