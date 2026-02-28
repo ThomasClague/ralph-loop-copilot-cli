@@ -56,7 +56,7 @@
   { "id": "TASK-55", "title": "Implement root layout with sidebar navigation", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-55.json", "passes": true },
   { "id": "TASK-56", "title": "Implement dashboard page (/)", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-56.json", "passes": true },
   { "id": "TASK-57", "title": "Implement batch list page (/batches)", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-57.json", "passes": true },
-  { "id": "TASK-58", "title": "Implement new batch page — Tab A (paste/CSV import with parsing)", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-58.json", "passes": false },
+  { "id": "TASK-58", "title": "Implement new batch page — Tab A (paste/CSV import with parsing)", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-58.json", "passes": true },
   { "id": "TASK-59", "title": "Implement new batch page — Tab B (single entry form)", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-59.json", "passes": false },
   { "id": "TASK-60", "title": "Implement media upload area on new batch page", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-60.json", "passes": false },
   { "id": "TASK-61", "title": "Implement batch detail page with prospect table and status badges", "category": "ui-ux", "specFilePath": ".agent/tasks/TASK-61.json", "passes": false },

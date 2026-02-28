@@ -3,8 +3,24 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 45
-**Current Task:** TASK-57 Complete
+**Tasks Completed:** 46
+**Current Task:** TASK-58 Complete
+
+---
+
+## 2026-02-28 — TASK-58: Implement new batch page — Tab A (paste/CSV import with parsing)
+
+- Created `app/(admin)/batches/new/page.tsx` — client component with batch name/industry inputs and shadcn Tabs
+- Tab A: textarea for CSV/TSV/one-per-line input, Parse button, editable preview table with duplicate highlighting (amber rows + warning icon badge)
+- CSV parser handles comma/tab/pipe delimiters, quoted fields, auto-detects headers, maps column names positionally when no header row
+- Duplicate detection: rows with same business_name + industry are flagged with amber styling
+- Industry field in each table row uses shadcn Select dropdown
+- Submit: POST /api/batches → POST /api/prospects → redirect to /batches/[id]
+- Created `app/api/batches/route.ts` — POST handler (dependency: TASK-64 foundation)
+- Created `app/api/prospects/route.ts` — POST handler (dependency: TASK-66 foundation)
+- Created `src/lib/utils/slugify.ts` — URL-safe slug with 6-char UUID suffix
+- 117 unit tests pass; TypeScript compiles clean; ESLint clean
+- Screenshot: `.agent/screenshots/TASK-58-2.png` — page renders with parsed table, 2 duplicate rows highlighted
 
 ---
 
