@@ -3,10 +3,20 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 36
-**Current Task:** TASK-47 Complete
+**Tasks Completed:** 37
+**Current Task:** TASK-48 Complete
 
 ---
+
+## 2026-02-28 — TASK-48: Implement color theming logic (Stage 6 — brand-derived or palette-mapped)
+
+- Created `next-app/src/lib/ai/theming.ts` — exports `selectPalette(branding, paletteHint): ThemeSelection`
+- Brand-derived path: takes first brand color as primary, derives hover/light/dark variants via darken/lighten helpers, uses second brand color as accent or falls back to amber, sets text-inverted based on perceived luminance
+- Hint-matching path: substring-matches paletteHint against 8 keyword groups → closest pre-built palette; fallback to first available palette
+- 16 unit tests all pass; full suite (83 tests) passes; TypeScript compiles clean
+
+---
+
 
 ## 2026-02-28 — TASK-47: Implement variant assignment via deterministic hash (Stage 5)
 
