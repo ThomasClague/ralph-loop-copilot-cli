@@ -10,6 +10,15 @@
 
 ## Session Log
 
+## 2026-02-28 — TASK-16: Define shared TypeScript types for all section content and site types
+
+- Created `next-app/src/types/site.ts` with all shared TypeScript interfaces
+- Exports: `BusinessInfo`, `SiteConfig`, `SectionType`, `SiteSection`, `SectionContent`
+- Content types for all 21 section types (HeroContent, ServicesContent, etc.)
+- TypeScript compiles without errors
+
+---
+
 ## 2026-02-28 — TASK-15: Implement scraping client in Next.js
 
 - Created `next-app/src/lib/scraping/types.ts` — re-exports types from `src/scraper/types.ts`
