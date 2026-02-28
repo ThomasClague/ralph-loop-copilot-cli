@@ -1,4 +1,15 @@
 
+## 2026-02-28 — TASK-94: Vitest unit tests for AI pipeline stages
+
+- All 6 required AI pipeline test files already existed and were passing
+- `assign-variants.test.ts` — 7 tests for deterministic variant assignment
+- `generate-structure.test.ts` — 9 tests with mocked `generateObject` for structureDecision
+- `generate-content.test.ts` — 10 tests with mocked `generateObject` for contentGeneration
+- `condense.test.ts` — 5 tests for condensationStage (AI + direct-map paths)
+- `extract.test.ts` — tests for extractionStage (programmatic extraction)
+- `theming.test.ts` — tests for colorTheming (brand-derived and palette-hint paths)
+- All 164 unit tests pass; no real API calls made
+
 ## 2026-02-28 — TASK-93: Write Vitest unit tests for repository layer
 
 - Created `next-app/__unit-tests/db/testDb.ts` — `createTestDb()` utility that builds an in-memory SQLite DB with DDL applied and returns a drizzle instance
