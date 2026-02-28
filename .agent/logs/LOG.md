@@ -3,7 +3,23 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 21
+**Tasks Completed:** 22
+**Current Task:** TASK-33 Complete
+
+---
+
+## 2026-02-28  TASK-33: Implement Comparison section variant (comparison-table)
+
+- Created `src/components/shared/comparison/ComparisonTable.tsx`  responsive table with column headers, feature rows driven by first column's features, checkmark () or cross () per cell; first column highlighted with `--color-primary` header and `--color-primary-light` background cells
+- Falls back to 3-column placeholder (Us vs Competitor A vs Competitor B) when content.columns is empty
+- All colors use CSS custom properties (`--color-bg`, `--color-surface`, `--color-heading`, `--color-text`, `--color-border`, `--color-primary`, `--color-primary-light`, `--color-text-inverted`)
+- Exported from `src/components/shared/comparison/index.ts`
+- Added `app/test-comparison/page.tsx` for visual verification
+- Playwright smoke test: headline, highlighted column header, checkmarks and crosses all visible; 3/3 browsers pass; screenshot saved to `.agent/screenshots/TASK-33-1.png`
+- TypeScript: no errors; all 23 unit tests pass
+
+---
+
 **Current Task:** TASK-32 Complete
 
 ---
