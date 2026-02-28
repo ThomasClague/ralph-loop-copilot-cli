@@ -3,8 +3,17 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 29
-**Current Task:** TASK-40 Complete
+**Tasks Completed:** 30
+**Current Task:** TASK-41 Complete
+
+---
+
+## 2026-02-28 — TASK-41: Configure Vercel AI SDK client with Anthropic provider
+
+- Created `next-app/src/lib/ai/client.ts` — exports `anthropic` provider instance (via `createAnthropic`) and `model` constant set to `claude-sonnet-4-20250514`
+- ANTHROPIC_API_KEY read from `process.env.ANTHROPIC_API_KEY`
+- Verified via tsx: `anthropic` is a function (provider factory), `model` is an object (LanguageModelV1)
+- TypeScript compiles without errors; all 23 unit tests pass
 
 ---
 
