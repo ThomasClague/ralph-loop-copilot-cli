@@ -10,7 +10,20 @@
 
 ## Session Log
 
-## 2026-02-28 — TASK-19: Implement About section variants (about-left, about-right)
+## 2026-02-28 — TASK-20: Implement Trust Indicators section variants (trust-bar, trust-grid)
+
+- Created `src/components/shared/trust_indicators/TrustBar.tsx` — horizontal flex bar with overflow-x-auto, icon/value/label per item, vertical dividers on desktop, compact height
+- Created `src/components/shared/trust_indicators/TrustGrid.tsx` — responsive 2x3/3x2 grid with large icons, spacious cards, border/shadow styling
+- Both accept `{ content: TrustIndicatorsContent, business: BusinessInfo }` props and render placeholder items when content.items is empty
+- All colors use CSS custom properties (`--color-surface-alt`, `--color-bg`, `--color-heading`, etc.)
+- Exported from `src/components/shared/trust_indicators/index.ts`
+- Added `app/test-trust/page.tsx` for visual verification
+- Playwright smoke test: both variants visible and correct; screenshot saved to `.agent/screenshots/TASK-20-1.png`
+- TypeScript: no errors; all 23 unit tests pass
+
+---
+
+
 
 - Created `src/components/shared/about/AboutLeft.tsx` — two-column grid, image left / text right, responsive (stacks on mobile)
 - Created `src/components/shared/about/AboutRight.tsx` — same layout but image right (uses CSS `order` classes to reverse)
