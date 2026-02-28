@@ -40,6 +40,10 @@ yarn-error.log*
 /data/
 /data/*.db
 
+# exports and uploads
+/exports/
+/uploads/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

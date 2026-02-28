@@ -6,7 +6,7 @@
   { "id": "TASK-5",  "title": "Implement repository pattern with all CRUD functions", "category": "data-model", "specFilePath": ".agent/tasks/TASK-5.json", "passes": true },
   { "id": "TASK-6",  "title": "Set up Express sidecar server entry point", "category": "functional", "specFilePath": ".agent/tasks/TASK-6.json", "passes": true },
   { "id": "TASK-7",  "title": "Update package.json scripts with concurrently", "category": "functional", "specFilePath": ".agent/tasks/TASK-7.json", "passes": true },
-  { "id": "TASK-8",  "title": "Create .env.local.example with all required environment variables", "category": "security", "specFilePath": ".agent/tasks/TASK-8.json", "passes": false },
+  { "id": "TASK-8",  "title": "Create .env.local.example with all required environment variables", "category": "security", "specFilePath": ".agent/tasks/TASK-8.json", "passes": true },
   { "id": "TASK-9",  "title": "Initialize shadcn/ui in the project", "category": "functional", "specFilePath": ".agent/tasks/TASK-9.json", "passes": false },
   { "id": "TASK-10", "title": "Implement Crawlee CheerioCrawler service", "category": "integration", "specFilePath": ".agent/tasks/TASK-10.json", "passes": false },
   { "id": "TASK-11", "title": "Implement page data extraction (title, meta, headings, body, links, images, phones, emails)", "category": "functional", "specFilePath": ".agent/tasks/TASK-11.json", "passes": false },

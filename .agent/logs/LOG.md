@@ -10,6 +10,16 @@
 
 ## Session Log
 
+## 2026-02-28 — TASK-8: Create .env.local.example with all required environment variables
+
+- Created `next-app/.env.local.example` with all required env vars (ANTHROPIC_API_KEY, PEXELS_API_KEY, RESEND_API_KEY, EMAIL_MODE=mock, EMAIL_FROM)
+- Verified `.gitignore` already has `.env*` covering `.env.local`; added `/exports/` and `/uploads/` entries
+- Created `next-app/src/lib/env.ts` with `validateEnv()` function for runtime validation
+- TypeScript compiles without errors
+
+---
+
+
 ## 2026-02-28 — TASK-7: Update package.json scripts with concurrently
 
 - Updated `dev` script: `concurrently "next dev" "tsx src/scraper/server.ts"`
