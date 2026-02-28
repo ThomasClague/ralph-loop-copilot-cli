@@ -1,5 +1,12 @@
 
-## 2026-02-28 — TASK-100: Playwright E2E test for preview and editor
+## 2026-02-28 — TASK-102: Playwright E2E test for export flow
+
+- Created `next-app/tests/e2e/export.spec.ts` — 2 E2E tests: export button visible in editor, Export as ZIP triggers download with valid ZIP containing index.html > 1000 bytes
+- beforeAll creates batch + prospect, triggers generation via `/api/generate/prospect/[slug]`, polls until ready with manual 150s deadline loop; afterAll cleans up
+- Used `test.describe.configure({ mode: "serial", timeout: 180_000 })` + `test.setTimeout(180_000)` inside beforeAll to handle AI generation timing
+- Both tests pass in ~58s (chromium)
+- Screenshots: `.agent/screenshots/TASK-102-1.png`, `.agent/screenshots/TASK-102-2.png`
+
 
 - Created `next-app/tests/e2e/pages/EditorPage.ts` — POM with goto, getSectionCount, selectPalette, getPreviewHeadline, editSectionContent, waitForAutoSave
 - Created `next-app/tests/e2e/editor.spec.ts` — 4 E2E tests: preview renders ≥3 sections, editor loads section list, palette change, headline edit + auto-save
