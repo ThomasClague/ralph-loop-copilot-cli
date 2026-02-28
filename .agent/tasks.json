@@ -70,7 +70,7 @@
   { "id": "TASK-69", "title": "PATCH /api/prospects/[id] — update prospect fields", "category": "api-endpoint", "specFilePath": ".agent/tasks/TASK-69.json", "passes": true },
   { "id": "TASK-70", "title": "POST /api/prospects/[id]/generate — trigger full generation pipeline", "category": "api-endpoint", "specFilePath": ".agent/tasks/TASK-70.json", "passes": true },
   { "id": "TASK-71", "title": "POST /api/prospects/[id]/regenerate-section — regenerate single section copy", "category": "api-endpoint", "specFilePath": ".agent/tasks/TASK-71.json", "passes": true },
-  { "id": "TASK-72", "title": "POST /api/prospects/[id]/regenerate-all — regenerate all copy", "category": "api-endpoint", "specFilePath": ".agent/tasks/TASK-72.json", "passes": false },
+  { "id": "TASK-72", "title": "POST /api/prospects/[id]/regenerate-all — regenerate all copy", "category": "api-endpoint", "specFilePath": ".agent/tasks/TASK-72.json", "passes": true },
   { "id": "TASK-73", "title": "POST /api/prospects/[id]/export — trigger export pipeline", "category": "api-endpoint", "specFilePath": ".agent/tasks/TASK-73.json", "passes": false },
   { "id": "TASK-74", "title": "POST /api/email/send — send outreach email via EmailService", "category": "api-endpoint", "specFilePath": ".agent/tasks/TASK-74.json", "passes": false },
   { "id": "TASK-75", "title": "GET /api/email/preview — render email preview with interpolated variables", "category": "api-endpoint", "specFilePath": ".agent/tasks/TASK-75.json", "passes": false },

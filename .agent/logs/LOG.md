@@ -3,8 +3,18 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 70
-**Current Task:** TASK-71 Complete
+**Tasks Completed:** 71
+**Current Task:** TASK-72 Complete
+
+---
+
+## 2026-02-28 — TASK-72: POST /api/generate/prospect/[slug]/section
+
+- Created `app/api/generate/prospect/[slug]/section/route.ts` — POST handler that regenerates a single section by `sectionType`
+- Accepts `{ sectionType: string }` body, finds section by type in siteConfig, calls `regenerateSection(prospectId, sectionId)`, returns updated section
+- Returns 404 if prospect not found or section type not in siteConfig; 400 if sectionType missing
+- Added unit tests in `__unit-tests/api/generate-prospect-section.test.ts` (5 tests: 404 not found, 400 missing sectionType, 404 section not found, 200 success, 500 error)
+- Integration verified: endpoint returns correct 404 for unknown slug; 132 unit tests pass; TypeScript compiles clean
 
 ---
 
