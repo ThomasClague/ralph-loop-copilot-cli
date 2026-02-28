@@ -10,6 +10,16 @@
 
 ## Session Log
 
+## 2026-02-28 — TASK-5: Implement repository pattern with all CRUD functions
+
+- Created `next-app/src/db/repository.ts` as the single point of database access
+- Exports typed CRUD functions for: batches, prospects, media, sentEmails, settings
+- JSON blob fields (scrapedRaw, siteContent, etc.) serialized on write, parsed on read
+- Exports Drizzle-inferred TypeScript types: Batch, Prospect, UpdateProspect, Media, SentEmail
+- TypeScript compiles without errors; unit tests pass
+
+---
+
 ## 2026-02-28
 
 **Steering Setup Complete**
