@@ -17,6 +17,16 @@ check_git_repo() {
   fi
 }
 
+# Check if Copilot CLI is installed
+# Usage: check_copilot_cli
+# Exits with EXIT_CLI_ERROR if copilot command is not found
+check_copilot_cli() {
+  if ! command -v copilot &> /dev/null; then
+    log_error "GitHub Copilot CLI not found. Install with: npm install -g @github/copilot"
+    exit $EXIT_CLI_ERROR
+  fi
+}
+
 # Ensure history directory exists for storing iteration logs
 # Usage: check_history_dir
 # Creates .agent/history/ directory if it doesn't exist

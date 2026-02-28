@@ -1,41 +1,20 @@
 # **Critical Steering Work**
 
-## Ensure the sandbox is running correctly
+## Ensure the local environment is running correctly
 
-This sandbox runs emulated aarch64 Linux. Apply as needed:
+This runs on your local machine via GitHub Copilot CLI. Apply as needed:
 
-- **Node >= 22 (if required):** Install nvm, persist to `/etc/sandbox-persistent.sh` with `unset NPM_CONFIG_PREFIX` before the nvm source line. Never add bash_completion to that file.
+- **Node >= 22 (if required):** Ensure Node.js 22+ is installed. Use `nvm` if managing multiple versions.
 
-- **Native binary SIGILL crashes (npm):** `npm install` will produce broken arm64 binaries. Follow this exact sequence:
-
-  1. Run `npm install --ignore-scripts` (prevents SIGILL during install)
-  2. Fix **all** known native binaries — for each package below, run:
-     ```
-     cd /tmp && npm pack <pkg>@<version> && tar xzf <tarball> && cp package/<binary> <node_modules_path> && rm -rf package
-     ```
-     Known SIGILL packages (check versions in node_modules):
-     - `@esbuild/linux-arm64` → `bin/esbuild`
-     - `@rollup/rollup-linux-arm64-gnu` → `rollup.linux-arm64-gnu.node`
-     - `@tailwindcss/oxide-linux-arm64-gnu` → `tailwindcss-oxide.linux-arm64-gnu.node`
-     - `@unrs/resolver-binding-linux-arm64-gnu` → `resolver.linux-arm64-gnu.node`
-     - `lightningcss-linux-arm64-gnu` → `lightningcss.linux-arm64-gnu.node`
-  3. **Verify each binary** before proceeding: `node -e "require('<pkg>')"` (for esbuild, use `node_modules/@esbuild/linux-arm64/bin/esbuild --version` instead since it's a standalone binary, not a requireable module)
-  4. **Scan for corrupted files** — `--ignore-scripts` can produce JS files with null bytes:
-     ```
-     find node_modules -name '*.js' -size +50k | while read f; do
-       if od -c "$f" | grep -q '\\0'; then echo "CORRUPT: $f"; fi
-     done
-     ```
-     Fix: `rm -rf node_modules/<corrupt-pkg> && npm install --ignore-scripts`
-     Re-scan until clean. Only then start the dev server.
-
-- **If using TanStack Start:** Check that `src/integrations/tanstack-query/root-provider.tsx` has a default export wrapping children with `QueryClientProvider`. The starter template ships without it, causing a 500 on load.
+- **Install dependencies:** Run `npm install` in the project directory.
 
 ## Main Tasks
 
-Install dependencies (using the sequence above), then install Playwright system dependencies: `sudo npx playwright install-deps chromium 2>&1`. Allow up to 10 minutes for tasks to complete.
+Install project dependencies, then install Playwright system dependencies:
 
-Then install the Playwright browser: `npx playwright install chromium`
+```bash
+npx playwright install chromium
+```
 
 Start the dev server and take a screenshot. Save it to the `.agent/screenshots` directory.
 

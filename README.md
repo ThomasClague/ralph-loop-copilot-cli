@@ -1,25 +1,22 @@
-# A Ralph Wiggum Loop implementation that works™
+# A Ralph Wiggum Loop for GitHub Copilot CLI
 
 [![@pageai/ralph-loop version](https://img.shields.io/npm/v/@pageai/ralph-loop?label=npm&style=flat)](https://github.com/pageai-pro/ralph-loop)
 
 Ralph is a long-running AI agent loop. Ralph automates software development tasks by iteratively working through a task list until completion. This allows for long running agent loops, effectively enabling AI to code for days at a time.
 
-This is an implementation that actually works, containing a hackable script so you can configure it to your env and favorite agentic AI CLI. It's set up by default to use Claude Code in a Docker sandbox, but supports [many other agentic AI CLIs](#running-with-a-different-agentic-cli).
+This is an implementation adapted for **GitHub Copilot CLI** running in **headless autopilot mode**. It contains a hackable script so you can configure it to your env and favorite settings. No Docker sandbox required — runs directly on your local machine.
 
-#### 👉 [Watch the video](https://www.youtube.com/watch?v=3TL8Ez66I3o) for an in-depth walkthrough.
-
-[![Ralph Wiggum Loop](https://github.com/user-attachments/assets/be94b8ba-b073-489d-b07e-d11db975a907)](https://www.youtube.com/watch?v=3TL8Ez66I3o)
+#### 👉 [Watch the original video](https://www.youtube.com/watch?v=3TL8Ez66I3o) for an in-depth walkthrough of the Ralph loop concept.
 
 - [Getting Started](#getting-started)
   - [(Optional) Set up code base](#optional-set-up-code-base)
   - [1️⃣ Step 1: Install Ralph](#1️⃣-step-1-install-ralph)
-  - [2️⃣ Step 2: Create a PRD + task list](#2️⃣-step-2-create-a-prd--task-list)
-  - [3️⃣ Step 3: Set up the agent inside Docker sandbox](#3️⃣-step-3-set-up-the-agent-inside-docker-sandbox)
+  - [2️⃣ Step 2: Install GitHub Copilot CLI](#2️⃣-step-2-install-github-copilot-cli)
+  - [3️⃣ Step 3: Create a PRD + task list](#3️⃣-step-3-create-a-prd--task-list)
   - [4️⃣ Step 4: Run Ralph](#4️⃣-step-4-run-ralph)
 - [Running the Ralph Loop with custom options](#running-the-ralph-loop-with-custom-options)
   - [(Optional) Adjusting to your language/framework](#optional-adjusting-to-your-languageframework)
 - [How It Works](#how-it-works)
-- [How Is This Different from Other Ralphs?](#how-is-this-different-from-other-ralphs)
 - [Steering the Agent](#steering-the-agent)
 - [Support](#support)
   - [Promise Tags](#promise-tags)
@@ -28,9 +25,11 @@ This is an implementation that actually works, containing a hackable script so y
 - [Skills](#skills)
   - [Available Skills](#available-skills)
   - [Skills Directory Structure](#skills-directory-structure)
+- [Custom Agents](#custom-agents)
+- [MCP Servers](#mcp-servers)
 - [Reference](#reference)
-  - [Playwright configuration](#playwright-configuration)
-  - [Vitest configuration](#vitest-configuration)
+  - [Copilot CLI Headless Mode](#copilot-cli-headless-mode)
+  - [Authentication](#authentication)
   - [Running with a different agentic CLI](#running-with-a-different-agentic-cli)
   - [Starting from scratch](#starting-from-scratch)
 - [License](#license)
@@ -57,11 +56,52 @@ Run this in your project's directory to install Ralph.
 npx @pageai/ralph-loop
 ```
 
-### 2️⃣ Step 2: Create a PRD + task list
+### 2️⃣ Step 2: Install GitHub Copilot CLI
 
-Use the `prd-creator` skill to generate a PRD from your requirements.<br/>
-Open up Claude Code or Cursor etc. and prompt it with **your requirements**. Like so:
+Install the Copilot CLI using one of these methods:
 
+**npm (all platforms — requires Node.js 22+):**
+```bash
+npm install -g @github/copilot
+```
+
+**WinGet (Windows):**
+```powershell
+winget install GitHub.Copilot
+```
+
+**Homebrew (macOS/Linux):**
+```bash
+brew install copilot-cli
+```
+
+**Install script (macOS/Linux):**
+```bash
+curl -fsSL https://gh.io/copilot-install | bash
+```
+
+Then authenticate:
+
+```bash
+copilot
+# Use /login command and follow the instructions
+```
+
+Or set a personal access token (with "Copilot Requests" permission):
+```bash
+export COPILOT_GITHUB_TOKEN=your_token_here
+```
+
+### 3️⃣ Step 3: Create a PRD + task list
+
+Use the `prd-creator` skill to generate a PRD from your requirements.
+Open up Copilot CLI and prompt it with **your requirements**:
+
+```bash
+copilot
+```
+
+Then enter:
 ```
 Use the prd-creator skill to help me create a PRD and task list for the below requirements.
 
@@ -76,18 +116,12 @@ Requirements:
   - Create and send invoices.
   - Track payments and receipts.
   - Generate reports and insights.
-  - Connect to bank accounts and credit cards.
-  - Connect to accounting software.
-  - Connect to payment processors.
 - Use the shadcn/ui library for components.
 - Integrate with Stripe for payments.
 - Use Supabase for database.
-- You can find env variables in the .env.example file: SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, STRIPE_SECRET_KEY, etc. are available in the runtime.
 
 // etc.
 ```
-
-> Check out [the video](https://www.youtube.com/watch?v=3TL8Ez66I3o&t=403s) for a more realistic example on how to write requirements.
 
 <details>
 <summary><strong>✨ Pro tips</strong></summary>
@@ -102,30 +136,14 @@ Requirements:
 </details>
 <br/>
 
-Then, follow the Skill's instructions and verify the PRD and then tasks.<br/>
+Then, follow the Skill's instructions and verify the PRD and then tasks.
 **It is highly recommended that you review individual task requirements before starting the loop. Review EACH TASK INDIVIDUALLY.**
-
-### 3️⃣ Step 3: Set up the agent inside Docker sandbox
-
-Authenticate inside the Docker sandbox before running Ralph. Run:
-
-```bash
-docker sandbox run claude .
-```
-
-And follow the instructions to log in into Claude Code.
-
-👉 Answer "Yes" to `Bypass Permissions mode`, that's the exact reason why you are using the Docker sandbox.
-
-> If you want to use a different agentic CLI, see [Running with a different agentic CLI](#running-with-a-different-agentic-cli).
 
 ### 4️⃣ Step 4: Run Ralph
 
 ```bash
 ./ralph.sh -n 50 # Run Ralph Loop with 50 iterations
 ```
-
-> ✍️ Note: the first iteration will be spent on ensuring the sandbox environment is set up correctly. Expect 5 minutes to complete.
 
 ## Running the Ralph Loop with custom options
 
@@ -175,12 +193,7 @@ Each iteration, Ralph will:
 4. Complete task, take screenshot, update task status and commit changes
 5. Repeat until all tasks pass or max iterations reached
 
-## How Is This Different from Other Ralphs?
-
-This was kept hackable so you can make it your own.<br/>
-The script follows the original concepts of the Ralph Wiggum Loop, working with fresh contexts and providing clear verifiable feedback.
-
-It also works generically with any task set.
+The key difference is this runs via **Copilot CLI autopilot mode** — no Docker sandbox needed. Copilot CLI runs locally with `--autopilot --yolo` flags, granting full permissions for autonomous operation.
 
 <details>
 <summary><strong>✨ Features</strong></summary>
@@ -196,17 +209,10 @@ It also works generically with any task set.
 - **History logging** - Saves clean output from each iteration
 - **Timing** - Shows timing metrics for each iteration and total time
 - **Steering** - Allows prioritizing critical work that needs to be done before the loop can continue
+- **Custom Agents** - Specialized agent profiles for implementation and code review
+- **Skills** - Reusable knowledge modules for specialized tasks
+- **MCP Servers** - Extended tool capabilities via Model Context Protocol
 </details>
-
-<br/>
-Besides that:
-
-- it allows you to dump unstructured requirements and have the agent create a PRD and task list for you.
-- it uses a task lookup table with individual detailed steps → more scalable as you get 100s of tasks done.
-- it's sandboxed and more secure
-- it shows progress and stats so you can keep an eye on what's been done
-- it instructs the agent to write and run automated tests and screenshots per task
-- it provides observability and traceability of the agent's work, showing a stream of output and capturing full historical logs per iteration
 
 ## Steering the Agent
 
@@ -219,11 +225,11 @@ The agent will check this file each iteration and if it finds any critical work,
 ## Support
 
 The `ralph.sh` script is designed to be hackable.
-It is configured to use Claude Code in a Docker sandbox by default, but with a one-liner change you can change it to use any other agentic AI CLI.
+It is configured to use **GitHub Copilot CLI in headless autopilot mode** by default.
 
 Check the `ralph.sh` script around `# This is the main command loop.` for the main command loop.
 
-> NB: skills are supported by all major agentic AI CLIs via symlinks.
+> NB: skills are supported natively by Copilot CLI via `.github/skills/` directory.
 
 ### Promise Tags
 
@@ -240,26 +246,47 @@ Ralph uses semantic tags to communicate status:
 | 1    | MAX_ITERATIONS - Reached limit |
 | 2    | BLOCKED - Needs human help     |
 | 3    | DECIDE - Needs human decision  |
+| 4    | CLI_ERROR - Copilot CLI issue  |
+| 5    | AUTH_ERROR - Not authenticated |
 
 ## Structure
 
 ```
 .agent/
-├── PROMPT.md           # Prompt sent to Agent each iteration
+├── PROMPT.md           # Prompt sent to Copilot CLI each iteration
+├── STEERING.md         # Critical work / overrides
 ├── tasks.json          # Task lookup table (required)
 ├── tasks/              # Individual task specs (TASK-{ID}.json)
 ├── prd/
 │   ├── PRD.md          # Product requirements document
-│   └── SUMMARY.md      # Short project overview sent to Agent each iteration
+│   └── SUMMARY.md      # Short project overview
 ├── logs/
 │   └── LOG.md          # Progress log (auto-created)
 ├── history/            # Iteration output logs
+├── screenshots/        # Task screenshots
 └── skills/             # Shared skills (source of truth)
+
+.github/
+├── copilot-instructions.md  # Repository-wide Copilot instructions
+├── agents/                  # Custom agent profiles
+│   ├── ralph-implementer.md
+│   └── ralph-reviewer.md
+└── skills/             # Symlink → .agent/skills/
+
+.copilot/
+├── mcp-config.json     # MCP server configuration
+└── settings.json       # Project-level Copilot CLI settings
 ```
 
 ## Skills
 
-Skills are reusable agent capabilities that provide specialized knowledge and workflows. The canonical source is `.agent/skills/`, which is symlinked to multiple agent tool directories for compatibility.
+Skills are reusable agent capabilities that provide specialized knowledge and workflows. The canonical source is `.agent/skills/`, symlinked to `.github/skills/` for Copilot CLI compatibility.
+
+Copilot CLI loads skills from these locations (priority order):
+1. `.github/skills/` (project)
+2. `.agents/skills/` (project)
+3. `.claude/skills/` (project, for Claude-compatible skills)
+4. `~/.copilot/skills/` (personal)
 
 ### Available Skills
 
@@ -275,10 +302,11 @@ Skills are reusable agent capabilities that provide specialized knowledge and wo
 | `mysql`                       | MySQL/InnoDB schema, indexing, query tuning, and ops    |
 | `postgres`                    | PostgreSQL best practices and query optimization        |
 | `web-design-guidelines`       | UI/UX design principles                                 |
+| `vitest-best-practices`       | Vitest testing patterns and configuration               |
 
 ### Skills Directory Structure
 
-Skills are symlinked from `.agent/skills/` to multiple locations for cross-tool compatibility:
+Skills are symlinked from `.agent/skills/` (source of truth) to Copilot CLI's search paths:
 
 ```
  # Source of truth
@@ -288,118 +316,99 @@ Skills are symlinked from `.agent/skills/` to multiple locations for cross-tool 
     ├── postgres/
     ├── ...
 
-# Symlinks -> .agent/skills/*
-.agents/skills/*
-.claude/skills/*
-.codex/skills/*
-.cursor/skills/*
+# Symlink → .agent/skills/
+.github/skills/
 ```
+
+## Custom Agents
+
+Copilot CLI supports custom agent profiles defined in Markdown files. This repo includes:
+
+| Agent | Description |
+| ----- | ----------- |
+| `ralph-implementer` | Implements tasks from the Ralph queue following the loop protocol |
+| `ralph-reviewer` | Reviews code changes for bugs, security, and quality |
+
+Custom agents are stored in `.github/agents/` and are automatically available to Copilot CLI.
+
+Copilot CLI also includes built-in agents: **explore** (fast codebase search), **task** (command execution), **code-review** (change analysis), and **general-purpose** (complex multi-step tasks).
+
+You can invoke agents via:
+- `/agent` slash command in interactive mode
+- `--agent=NAME` command-line flag
+- Copilot auto-delegates to the appropriate agent
+
+## MCP Servers
+
+MCP (Model Context Protocol) servers extend Copilot CLI with additional tools. Configuration is in `.copilot/mcp-config.json`.
+
+**Configured servers:**
+
+| Server | Description |
+| ------ | ----------- |
+| `playwright` | Browser automation for testing and screenshots |
+| `context7` | Context retrieval via Upstash |
+| `sequential-thinking` | Step-by-step reasoning |
+
+Copilot CLI also includes built-in MCP servers: **github-mcp-server** (GitHub API), **playwright**, **fetch** (HTTP), and **time**.
+
+Add new MCP servers via:
+- Edit `.copilot/mcp-config.json` for project-level servers
+- Edit `~/.copilot/mcp-config.json` for personal servers
+- Use `/mcp add` in interactive mode
+- Use `--additional-mcp-config` flag for session-only servers
 
 ## Reference
 
-### Playwright configuration
+### Copilot CLI Headless Mode
 
-If you are using Playwright, here is a recommended configuration:
+The Ralph loop uses Copilot CLI in **autopilot mode** programmatically:
 
-```typescript:playwright.config.ts
-import { defineConfig, devices } from '@playwright/test';
-
-/**
- * See https://playwright.dev/docs/test-configuration.
- */
-export default defineConfig({
-  testDir: './tests',
-  fullyParallel: true,
-  globalTimeout: 30 * 60 * 1000,
-  forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 1,
-  workers: process.env.CI ? 3 : 6,
-  reporter: 'html',
-  use: {
-    baseURL: 'http://localhost:3000',
-    trace: 'on-first-retry',
-  },
-
-
-  // NB: only chromium will run in Docker (arm64).
-  projects: [
-    {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    }
-  ],
-});
+```bash
+copilot --autopilot --yolo --no-ask-user --max-autopilot-continues 50 -s -p "PROMPT"
 ```
 
-### Vitest configuration
+Key flags:
+| Flag | Description |
+| ---- | ----------- |
+| `--autopilot` | Autonomous continuation until task complete |
+| `--yolo` / `--allow-all` | Grant all permissions (tools, paths, URLs) |
+| `--no-ask-user` | Suppress clarifying questions |
+| `--max-autopilot-continues N` | Limit continuation steps |
+| `-s` / `--silent` | Output only agent response (for scripting) |
+| `-p PROMPT` | Pass prompt programmatically (exits after completion) |
+| `--model MODEL` | Set AI model (default: Claude Sonnet 4.5) |
+| `--agent AGENT` | Use a specific custom agent |
 
-If you are using Vitest, here is a recommended configuration:
+### Authentication
 
-```typescript:vitest.config.ts
-import { defineConfig } from "vitest/config";
-import react from "@vitejs/plugin-react";
-import path from "path";
+Copilot CLI requires GitHub authentication. Options:
 
-export default defineConfig({
-  plugins: [react()],
-  test: {
-    environment: "node",
-    globals: true,
-    include: ["lib/**/*.test.ts", "lib/**/*.test.tsx"],
-    // setupFiles: ['./vitest.setup.ts'], // Include this if using Next.js
-  },
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname),
-    },
-  },
-});
-
-```
-
-If you are using Next.js, you'll also need a `vitest.setup.ts` file to mock the `next/image` and `next/link` components.
-
-```typescript:vitest.setup.ts
-import '@testing-library/jest-dom/vitest'
-import { vi } from 'vitest'
-import React from 'react'
-
-// If using Next.js, mock next/image
-vi.mock('next/image', () => ({
-  default: ({ src, alt, ...props }: { src: string; alt: string }) => {
-    return React.createElement('img', { src, alt, ...props })
-  },
-}))
-
-// If using Next.js, mock next/link
-vi.mock('next/link', () => ({
-  default: ({
-    children,
-    href,
-    ...props
-  }: {
-    children: React.ReactNode
-    href: string
-  }) => {
-    return React.createElement('a', { href, ...props }, children)
-  },
-}))
-```
+1. **Interactive login:** Run `copilot` → use `/login`
+2. **Personal Access Token:** Create a fine-grained PAT with "Copilot Requests" permission:
+   ```bash
+   export COPILOT_GITHUB_TOKEN=your_token
+   ```
+3. **GitHub CLI token:** If `gh` is authenticated, `GH_TOKEN` or `GITHUB_TOKEN` env vars work too
 
 ### Running with a different agentic CLI
 
-If you want to use a different agentic CLI, you can adjust the `ralph.sh` script to reflect your CLI of choice.
+If you want to use a different agentic CLI, edit `ralph.sh` around `# This is the main command loop.`.
 
-Check the `ralph.sh` script around `# This is the main command loop.` for the main command loop.
-
-Replace `docker sandbox run claude . --` with the your favorite CLI. Remember to also update the options after the `--`.
+Replace the `copilot` command with your CLI of choice:
 
 ```bash
-docker sandbox run codex . # for Codex CLI
-docker sandbox run gemini . # for Gemini CLI
+# For Claude Code (with Docker sandbox):
+docker sandbox run claude . -- --model opus --output-format stream-json --verbose -p "$PROMPT_CONTENT"
+
+# For Codex CLI:
+docker sandbox run codex . -- -p "$PROMPT_CONTENT"
+
+# For Gemini CLI:
+docker sandbox run gemini . -- -p "$PROMPT_CONTENT"
 ```
 
-Docker currently supports: `claude`, `codex`, `opencode`,`copilot`, `gemini`, `cagent`, `kiro` and more.
+Docker supports: `claude`, `codex`, `opencode`, `copilot`, `gemini`, `cagent`, `kiro` and more.
 See all supported agentic AI CLIs in [Docker's docs](https://docs.docker.com/ai/sandboxes/agents/).
 
 ### Starting from scratch

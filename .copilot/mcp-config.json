@@ -1,0 +1,34 @@
+{
+  "playwright": {
+    "type": "local",
+    "command": "npx",
+    "args": [
+      "-y",
+      "@playwright/mcp@latest",
+      "--headless",
+      "--no-sandbox",
+      "--install"
+    ],
+    "tools": ["*"],
+    "env": {}
+  },
+  "context7": {
+    "type": "local",
+    "command": "npx",
+    "args": [
+      "-y",
+      "@upstash/context7-mcp"
+    ],
+    "tools": ["*"],
+    "env": {}
+  },
+  "sequential-thinking": {
+    "type": "local",
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-sequential-thinking"
+    ],
+    "tools": ["*"]
+  }
+}

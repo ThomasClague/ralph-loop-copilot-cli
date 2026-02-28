@@ -1,0 +1,7 @@
+{
+  "model": "claude-sonnet-4.5",
+  "reasoning_effort": "high",
+  "auto_update": true,
+  "include_coauthor": true,
+  "beep": true
+}

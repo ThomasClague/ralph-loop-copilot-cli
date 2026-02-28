@@ -59,6 +59,7 @@ fi
 
 # Pre-flight checks
 check_git_repo
+check_copilot_cli
 check_required_files
 check_history_dir
 check_ansi_support
@@ -93,12 +94,11 @@ $(cat $SCRIPT_DIR/.agent/PROMPT.md)"
   OUTPUT_FILE=$(mktemp)
   FULL_OUTPUT_FILE=$(mktemp)
 
-  # Use script to provide pseudo-TTY for docker sandbox.
   # This is the main command loop.
+  # Uses GitHub Copilot CLI in autopilot (headless) mode.
   export PROMPT_CONTENT
-  export DOCKER_DEFAULT_PLATFORM=linux/amd64 # Needed for Playwright.
 
-  script -q "$OUTPUT_FILE" bash -c 'docker sandbox run claude . -- --model opus --output-format stream-json --verbose -p "$PROMPT_CONTENT"' >/dev/null 2>&1 &
+  copilot --autopilot --yolo --no-ask-user --max-autopilot-continues "$MAX_ITERATIONS" -s -p "$PROMPT_CONTENT" > "$OUTPUT_FILE" 2>&1 &
   AGENT_PID=$!
 
   # Track position in output file for incremental reading
@@ -153,30 +153,33 @@ $(cat $SCRIPT_DIR/.agent/PROMPT.md)"
 
   OUTPUT=$(cat "$FULL_OUTPUT_FILE" 2>/dev/null || cat "$OUTPUT_FILE")
 
-  # Check for Docker daemon not ready error
-  if echo "$OUTPUT" | grep -q "docker daemon not ready"; then
+  # Check for Copilot CLI not found error
+  if echo "$OUTPUT" | grep -q "copilot: command not found\|copilot: not found"; then
     stop_spinner
     clear_rolling_preview
     echo ""
     echo -e "${RD}░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░${R}"
-    echo -e "  ❌ ${RD}Docker Error${R}"
-    echo -e "  Docker daemon is not ready. Please ensure Docker is running."
+    echo -e "  ❌ ${RD}Copilot CLI Not Found${R}"
+    echo -e "  Install Copilot CLI: ${C}npm install -g @github/copilot${R}"
+    echo -e "  Or: ${C}winget install GitHub.Copilot${R} (Windows)"
+    echo -e "  Or: ${C}brew install copilot-cli${R} (macOS/Linux)"
     echo -e "${RD}░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░${R}"
     rm -f "$OUTPUT_FILE" "$FULL_OUTPUT_FILE"
-    exit $EXIT_DOCKER_ERROR
+    exit $EXIT_CLI_ERROR
   fi
 
-  # Check for invalid API key / authentication error
-  if echo "$OUTPUT" | grep -q "Invalid API key"; then
+  # Check for authentication error
+  if echo "$OUTPUT" | grep -q "Invalid API key\|not authenticated\|login required\|COPILOT_GITHUB_TOKEN"; then
     stop_spinner
     clear_rolling_preview
     echo ""
     echo -e "${RD}░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░${R}"
     echo -e "  ❌ ${RD}Authentication Error${R}"
-    echo -e "  Invalid API key. Please authenticate inside the Docker sandbox."
+    echo -e "  Not authenticated with GitHub Copilot CLI."
     echo -e ""
-    echo -e "  Run the following command and follow the login instructions:"
-    echo -e "  ${C}docker sandbox run claude . --${R}"
+    echo -e "  Authenticate using one of these methods:"
+    echo -e "  ${C}copilot${R} → then use ${C}/login${R}"
+    echo -e "  Or set ${C}COPILOT_GITHUB_TOKEN${R} env var with a PAT"
     echo -e "${RD}░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░${R}"
     rm -f "$OUTPUT_FILE" "$FULL_OUTPUT_FILE"
     exit $EXIT_AUTH_ERROR

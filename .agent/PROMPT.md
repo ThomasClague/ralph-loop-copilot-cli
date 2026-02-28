@@ -35,7 +35,6 @@ Tasks are listed in @.agent/tasks.json
 ## Rules
 
 - **CRITICAL**: Only work on **ONE task per invocation**. After committing the task, output `<promise>TASK-{ID}:DONE</promise>` and **STOP immediately**. Do NOT read the next task. Do NOT continue working. Your response **must END** after the promise tag. Any output after it is a violation.
-- Kill all background processes (dev server, etc.) before outputting the promise tag.
 - No git init/remote changes. **No git push**.
 - Check the last 5 tasks in `.agent/logs/LOG.md` for past work
 - **CRITICAL**: When **ALL** tasks pass → output `<promise>COMPLETE</promise>` and **nothing else**.

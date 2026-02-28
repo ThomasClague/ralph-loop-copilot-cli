@@ -3,28 +3,30 @@
 # JSON parsing and ANSI stripping utilities
 # Dependencies: constants.sh, terminal.sh
 
-# Parse JSON stream and extract text content
-# Handles Agent's stream-json format
+# Parse output content from Copilot CLI
+# Copilot CLI with -s (silent) outputs plain text, not JSON.
+# We pass through the text as-is.
 parse_json_content() {
-  local json_line="$1"
-  # Try to extract text content from various JSON formats
-  # For example, Claude stream-json outputs {"type":"content_block_delta","delta":{"text":"..."}}
-  # or {"type":"text","text":"..."} etc.
+  local line="$1"
 
-  # Extract text from delta
-  local text=$(echo "$json_line" | grep -o '"text":"[^"]*"' | head -1 | sed 's/"text":"//;s/"$//')
-  if [ -n "$text" ]; then
-    # Unescape common JSON escapes
-    # JSON \n -> actual newline, \t -> actual tab, etc.
-    text=$(echo "$text" | sed 's/\\n/\'$'\n''/g; s/\\t/\'$'\t''/g; s/\\"/"/g; s/\\\\/\\/g')
-    echo "$text"
-    return
+  # If it looks like JSON (from stream mode or MCP output), try to extract text
+  if echo "$line" | grep -q '^{'; then
+    local text=$(echo "$line" | grep -o '"text":"[^"]*"' | head -1 | sed 's/"text":"//;s/"$//')
+    if [ -n "$text" ]; then
+      text=$(echo "$text" | sed 's/\\n/\'$'\n''/g; s/\\t/\'$'\t''/g; s/\\"/"/g; s/\\\\/\\/g')
+      echo "$text"
+      return
+    fi
+    # Try result field for final output
+    local result=$(echo "$line" | grep -o '"result":"[^"]*"' | head -1 | sed 's/"result":"//;s/"$//')
+    if [ -n "$result" ]; then
+      echo "$result"
+      return
+    fi
   fi
 
-  # If it doesn't look like JSON, return as-is
-  if ! echo "$json_line" | grep -q '^{'; then
-    echo "$json_line"
-  fi
+  # Plain text output from Copilot CLI - return as-is
+  echo "$line"
 }
 
 # Strip ANSI escape sequences and control characters from text
@@ -83,22 +85,25 @@ strip_ansi_file() {
     > "$output_file"
 }
 
-# Extract final summary from JSON stream output
-# Looks for the result type message which contains the final output
+# Extract final summary from output
+# For Copilot CLI plain text output, we take the last meaningful lines
 extract_final_summary() {
   local output_file="$1"
-  local result_line=""
   local summary=""
 
-  # Look for the result type message in the JSON stream
   if [ -f "$output_file" ]; then
-    result_line=$(grep '"type":"result"' "$output_file" 2>/dev/null | tail -1)
+    # First try: Look for JSON result type message (if stream mode)
+    local result_line=$(grep '"type":"result"' "$output_file" 2>/dev/null | tail -1)
 
     if [ -n "$result_line" ]; then
-      # Extract the result text using jq
       if command -v jq &> /dev/null; then
         summary=$(echo "$result_line" | jq -r '.result // ""' 2>/dev/null)
       fi
+    fi
+
+    # Fallback: For plain text output, get last 20 non-empty lines
+    if [ -z "$summary" ]; then
+      summary=$(grep -v '^\s*$' "$output_file" 2>/dev/null | tail -n 20)
     fi
   fi
 
