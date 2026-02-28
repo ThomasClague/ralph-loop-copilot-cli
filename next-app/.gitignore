@@ -40,6 +40,9 @@ yarn-error.log*
 /data/
 /data/*.db
 
+# crawlee temp storage
+/storage/
+
 # exports and uploads
 /exports/
 /uploads/

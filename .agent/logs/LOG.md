@@ -10,7 +10,20 @@
 
 ## Session Log
 
-## 2026-02-28 — TASK-9: Initialize shadcn/ui in the project
+## 2026-02-28 — TASK-10: Implement Crawlee CheerioCrawler service
+
+- Implemented `crawlSite(url, maxPages)` in `next-app/src/scraper/crawlee-service.ts`
+- CheerioCrawler with maxConcurrency=3, requestHandlerTimeoutSecs=30, navigationTimeoutSecs=30
+- Same-domain link filtering via `transformRequestFunction` in `enqueueLinks`
+- Realistic User-Agent set via `preNavigationHooks`
+- 30-second overall timeout via `Promise.race` with `crawler.teardown()` fallback
+- Added `./storage/` to `.gitignore` for Crawlee temp files
+- Verified: crawled `https://example.com` → 1 page, title "Example Domain", HTML 528 bytes
+- TypeScript compiles without errors; all unit and E2E tests pass
+
+---
+
+
 
 - Ran `npx shadcn@latest init -d` — detected Next.js + Tailwind CSS v4, created `components.json`, updated `app/globals.css` with CSS variables
 - Installed core components: button, badge, card, dialog, dropdown-menu, form, input, label, select, separator, sheet, sidebar, table, tabs, textarea
