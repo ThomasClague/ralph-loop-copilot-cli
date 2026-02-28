@@ -3,8 +3,22 @@
 `Current Status`
 =================
 **Last Updated:** 2026-02-28
-**Tasks Completed:** 46
-**Current Task:** TASK-58 Complete
+**Tasks Completed:** 47
+**Current Task:** TASK-59 Complete
+
+---
+
+## 2026-02-28 — TASK-59: Implement new batch page — Tab B (single entry form)
+
+- Implemented Tab B "Single Entry" in `app/(admin)/batches/new/page.tsx`
+- Form fields: business_name (required), industry (inherits from batch default), location, phone, email, notes
+- "Has existing website?" Switch toggle reveals/hides `existing_url` Input field
+- "Add Prospect" button validates business_name, appends to running list (useState), clears form
+- Running list table with × remove button per row
+- "Create Batch & Prospects (N)" submit button POSTs batch + prospects, redirects to /batches/[id]
+- Installed `shadcn/ui` Switch component
+- 117 unit tests pass; TypeScript compiles clean; ESLint clean
+- Screenshots: `.agent/screenshots/TASK-59-1.png` (form), `.agent/screenshots/TASK-59-2.png` (URL field visible), `.agent/screenshots/TASK-59-3.png` (2 prospects in list)
 
 ---
 
